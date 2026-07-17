@@ -19,7 +19,7 @@
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
 
         /* ════════════════════════════════════════
@@ -99,7 +99,7 @@
             background: var(--orange);
             border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Syne', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-size: 1.25rem;
             font-weight: 800;
             color: #fff;
@@ -112,7 +112,7 @@
             box-shadow: 0 0 20px rgba(249,115,22,0.4);
         }
         .logo-text {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-size: 1.2rem;
             font-weight: 800;
             color: var(--text);
@@ -172,7 +172,7 @@
         .f-links {}
 
         .f-col-title {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 0.12em;
@@ -267,7 +267,7 @@
             color: var(--orange);
         }
         .newsletter-title {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-size: 1.05rem;
             font-weight: 700;
             color: var(--text);
@@ -308,7 +308,7 @@
             font-size: 0.85rem;
             color: var(--text);
             outline: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             transition: border-color 0.25s, box-shadow 0.25s;
         }
         .email-field input::placeholder { color: var(--muted2); }
@@ -334,7 +334,7 @@
             color: #000;
             font-weight: 700;
             font-size: 0.875rem;
-            font-family: 'Syne', sans-serif;
+            font-family: 'Sora', sans-serif;
             padding: 11px 16px;
             border: none;
             border-radius: 9px;
@@ -439,7 +439,7 @@
             transition: color 0.2s;
             background: none;
             border: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
         .back-top:hover { color: var(--orange); }
         .back-top svg { transition: transform 0.2s; }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SkillController;
@@ -18,6 +19,8 @@ Route::get('/', function () {
     $projects = Project::active()->ordered()->get();
     return view('welcome', compact('skills', 'projects'));
 });
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,12 +42,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Skills CRUD
-        Route::resource('skills', SkillController::class);
+        // Skills CRUD (no show() on the controller — index is the detail view)
+        Route::resource('skills', SkillController::class)->except('show');
         Route::post('skills/{skill}/toggle', [SkillController::class, 'toggleActive'])->name('skills.toggle');
 
-        // Projects CRUD
-        Route::resource('projects', ProjectController::class);
+        // Projects CRUD (no show() on the controller — index is the detail view)
+        Route::resource('projects', ProjectController::class)->except('show');
         Route::post('projects/{project}/toggle', [ProjectController::class, 'toggleActive'])->name('projects.toggle');
     });
 });

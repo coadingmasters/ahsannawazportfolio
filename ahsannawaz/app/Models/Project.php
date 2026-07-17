@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Project extends Model
 {
@@ -31,8 +32,9 @@ class Project extends Model
 
     public function getImageUrlAttribute(): string
     {
-        if ($this->image && file_exists(public_path('images/projects/' . $this->image))) {
-            return asset('images/projects/' . $this->image);
+        if ($this->image && Storage::disk('public')->exists($this->image)) {
+            // asset() resolves against the current host, so images load on any port.
+            return asset('storage/' . $this->image);
         }
         return 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80';
     }

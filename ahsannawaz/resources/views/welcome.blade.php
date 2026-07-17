@@ -6,7 +6,7 @@
     <title>{{ config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
 </head>
     <body>
@@ -761,6 +761,170 @@
 </section>
 
 
+{{-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ --}}
+<section id="contact">
+
+    <!-- Ambient blobs -->
+    <div class="ct-blob ct-blob-1"></div>
+    <div class="ct-blob ct-blob-2"></div>
+
+    <div class="ct-inner">
+
+        {{-- ── HEADER ── --}}
+        <div class="ct-header ct-reveal">
+            <div class="ct-label">Get In Touch</div>
+            <h2 class="ct-title">Let's <em>Work Together</em></h2>
+            <p class="ct-desc">
+                Have a project, an idea, or just a question? Drop me a message and I'll reply within 24 hours.
+            </p>
+        </div>
+
+        <div class="ct-grid">
+
+            {{-- ── LEFT — INFO ── --}}
+            <div class="ct-aside ct-reveal" style="transition-delay:0.1s">
+
+                <div class="ct-status">
+                    <span class="ct-status-dot"></span>
+                    Available for new projects
+                </div>
+
+                <h3 class="ct-aside-title">Let's build something <em>great.</em></h3>
+                <p class="ct-aside-text">
+                    I'm currently taking on freelance work and long-term collaborations.
+                    Tell me what you're building and I'll get back to you with a plan.
+                </p>
+
+                <div class="ct-info-list">
+                    <a href="mailto:hello@ahsannawaz.dev" class="ct-info-item">
+                        <span class="ct-info-ico">✉</span>
+                        <span class="ct-info-body">
+                            <span class="ct-info-label">Email</span>
+                            <span class="ct-info-value">hello@ahsannawaz.dev</span>
+                        </span>
+                        <svg class="ct-info-arr" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+
+                    <div class="ct-info-item">
+                        <span class="ct-info-ico">◎</span>
+                        <span class="ct-info-body">
+                            <span class="ct-info-label">Location</span>
+                            <span class="ct-info-value">Pakistan 🇵🇰 · Remote worldwide</span>
+                        </span>
+                    </div>
+
+                    <div class="ct-info-item">
+                        <span class="ct-info-ico">◷</span>
+                        <span class="ct-info-body">
+                            <span class="ct-info-label">Response Time</span>
+                            <span class="ct-info-value">Usually within 24 hours</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="ct-socials">
+                    <span class="ct-socials-label">Follow me</span>
+                    <div class="ct-socials-row">
+                        <a href="#" class="ct-social" title="LinkedIn" aria-label="LinkedIn">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#" class="ct-social" title="GitHub" aria-label="GitHub">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        </a>
+                        <a href="#" class="ct-social" title="Twitter / X" aria-label="Twitter">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.057z"/></svg>
+                        </a>
+                        <a href="#" class="ct-social" title="Facebook" aria-label="Facebook">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ── RIGHT — FORM ── --}}
+            <div class="ct-form-wrap ct-reveal" style="transition-delay:0.2s">
+
+                @if (session('contact_success'))
+                    <div class="ct-alert ct-alert-ok">
+                        <span>✓</span> {{ session('contact_success') }}
+                    </div>
+                @endif
+
+                @error('contact')
+                    <div class="ct-alert ct-alert-err">
+                        <span>⚠</span> {{ $message }}
+                    </div>
+                @enderror
+
+                <form method="POST" action="{{ route('contact.store') }}" class="ct-form">
+                    @csrf
+
+                    {{-- Honeypot — hidden from humans, catches bots --}}
+                    <div class="ct-hp" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="ct-row">
+                        <div class="ct-field">
+                            <label for="ct-name">Your Name <span>*</span></label>
+                            <input id="ct-name" type="text" name="name" value="{{ old('name') }}"
+                                   placeholder="John Doe" maxlength="100" required>
+                            @error('name') <div class="ct-err">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="ct-field">
+                            <label for="ct-email">Email <span>*</span></label>
+                            <input id="ct-email" type="email" name="email" value="{{ old('email') }}"
+                                   placeholder="john@company.com" maxlength="150" required>
+                            @error('email') <div class="ct-err">{{ $message }}</div> @enderror
+                        </div>
+                    </div>
+
+                    <div class="ct-row">
+                        <div class="ct-field">
+                            <label for="ct-subject">Subject <span>*</span></label>
+                            <input id="ct-subject" type="text" name="subject" value="{{ old('subject') }}"
+                                   placeholder="Laravel project enquiry" maxlength="200" required>
+                            @error('subject') <div class="ct-err">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="ct-field">
+                            <label for="ct-budget">Budget <span class="ct-opt">(optional)</span></label>
+                            <select id="ct-budget" name="budget">
+                                <option value="">Select a range</option>
+                                @foreach (['< $500', '$500 – $1k', '$1k – $5k', '$5k – $10k', '$10k+'] as $range)
+                                    <option value="{{ $range }}" @selected(old('budget') === $range)>{{ $range }}</option>
+                                @endforeach
+                            </select>
+                            @error('budget') <div class="ct-err">{{ $message }}</div> @enderror
+                        </div>
+                    </div>
+
+                    <div class="ct-field">
+                        <label for="ct-message">Message <span>*</span></label>
+                        <textarea id="ct-message" name="message" rows="5" maxlength="5000"
+                                  placeholder="Tell me about your project, timeline, and what you're hoping to achieve…" required>{{ old('message') }}</textarea>
+                        <div class="ct-meta">
+                            <span class="ct-count"><b id="ct-count">0</b> / 5000</span>
+                        </div>
+                        @error('message') <div class="ct-err">{{ $message }}</div> @enderror
+                    </div>
+
+                    <button type="submit" class="ct-submit">
+                        <span class="ct-submit-txt">✉ Send Message</span>
+                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <p class="ct-note">Your details stay private — never shared with anyone.</p>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
         @include('layouts.partials.footer')

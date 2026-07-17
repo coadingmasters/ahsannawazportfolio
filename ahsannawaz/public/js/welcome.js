@@ -187,3 +187,48 @@ function toggleReadMore(e) {
     }, { threshold: 0.08 });
     cards.forEach(c => cardIO.observe(c));
 })();
+
+/* ══════════════════════════════════════
+   CONTACT SECTION
+══════════════════════════════════════ */
+(() => {
+    /* Scroll reveal — same observer pattern as #services */
+    const ctEls = document.querySelectorAll('#contact .ct-reveal');
+    const ctIO = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                ctIO.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    ctEls.forEach(el => ctIO.observe(el));
+
+    /* Live character counter */
+    const msg = document.getElementById('ct-message');
+    const count = document.getElementById('ct-count');
+    if (msg && count) {
+        const sync = () => { count.textContent = msg.value.length; };
+        msg.addEventListener('input', sync);
+        sync();
+    }
+
+    /* Submit feedback — prevents double-posting */
+    const form = document.querySelector('.ct-form');
+    if (form) {
+        form.addEventListener('submit', () => {
+            const btn = form.querySelector('.ct-submit');
+            const txt = form.querySelector('.ct-submit-txt');
+            if (btn && txt) {
+                btn.classList.add('sending');
+                txt.textContent = 'Sending…';
+            }
+        });
+    }
+
+    /* If the server flagged an error or success, bring it into view */
+    const alertEl = document.querySelector('#contact .ct-alert');
+    if (alertEl && window.location.hash === '#contact') {
+        alertEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+})();

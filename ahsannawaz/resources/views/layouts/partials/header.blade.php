@@ -27,7 +27,7 @@
 body {
     background: var(--bg-dark);
     color: var(--text-white);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* ===== HEADER ===== */
