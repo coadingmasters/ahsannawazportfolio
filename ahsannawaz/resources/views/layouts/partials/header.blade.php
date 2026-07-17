@@ -246,15 +246,15 @@ nav a.active { color: var(--orange); }
         {{-- Desktop Navigation --}}
         <nav>
             <a href="{{ url('/') }}"       class="{{ request()->is('/') ? 'active' : '' }}">Home</a>
-            <a href="{{ url('/#about') }}"    class="{{ request()->is('about') ? 'active' : '' }}">About</a>
-            <a href="{{ url('/#skills') }}"   class="{{ request()->is('skills') ? 'active' : '' }}">Skills</a>
-            <a href="{{ url('/#projects') }}" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
-            <a href="{{ url('/#contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
+            <a href="{{ route('about') }}"    class="{{ request()->is('about') ? 'active' : '' }}">About</a>
+            <a href="{{ route('skills') }}"   class="{{ request()->is('skills') ? 'active' : '' }}">Skills</a>
+            <a href="{{ route('projects') }}" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
+            <a href="{{ route('contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
         </nav>
 
         {{-- CTA + Hamburger --}}
         <div style="display:flex;align-items:center;gap:12px;">
-            <a href="{{ url('/#contact') }}" class="btn-hire">Hire Me</a>
+            <a href="{{ route('contact') }}" class="btn-hire">Hire Me</a>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
@@ -265,11 +265,11 @@ nav a.active { color: var(--orange); }
     {{-- Mobile Menu --}}
     <div class="mobile-menu" id="mobileMenu">
         <a href="{{ url('/') }}"          class="{{ request()->is('/') ? 'active' : '' }}">Home</a>
-        <a href="{{ url('/#about') }}"    class="{{ request()->is('about') ? 'active' : '' }}">About</a>
-        <a href="{{ url('/#skills') }}"   class="{{ request()->is('skills') ? 'active' : '' }}">Skills</a>
-        <a href="{{ url('/#projects') }}" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
-        <a href="{{ url('/#contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
-        <a href="{{ url('/#contact') }}"  class="btn-hire">Hire Me</a>
+        <a href="{{ route('about') }}"    class="{{ request()->is('about') ? 'active' : '' }}">About</a>
+        <a href="{{ route('skills') }}"   class="{{ request()->is('skills') ? 'active' : '' }}">Skills</a>
+        <a href="{{ route('projects') }}" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
+        <a href="{{ route('contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
+        <a href="{{ route('contact') }}"  class="btn-hire">Hire Me</a>
     </div>
 </header>
 

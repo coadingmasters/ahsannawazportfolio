@@ -467,3 +467,200 @@ table.tbl tbody tr:hover { background: rgba(255, 255, 255, 0.02); }
     .nav-item { margin-bottom: 0; white-space: nowrap; }
     .content, .topbar { padding-left: 1rem; padding-right: 1rem; }
 }
+
+/* ============================================
+   MODALS — centered, animated
+   Replaces window.alert() / window.confirm()
+============================================ */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background: rgba(5, 5, 5, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.modal-backdrop.open { opacity: 1; visibility: visible; }
+
+.modal {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(150deg, #151515, #1c1c1c);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2rem 1.75rem 1.6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    transform: scale(0.9) translateY(14px);
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
+}
+.modal-backdrop.open .modal { transform: scale(1) translateY(0); opacity: 1; }
+
+/* Accent wash behind the icon */
+.modal::before {
+    content: '';
+    position: absolute;
+    top: -90px; left: 50%;
+    transform: translateX(-50%);
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, var(--modal-accent, var(--orange)) 0%, transparent 70%);
+    opacity: 0.13;
+    pointer-events: none;
+}
+
+.modal-ico {
+    width: 60px; height: 60px;
+    margin: 0 auto 1.1rem;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--modal-accent, var(--orange)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--modal-accent, var(--orange)) 35%, transparent);
+    color: var(--modal-accent, var(--orange));
+    font-size: 1.6rem;
+    position: relative;
+    animation: modalIcoPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+@keyframes modalIcoPop {
+    from { transform: scale(0.4); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+/* Success tick draws itself */
+.modal-tick { width: 30px; height: 30px; }
+.modal-tick path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: tickDraw 0.5s ease 0.3s forwards;
+}
+@keyframes tickDraw { to { stroke-dashoffset: 0; } }
+
+/* Pulsing ring around the icon */
+.modal-ico::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    border: 1px solid var(--modal-accent, var(--orange));
+    animation: modalRing 1.8s ease-out infinite;
+}
+@keyframes modalRing {
+    0%   { transform: scale(1);   opacity: 0.55; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+.modal-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+.modal-text {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+}
+.modal-text b { color: var(--text); font-weight: 600; }
+
+.modal-actions { display: flex; gap: 0.6rem; }
+.modal-actions .btn { flex: 1; padding: 0.7rem 1rem; }
+
+/* Auto-dismiss progress bar on the success modal */
+.modal-timer {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--modal-accent, var(--orange));
+    transform-origin: left;
+    animation: modalTimer 3.2s linear forwards;
+}
+@keyframes modalTimer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+.modal-close {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+.modal-close:hover { color: var(--text); background: var(--surface2); }
+
+/* ============================================
+   BULK SELECT
+============================================ */
+.bulk-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--orange-dim);
+    border: 1px solid var(--orange);
+    border-radius: 11px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    /* Collapsed by default; .open animates it in */
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease, opacity 0.22s ease, margin 0.28s ease,
+                padding 0.28s ease, border-width 0.28s ease;
+}
+.bulk-bar.open {
+    max-height: 80px;
+    opacity: 1;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    margin-bottom: 1rem;
+    border-width: 1px;
+}
+.hidden-form { display: none; }
+
+.bulk-count { font-size: 0.85rem; font-weight: 600; color: var(--orange); }
+.bulk-count b { font-family: 'Sora', sans-serif; }
+.bulk-actions { display: flex; gap: 0.5rem; }
+
+.row-check,
+.check-group {
+    width: 16px; height: 16px;
+    accent-color: var(--orange);
+    cursor: pointer;
+    vertical-align: middle;
+}
+table.tbl th.col-check,
+table.tbl td.col-check { width: 34px; padding-right: 0; }
+
+table.tbl tr.is-selected { background: rgba(249, 115, 22, 0.06); }
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-backdrop, .modal { transition: none; }
+    .modal-ico, .modal-ico::after, .modal-tick path, .modal-timer { animation: none; }
+    .modal-tick path { stroke-dashoffset: 0; }
+    .bulk-bar { transition: none; }
+}

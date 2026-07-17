@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -104,6 +105,34 @@ class ProjectController extends Controller
     {
         $project->update(['is_active' => !$project->is_active]);
         return response()->json(['is_active' => $project->is_active]);
+    }
+
+    /**
+     * Delete several projects at once from the index checkboxes.
+     */
+    public function bulkDestroy(Request $request)
+    {
+        $data = $request->validate([
+            'ids'   => 'required|array|min:1',
+            'ids.*' => 'integer|exists:projects,id',
+        ], [
+            'ids.required' => 'Select at least one project to delete.',
+        ]);
+
+        $projects = Project::whereIn('id', $data['ids'])->get();
+
+        foreach ($projects as $project) {
+            // Don't orphan the uploaded cover images.
+            if ($project->image) {
+                Storage::disk('public')->delete($project->image);
+            }
+            $project->delete();
+        }
+
+        $count = $projects->count();
+
+        return redirect()->route('admin.projects.index')
+            ->with('success', $count . ' ' . Str::plural('project', $count) . ' deleted successfully!');
     }
 
     private function parseTechStack(?string $input): array

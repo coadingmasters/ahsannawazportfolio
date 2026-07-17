@@ -560,7 +560,9 @@
                 <li><a href="#portfolio"><span class="arr">›</span> Portfolio</a></li>
                 <li><a href="#testimonials"><span class="arr">›</span> Testimonials</a></li>
                 <li><a href="#contact"><span class="arr">›</span> Contact</a></li>
-                <li><a href="#"><span class="arr">›</span> Download CV</a></li>
+                @if ($hasCv)
+                    <li><a href="{{ route('cv.download') }}"><span class="arr">›</span> Download CV</a></li>
+                @endif
             </ul>
         </div>
 

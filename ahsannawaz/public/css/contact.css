@@ -1,0 +1,233 @@
+/* ══════════════════════════════════════
+   CONTACT PAGE
+   Layers on top of welcome.css (.ct-* form styles)
+   and about.css (.ab-* page shell)
+══════════════════════════════════════ */
+
+/* ── Hero availability pill ── */
+.cp-hero-status {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 1.5rem;
+    font-size: 0.78rem; font-weight: 600;
+    color: #4ade80;
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.25);
+    padding: 8px 16px; border-radius: 999px;
+}
+
+/* ══════════ METHOD CARDS ══════════ */
+.cp-methods {
+    padding: 70px 2rem;
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(249,115,22,0.1);
+}
+.cp-method-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+.cp-method {
+    display: block;
+    background: linear-gradient(150deg, #111, #161616);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 1.65rem 1.5rem;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.cp-method::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, var(--mc, #F97316) 0%, transparent 70%);
+    opacity: 0.07;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.cp-method:hover { border-color: var(--mc, #F97316); transform: translateY(-5px); }
+.cp-method:hover::before { opacity: 0.18; }
+
+.cp-method-ico {
+    display: grid; place-items: center;
+    width: 42px; height: 42px;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--mc, #F97316);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s, border-color 0.3s;
+}
+.cp-method:hover .cp-method-ico { transform: scale(1.1) rotate(-6deg); border-color: var(--mc, #F97316); }
+
+.cp-method-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    color: #fff; margin-bottom: 0.4rem;
+}
+.cp-method-desc { font-size: 0.79rem; color: #666; line-height: 1.65; margin-bottom: 0.9rem; }
+.cp-method-value {
+    display: block;
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--mc, #F97316);
+    word-break: break-word;
+}
+
+/* ══════════ FORM + ASIDE ══════════ */
+.cp-form-section {
+    padding: 90px 2rem;
+    background: #0d0d0d;
+    position: relative;
+    overflow: hidden;
+    scroll-margin-top: 80px;
+}
+.cp-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.9fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* Aside */
+.cp-aside { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.cp-aside-card {
+    background: linear-gradient(150deg, #121212, #171717);
+    border: 1px solid rgba(249,115,22,0.16);
+    border-radius: 18px;
+    padding: 1.6rem 1.5rem;
+    transition: border-color 0.3s;
+}
+.cp-aside-card:hover { border-color: rgba(249,115,22,0.38); }
+
+.cp-aside-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.98rem; font-weight: 700;
+    color: #fff;
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Steps */
+.cp-steps { list-style: none; display: flex; flex-direction: column; gap: 1.05rem; }
+.cp-steps li { display: flex; gap: 0.85rem; align-items: flex-start; }
+.cp-step-num {
+    width: 26px; height: 26px; flex-shrink: 0;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: rgba(249,115,22,0.1);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: #F97316;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.72rem; font-weight: 700;
+}
+.cp-step-body b { display: block; font-size: 0.82rem; color: #ddd; font-weight: 600; margin-bottom: 2px; }
+.cp-step-body i { display: block; font-size: 0.75rem; color: #666; font-style: normal; line-height: 1.6; }
+
+/* Good fits */
+.cp-fits { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.cp-fits li {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-size: 0.81rem; color: #888; line-height: 1.55;
+}
+.cp-fits li::before {
+    content: '✓';
+    color: #4ade80;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.cp-socials-card .ct-socials-row { gap: 0.55rem; }
+
+/* ══════════ FAQ ══════════ */
+.cp-faq { padding: 90px 2rem; background: #0a0a0a; }
+.cp-faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cp-faq-item {
+    background: linear-gradient(150deg, #111, #161616);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+.cp-faq-item:hover { border-color: rgba(249,115,22,0.3); }
+.cp-faq-item.open { border-color: rgba(249,115,22,0.42); }
+
+.cp-faq-q {
+    width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    background: transparent;
+    border: none;
+    padding: 1.15rem 1.4rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    color: #ddd;
+    transition: color 0.2s;
+}
+.cp-faq-q:hover { color: #fff; }
+.cp-faq-item.open .cp-faq-q { color: #F97316; }
+
+/* Plus → minus icon */
+.cp-faq-icon {
+    position: relative;
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+}
+.cp-faq-icon::before,
+.cp-faq-icon::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.cp-faq-icon::before { top: 7px; left: 0; width: 16px; height: 2px; }
+.cp-faq-icon::after  { left: 7px; top: 0; width: 2px; height: 16px; }
+.cp-faq-item.open .cp-faq-icon::after { transform: rotate(90deg); opacity: 0; }
+
+/* Animated open/close — max-height is set inline by JS */
+.cp-faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+.cp-faq-a p {
+    padding: 0 1.4rem 1.25rem;
+    font-size: 0.84rem;
+    color: #666;
+    line-height: 1.75;
+}
+
+/* ══════════ RESPONSIVE ══════════ */
+@media (max-width: 1024px) {
+    .cp-method-grid { grid-template-columns: repeat(2, 1fr); }
+    .cp-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+    .cp-methods, .cp-form-section, .cp-faq { padding: 60px 1.25rem; }
+    .cp-method-grid { grid-template-columns: 1fr; }
+    .cp-aside-card { padding: 1.35rem 1.15rem; }
+    .cp-faq-q { padding: 1rem 1.15rem; font-size: 0.85rem; }
+    .cp-faq-a p { padding: 0 1.15rem 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cp-faq-a { transition: none; }
+    .cp-method, .cp-method-ico { transition: none; }
+}

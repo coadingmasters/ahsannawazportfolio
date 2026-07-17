@@ -8,9 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+    {{-- Reused by the homepage projects section: .ab-* shell + .pj-card* --}}
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/projects.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/popup.css') }}">
 </head>
     <body>
         @include('layouts.partials.header')
+
+        @php
+            // ucfirst() would render "Cms"/"Api" — spell these properly.
+            $catLabels = [
+                'backend' => 'Backend', 'frontend' => 'Frontend', 'cms' => 'CMS',
+                'database' => 'Database', 'tools' => 'Tools',
+                'web' => 'Web', 'mobile' => 'Mobile', 'api' => 'API', 'wordpress' => 'WordPress',
+            ];
+        @endphp
 <section id="hero">
 
     <!-- Ambient blobs -->
@@ -60,9 +73,11 @@
                 <a href="#contact" class="btn-primary">
                     ✉ Hire Me
                 </a>
-                <a href="#" class="btn-secondary" download>
-                    ↓ Download CV
-                </a>
+                @if ($hasCv)
+                    <a href="{{ route('cv.download') }}" class="btn-secondary">
+                        ↓ Download CV
+                    </a>
+                @endif
             </div>
 
             <div class="social-row">
@@ -307,196 +322,30 @@
             <p class="sk-desc">A curated set of technologies I've mastered over 5+ years of building real-world, production-grade web applications.</p>
         </div>
 
-        {{-- ── FILTER TABS ── --}}
+        {{-- ── FILTER TABS — built from the categories actually in the DB ── --}}
         <div class="sk-tabs sk-reveal" style="transition-delay:0.1s" id="sk-tabs">
             <button class="sk-tab active" data-filter="all">All</button>
-            <button class="sk-tab" data-filter="backend">Backend</button>
-            <button class="sk-tab" data-filter="frontend">Frontend</button>
-            <button class="sk-tab" data-filter="cms">CMS</button>
-            <button class="sk-tab" data-filter="database">Database</button>
-            <button class="sk-tab" data-filter="tools">Tools</button>
+            @foreach ($skills->keys() as $cat)
+                <button class="sk-tab" data-filter="{{ $cat }}">{{ $catLabels[$cat] ?? ucfirst($cat) }}</button>
+            @endforeach
         </div>
 
         {{-- ── CARDS GRID ── --}}
         <div class="sk-grid" id="sk-grid">
 
-            {{-- Backend --}}
-            <div class="sk-card" data-cat="backend">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(249,115,22,0.12);">🔥</div>
-                <div class="sk-card-name">Laravel</div>
-                <div class="sk-card-cat">PHP Framework</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="95" style="background:linear-gradient(90deg,#F97316,#fb923c)"></div></div>
-                <div class="sk-bar-pct">95%</div>
-            </div>
-
-            <div class="sk-card" data-cat="backend">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(139,92,246,0.12);">🐘</div>
-                <div class="sk-card-name">PHP</div>
-                <div class="sk-card-cat">Server Language</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="93" style="background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div>
-                <div class="sk-bar-pct">93%</div>
-            </div>
-
-            <div class="sk-card" data-cat="backend">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(59,130,246,0.12);">🔗</div>
-                <div class="sk-card-name">REST API</div>
-                <div class="sk-card-cat">API Development</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="90" style="background:linear-gradient(90deg,#2563eb,#60a5fa)"></div></div>
-                <div class="sk-bar-pct">90%</div>
-            </div>
-
-           
-
-            {{-- Frontend --}}
-            <div class="sk-card" data-cat="frontend">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(6,182,212,0.12);">⚛️</div>
-                <div class="sk-card-name">React JS</div>
-                <div class="sk-card-cat">JS Framework</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="88" style="background:linear-gradient(90deg,#0891b2,#22d3ee)"></div></div>
-                <div class="sk-bar-pct">88%</div>
-            </div>
-
-            <div class="sk-card" data-cat="frontend">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(249,115,22,0.12);">🎨</div>
-                <div class="sk-card-name">HTML5 / CSS3</div>
-                <div class="sk-card-cat">Markup & Style</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="97" style="background:linear-gradient(90deg,#F97316,#fb923c)"></div></div>
-                <div class="sk-bar-pct">97%</div>
-            </div>
-
-            <div class="sk-card" data-cat="frontend">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(234,179,8,0.12);">✨</div>
-                <div class="sk-card-name">JavaScript</div>
-                <div class="sk-card-cat">Core Language</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="91" style="background:linear-gradient(90deg,#b45309,#fbbf24)"></div></div>
-                <div class="sk-bar-pct">91%</div>
-            </div>
-
-            <div class="sk-card" data-cat="frontend">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(99,102,241,0.12);">💡</div>
-                <div class="sk-card-name">jQuery</div>
-                <div class="sk-card-cat">JS Library</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="94" style="background:linear-gradient(90deg,#4338ca,#818cf8)"></div></div>
-                <div class="sk-bar-pct">94%</div>
-            </div>
-
-            <div class="sk-card" data-cat="frontend">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(6,182,212,0.12);">🌊</div>
-                <div class="sk-card-name">Tailwind CSS</div>
-                <div class="sk-card-cat">Utility Framework</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="87" style="background:linear-gradient(90deg,#0891b2,#22d3ee)"></div></div>
-                <div class="sk-bar-pct">87%</div>
-            </div>
-
-            <div class="sk-card" data-cat="frontend">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(139,92,246,0.12);">🅱️</div>
-                <div class="sk-card-name">Bootstrap</div>
-                <div class="sk-card-cat">CSS Framework</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="93" style="background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div>
-                <div class="sk-bar-pct">93%</div>
-            </div>
-
-            {{-- CMS --}}
-            <div class="sk-card" data-cat="cms">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(59,130,246,0.12);">📝</div>
-                <div class="sk-card-name">WordPress</div>
-                <div class="sk-card-cat">CMS Platform</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="92" style="background:linear-gradient(90deg,#1d4ed8,#60a5fa)"></div></div>
-                <div class="sk-bar-pct">92%</div>
-            </div>
-
-            <div class="sk-card" data-cat="cms">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(249,115,22,0.12);">🔌</div>
-                <div class="sk-card-name">Plugin Dev</div>
-                <div class="sk-card-cat">WP Plugins</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="90" style="background:linear-gradient(90deg,#F97316,#fb923c)"></div></div>
-                <div class="sk-bar-pct">90%</div>
-            </div>
-
-            <div class="sk-card" data-cat="cms">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(16,185,129,0.12);">🎭</div>
-                <div class="sk-card-name">Theme Dev</div>
-                <div class="sk-card-cat">WP Themes</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="88" style="background:linear-gradient(90deg,#059669,#34d399)"></div></div>
-                <div class="sk-bar-pct">88%</div>
-            </div>
-
-            {{-- Database --}}
-            <div class="sk-card" data-cat="database">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(249,115,22,0.12);">🗄️</div>
-                <div class="sk-card-name">MySQL</div>
-                <div class="sk-card-cat">Relational DB</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="92" style="background:linear-gradient(90deg,#F97316,#fb923c)"></div></div>
-                <div class="sk-bar-pct">92%</div>
-            </div>
-
-            <div class="sk-card" data-cat="database">
-                <span class="sk-level level-good">Good</span>
-                <div class="sk-card-icon" style="background:rgba(16,185,129,0.12);">🍃</div>
-                <div class="sk-card-name">MongoDB</div>
-                <div class="sk-card-cat">NoSQL DB</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="70" style="background:linear-gradient(90deg,#059669,#34d399)"></div></div>
-                <div class="sk-bar-pct">70%</div>
-            </div>
-
-            <div class="sk-card" data-cat="database">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(59,130,246,0.12);">📊</div>
-                <div class="sk-card-name">DB Design</div>
-                <div class="sk-card-cat">Schema & Query</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="85" style="background:linear-gradient(90deg,#2563eb,#60a5fa)"></div></div>
-                <div class="sk-bar-pct">85%</div>
-            </div>
-
-            {{-- Tools --}}
-            <div class="sk-card" data-cat="tools">
-                <span class="sk-level level-expert">Expert</span>
-                <div class="sk-card-icon" style="background:rgba(234,179,8,0.12);">🐙</div>
-                <div class="sk-card-name">Git / GitHub</div>
-                <div class="sk-card-cat">Version Control</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="92" style="background:linear-gradient(90deg,#b45309,#fbbf24)"></div></div>
-                <div class="sk-bar-pct">92%</div>
-            </div>
-
-            <div class="sk-card" data-cat="tools">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(6,182,212,0.12);">🐳</div>
-                <div class="sk-card-name">Docker</div>
-                <div class="sk-card-cat">Containerization</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="75" style="background:linear-gradient(90deg,#0891b2,#22d3ee)"></div></div>
-                <div class="sk-bar-pct">75%</div>
-            </div>
-
-            <div class="sk-card" data-cat="tools">
-                <span class="sk-level level-advanced">Advanced</span>
-                <div class="sk-card-icon" style="background:rgba(249,115,22,0.12);">🚀</div>
-                <div class="sk-card-name">Composer / NPM</div>
-                <div class="sk-card-cat">Package Managers</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="94" style="background:linear-gradient(90deg,#F97316,#fb923c)"></div></div>
-                <div class="sk-bar-pct">94%</div>
-            </div>
-
-            <div class="sk-card" data-cat="tools">
-                <span class="sk-level level-good">Good</span>
-                <div class="sk-card-icon" style="background:rgba(139,92,246,0.12);">☁️</div>
-                <div class="sk-card-name">AWS / cPanel</div>
-                <div class="sk-card-cat">Hosting & Cloud</div>
-                <div class="sk-bar-track"><div class="sk-bar-fill" data-w="78" style="background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div>
-                <div class="sk-bar-pct">78%</div>
-            </div>
+            {{-- Cards come straight from the DB (admin → Skills) --}}
+            @foreach ($skills->flatten() as $skill)
+                <div class="sk-card" data-cat="{{ $skill->category }}">
+                    <span class="sk-level level-{{ $skill->level }}">{{ ucfirst($skill->level) }}</span>
+                    <div class="sk-card-icon" style="background:{{ $skill->color }}1f;">{{ $skill->icon }}</div>
+                    <div class="sk-card-name">{{ $skill->name }}</div>
+                    <div class="sk-card-cat">{{ $catLabels[$skill->category] ?? ucfirst($skill->category) }}</div>
+                    <div class="sk-bar-track">
+                        <div class="sk-bar-fill" data-w="{{ $skill->percentage }}" style="background:{{ $skill->color_gradient }}"></div>
+                    </div>
+                    <div class="sk-bar-pct">{{ $skill->percentage }}%</div>
+                </div>
+            @endforeach
 
         </div>
 
@@ -751,15 +600,89 @@
                     ✉ Hire Me
                     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="#" class="srv-cta-btn-secondary" download>
-                    ↓ Download CV
-                </a>
+                @if ($hasCv)
+                    <a href="{{ route('cv.download') }}" class="srv-cta-btn-secondary">
+                        ↓ Download CV
+                    </a>
+                @endif
             </div>
         </div>
 
     </div>
 </section>
 
+
+{{-- ══════════════════════════════════════
+     PROJECTS — straight from the DB (admin → Projects)
+══════════════════════════════════════ --}}
+@if ($projects->isNotEmpty())
+<section id="projects">
+    <div class="hp-blob hp-blob-1"></div>
+
+    <div class="hp-inner">
+
+        <div class="hp-header ab-rv">
+            <div class="ab-label">Recent Work</div>
+            <h2 class="hp-title">Featured <em>Projects</em></h2>
+            <p class="hp-desc">
+                A few things I've shipped recently. Every one built for a real client with real deadlines.
+            </p>
+        </div>
+
+        <div class="pj-grid hp-grid">
+            @foreach ($projects->take(6) as $project)
+                <article class="pj-card ab-rv" data-delay="{{ $loop->index % 3 }}">
+                    <span class="pj-card-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+
+                    <div class="pj-card-media">
+                        <img src="{{ $project->image_url }}" alt="{{ $project->title }}" class="pj-card-img" loading="lazy">
+                        <div class="pj-card-overlay">
+                            <div class="pj-card-actions">
+                                @if ($project->live_url)
+                                    <a href="{{ $project->live_url }}" target="_blank" rel="noopener"
+                                       class="pj-action" title="View live" aria-label="View {{ $project->title }} live">↗</a>
+                                @endif
+                                @if ($project->github_url)
+                                    <a href="{{ $project->github_url }}" target="_blank" rel="noopener"
+                                       class="pj-action" title="View source" aria-label="View {{ $project->title }} source">⎇</a>
+                                @endif
+                            </div>
+                        </div>
+                        @if ($project->is_featured)
+                            <span class="pj-card-star" title="Featured">★</span>
+                        @endif
+                    </div>
+
+                    <div class="pj-card-body">
+                        <span class="pj-cat">{{ $catLabels[$project->category] ?? ucfirst($project->category) }}</span>
+                        <h3 class="pj-card-title">{{ $project->title }}</h3>
+                        <p class="pj-card-desc">{{ $project->description }}</p>
+
+                        @if ($project->tech_stack)
+                            <div class="pj-stack">
+                                @foreach (array_slice($project->tech_stack, 0, 4) as $tech)
+                                    <span class="pj-chip">{{ $tech }}</span>
+                                @endforeach
+                                @if (count($project->tech_stack) > 4)
+                                    <span class="pj-chip pj-chip-more">+{{ count($project->tech_stack) - 4 }}</span>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </article>
+            @endforeach
+        </div>
+
+        <div class="hp-more ab-rv">
+            <a href="{{ route('projects') }}" class="ab-btn-primary">
+                View All Projects
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+
+    </div>
+</section>
+@endif
 
 {{-- ══════════════════════════════════════
      CONTACT
@@ -846,18 +769,6 @@
             {{-- ── RIGHT — FORM ── --}}
             <div class="ct-form-wrap ct-reveal" style="transition-delay:0.2s">
 
-                @if (session('contact_success'))
-                    <div class="ct-alert ct-alert-ok">
-                        <span>✓</span> {{ session('contact_success') }}
-                    </div>
-                @endif
-
-                @error('contact')
-                    <div class="ct-alert ct-alert-err">
-                        <span>⚠</span> {{ $message }}
-                    </div>
-                @enderror
-
                 <form method="POST" action="{{ route('contact.store') }}" class="ct-form">
                     @csrf
 
@@ -927,8 +838,12 @@
 </section>
 
 
+        @include('layouts.partials.popup')
+
         @include('layouts.partials.footer')
 
+<script src="{{ asset('js/popup.js') }}"></script>
+<script src="{{ asset('js/about.js') }}"></script>
 <script src="{{ asset('js/welcome.js') }}"></script>
 </body>
 </html>

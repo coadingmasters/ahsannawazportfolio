@@ -1,0 +1,330 @@
+/* ══════════════════════════════════════
+   SKILLS PAGE
+   Layers on welcome.css + about.css (.ab-* shell)
+   Reuses .pj-filter* from projects.css conventions
+══════════════════════════════════════ */
+
+/* ══════════ MASTHEAD ══════════ */
+.sp-masthead {
+    position: relative;
+    padding: 110px 2rem 70px;
+    background: #0d0d0d;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(249,115,22,0.12);
+    text-align: center;
+}
+.sp-masthead .ab-inner { max-width: 900px; }
+
+.sp-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+.sp-title em { font-style: normal; color: #F97316; }
+
+.sp-lede {
+    font-size: 0.92rem;
+    color: #777;
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+/* ── Stats strip ── */
+.sp-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+.sp-stat { text-align: center; }
+.sp-stat-num {
+    display: block;
+    font-family: 'Sora', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #F97316, #fb923c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sp-stat-label {
+    display: block;
+    font-size: 0.66rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-top: 0.35rem;
+}
+.sp-stat-div {
+    width: 1px; height: 34px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* ══════════ TOOLBAR ══════════ */
+.sp-main { padding: 70px 2rem 90px; background: #0a0a0a; }
+
+.sp-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.35rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sp-legend { display: flex; gap: 1rem; flex-wrap: wrap; }
+.sp-legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; color: #666; font-weight: 500;
+}
+.sp-legend-item i {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: block;
+}
+
+/* ══════════ RING GRID ══════════ */
+.sp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+.sp-card {
+    background: linear-gradient(150deg, #111, #161616);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 1.6rem 1.25rem 1.35rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+}
+.sp-card::before {
+    content: '';
+    position: absolute;
+    top: -70px; left: 50%;
+    transform: translateX(-50%);
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, var(--sc, #F97316) 0%, transparent 70%);
+    opacity: 0.06;
+    pointer-events: none;
+    transition: opacity 0.35s;
+}
+.sp-card:hover {
+    border-color: var(--sc, #F97316);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.sp-card:hover::before { opacity: 0.16; }
+
+.sp-card.is-hidden { display: none; }
+.sp-card.is-filtering { animation: pjPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ── Ring ── */
+.sp-ring-wrap {
+    position: relative;
+    width: 92px; height: 92px;
+    margin: 0 auto 1rem;
+}
+.sp-ring {
+    width: 100%; height: 100%;
+    transform: rotate(-90deg); /* start the arc at 12 o'clock */
+}
+.sp-ring circle {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+}
+.sp-ring-track { stroke: rgba(255,255,255,0.06); }
+.sp-ring-fill {
+    /* r=42 → circumference ≈ 263.9; JS animates stroke-dashoffset from full to target */
+    stroke-dasharray: 263.9;
+    stroke-dashoffset: 263.9;
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: drop-shadow(0 0 5px var(--sc, #F97316));
+}
+.sp-ring-ico {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    transition: transform 0.35s;
+}
+.sp-card:hover .sp-ring-ico { transform: scale(1.15); }
+
+/* ── Card body ── */
+.sp-card-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem; font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.25rem;
+    transition: color 0.25s;
+}
+.sp-card:hover .sp-card-name { color: var(--sc, #F97316); }
+
+.sp-card-cat {
+    display: block;
+    font-size: 0.66rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+}
+
+.sp-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+.sp-pct {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.82rem; font-weight: 700;
+    color: var(--sc, #F97316);
+}
+.sp-level {
+    font-size: 0.64rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: 2px 8px;
+}
+
+/* ══════════ BREAKDOWN ══════════ */
+.sp-breakdown {
+    padding: 90px 2rem;
+    background: #0d0d0d;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(249,115,22,0.1);
+}
+.sp-break-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+}
+.sp-break-card {
+    background: linear-gradient(150deg, #121212, #171717);
+    border: 1px solid rgba(249,115,22,0.14);
+    border-radius: 18px;
+    padding: 1.6rem 1.5rem;
+    transition: border-color 0.3s;
+}
+.sp-break-card:hover { border-color: rgba(249,115,22,0.4); }
+
+.sp-break-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+}
+.sp-break-head h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: #fff;
+}
+.sp-break-avg {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.05rem; font-weight: 800;
+    color: #F97316;
+    display: flex; align-items: baseline; gap: 4px;
+}
+.sp-break-avg i {
+    font-style: normal;
+    font-size: 0.6rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.sp-break-blurb {
+    font-size: 0.78rem;
+    color: #666;
+    line-height: 1.65;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.sp-break-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.sp-break-row {
+    display: grid;
+    grid-template-columns: 1fr 90px 34px;
+    align-items: center;
+    gap: 0.7rem;
+}
+.sp-break-name {
+    font-size: 0.79rem;
+    color: #ccc;
+    display: flex; align-items: center;
+    min-width: 0;
+}
+.sp-break-ico { margin-right: 6px; font-size: 0.85rem; flex-shrink: 0; }
+.sp-break-bar {
+    height: 5px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.sp-break-bar > i {
+    display: block; height: 100%; width: 0;
+    border-radius: 999px;
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sp-break-pct {
+    font-size: 0.7rem;
+    color: #666;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* ══════════ RESPONSIVE ══════════ */
+@media (max-width: 1024px) {
+    .sp-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 780px) {
+    .sp-grid { grid-template-columns: repeat(2, 1fr); }
+    .sp-toolbar { flex-direction: column; align-items: flex-start; }
+    .sp-stats { gap: 1.1rem; }
+    .sp-stat-div { display: none; }
+    .sp-stat { min-width: 70px; }
+}
+
+@media (max-width: 640px) {
+    .sp-masthead { padding: 80px 1.25rem 55px; }
+    .sp-main { padding: 50px 1.25rem 60px; }
+    .sp-breakdown { padding: 60px 1.25rem; }
+    .sp-stat-num { font-size: 1.6rem; }
+    .sp-break-row { grid-template-columns: 1fr 60px 30px; }
+}
+
+@media (max-width: 420px) {
+    .sp-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sp-ring-fill { transition: none; }
+    .sp-break-bar > i { transition: none; }
+    .sp-card, .sp-ring-ico { transition: none; }
+    .sp-card:hover { transform: none; }
+    .sp-card.is-filtering { animation: none; }
+}

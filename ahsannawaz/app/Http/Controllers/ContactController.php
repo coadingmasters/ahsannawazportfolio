@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\RateLimiter;
 
 class ContactController extends Controller
 {
+    public function show()
+    {
+        return view('contact');
+    }
+
     public function store(Request $request)
     {
         // Honeypot — bots fill hidden fields, humans never see them.

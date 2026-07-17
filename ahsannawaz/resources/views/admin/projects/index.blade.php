@@ -10,6 +10,19 @@
 
 @section('content')
 
+    {{-- Bulk action bar — slides in once something is ticked --}}
+    <div class="bulk-bar" id="bulk-bar" data-noun="project">
+        <span class="bulk-count" id="bulk-count"><b>0</b> projects selected</span>
+        <div class="bulk-actions">
+            <button type="button" class="btn btn-ghost btn-sm" id="bulk-clear">Clear</button>
+            <button type="button" class="btn btn-danger btn-sm" id="bulk-delete">🗑 Delete selected</button>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ route('admin.projects.bulk-destroy') }}" id="bulk-form" class="hidden-form">
+        @csrf
+    </form>
+
     <div class="card">
         @if ($projects->isEmpty())
             <div class="empty">
@@ -22,6 +35,10 @@
                 <table class="tbl">
                     <thead>
                         <tr>
+                            <th class="col-check">
+                                <input type="checkbox" class="check-group" data-group="all"
+                                       title="Select all projects" aria-label="Select all projects">
+                            </th>
                             <th></th>
                             <th>Project</th>
                             <th>Category</th>
@@ -35,6 +52,12 @@
                     <tbody>
                         @foreach ($projects as $project)
                             <tr>
+                                <td class="col-check">
+                                    <input type="checkbox" class="row-check"
+                                           value="{{ $project->id }}"
+                                           data-group="all"
+                                           aria-label="Select {{ $project->title }}">
+                                </td>
                                 <td><img src="{{ $project->image_url }}" alt="" class="thumb"></td>
                                 <td>
                                     <div style="display:flex;align-items:center;gap:0.4rem">

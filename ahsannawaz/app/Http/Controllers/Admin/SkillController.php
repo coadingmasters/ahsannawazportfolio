@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SkillController extends Controller
 {
@@ -82,5 +83,24 @@ class SkillController extends Controller
     {
         $skill->update(['is_active' => !$skill->is_active]);
         return response()->json(['is_active' => $skill->is_active]);
+    }
+
+    /**
+     * Delete several skills at once from the index checkboxes.
+     */
+    public function bulkDestroy(Request $request)
+    {
+        $data = $request->validate([
+            'ids'   => 'required|array|min:1',
+            'ids.*' => 'integer|exists:skills,id',
+        ], [
+            'ids.required' => 'Select at least one skill to delete.',
+        ]);
+
+        $count = Skill::whereIn('id', $data['ids'])->count();
+        Skill::whereIn('id', $data['ids'])->delete();
+
+        return redirect()->route('admin.skills.index')
+            ->with('success', $count . ' ' . Str::plural('skill', $count) . ' deleted successfully!');
     }
 }
