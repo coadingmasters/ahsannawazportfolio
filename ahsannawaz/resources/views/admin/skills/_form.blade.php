@@ -2,7 +2,7 @@
 @php
     $skill = $skill ?? null;
     $gradients = [
-        'linear-gradient(90deg,#F97316,#fb923c)' => 'Orange',
+        'linear-gradient(90deg,#F97316,var(--accent-hover))' => 'Orange',
         'linear-gradient(90deg,#7c3aed,#a78bfa)' => 'Purple',
         'linear-gradient(90deg,#2563eb,#60a5fa)' => 'Blue',
         'linear-gradient(90deg,#0891b2,#22d3ee)' => 'Cyan',
@@ -10,7 +10,7 @@
         'linear-gradient(90deg,#b45309,#fbbf24)' => 'Amber',
         'linear-gradient(90deg,#4338ca,#818cf8)' => 'Indigo',
     ];
-    $currentGradient = old('color_gradient', $skill->color_gradient ?? 'linear-gradient(90deg,#F97316,#fb923c)');
+    $currentGradient = old('color_gradient', $skill->color_gradient ?? 'linear-gradient(90deg,#F97316,var(--accent-hover))');
 @endphp
 
 @csrf

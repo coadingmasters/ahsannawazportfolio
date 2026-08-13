@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    {{-- Applied before the first paint, otherwise the panel flashes light
+         then snaps to dark on every page load. --}}
+    <script>
+        (function () {
+            var t = localStorage.getItem('admin-theme');
+            if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -8,7 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    @css('css/theme.css')
+    @css('css/admin.css')
 </head>
 <body>
 <div class="admin">
@@ -75,7 +85,14 @@
                 <h1>@yield('heading', 'Dashboard')</h1>
                 <div class="crumb">@yield('crumb', 'Overview')</div>
             </div>
-            <div>@yield('actions')</div>
+            <div class="topbar-actions">
+                <button type="button" id="theme-toggle" class="theme-toggle"
+                        aria-label="Switch between light and dark mode" title="Light / dark">
+                    <span class="tt-sun" aria-hidden="true">☀</span>
+                    <span class="tt-moon" aria-hidden="true">☾</span>
+                </button>
+                @yield('actions')
+            </div>
         </div>
 
         <div class="content">
@@ -141,6 +158,19 @@
 @endif
 
 <script>
+/* ═══════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════ */
+(function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('admin-theme', next);
+    });
+})();
+
 /* ═══════════════════════════════════════
    MODALS
 ═══════════════════════════════════════ */

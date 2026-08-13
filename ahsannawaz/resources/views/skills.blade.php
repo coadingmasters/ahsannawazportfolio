@@ -8,12 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    @css('css/theme.css')
+    @css('css/welcome.css')
+    @css('css/about.css')
     {{-- Reused here: .pj-filter* pills, .pj-empty / .pj-noresults, and the pjPop keyframe --}}
-    <link rel="stylesheet" href="{{ asset('css/projects.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/skills.css') }}">
+    @css('css/projects.css')
+    @css('css/skills.css')
 </head>
 <body>
 

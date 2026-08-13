@@ -8,9 +8,9 @@
 
 @php
     // Ordinal ramp for skill level — weakest to strongest, one hue.
-    // Validated against the #161616 surface: monotone lightness, 28° hue
-    // spread, light end at 3.49:1.
-    $levelColor = ['good' => '#c2410c', 'advanced' => '#f97316', 'expert' => '#fdba74'];
+    // The actual colours live in theme.css so they re-step per mode: the
+    // light and dark ramps are validated separately against their surface.
+    $levelColor = ['good' => 'var(--ramp-1)', 'advanced' => 'var(--ramp-2)', 'expert' => 'var(--ramp-3)'];
     $totalLevels = $levelMix->sum('count') ?: 1;
 
     // ucfirst() alone would render these as "Cms" / "Api" / "Wordpress".
@@ -259,7 +259,7 @@
             <div class="stack">
                 @foreach ($levelMix as $row)
                     <span class="stack-seg"
-                          style="background:{{ $levelColor[$row['level']] ?? '#f97316' }}"
+                          style="background:{{ $levelColor[$row['level']] ?? 'var(--ramp-2)' }}"
                           data-w="{{ round($row['count'] / $totalLevels * 100, 2) }}"
                           title="{{ ucfirst($row['level']) }} — {{ $row['count'] }} skills"></span>
                 @endforeach
@@ -268,7 +268,7 @@
             <div class="legend">
                 @foreach ($levelMix as $row)
                     <div class="legend-item">
-                        <span class="legend-dot" style="background:{{ $levelColor[$row['level']] ?? '#f97316' }}"></span>
+                        <span class="legend-dot" style="background:{{ $levelColor[$row['level']] ?? 'var(--ramp-2)' }}"></span>
                         <span class="legend-name">{{ $row['level'] }}</span>
                         <span class="legend-val">{{ $row['count'] }} · {{ round($row['count'] / $totalLevels * 100) }}%</span>
                     </div>
