@@ -40,7 +40,12 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            // Hostinger disables symlink(), so `artisan storage:link` cannot run there.
+            // In production FILESYSTEM_PUBLIC_ROOT points this disk straight at
+            // public/storage, which asset('storage/...') already resolves to.
+            'root' => env('FILESYSTEM_PUBLIC_ROOT')
+                ? base_path(env('FILESYSTEM_PUBLIC_ROOT'))
+                : storage_path('app/public'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,

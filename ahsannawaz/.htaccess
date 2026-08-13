@@ -1,0 +1,31 @@
+# Hostinger's account default is PHP 8.3, but Laravel 13 / Symfony 8 need >= 8.4.
+# There is no CLI PHP selector on this plan, so the version is pinned here.
+AddHandler application/x-httpd-alt-php84 .php
+
+# The whole Laravel app lives inside public_html, so this file is what keeps the
+# site working AND keeps the internals unreachable. Do not delete it.
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Loose files that sit next to the app root and must never be served.
+    RewriteRule ^(\.env|\.env\..*|artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|deploy\.sh|README\.md)$ - [F,L]
+
+    # Everything else is handled by Laravel's front controller in public/.
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Belt-and-braces: never serve a dotfile, whatever the rewrite does.
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
