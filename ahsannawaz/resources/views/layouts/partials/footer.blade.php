@@ -93,24 +93,9 @@
             text-decoration: none;
             margin-bottom: 1.4rem;
         }
-        .logo-icon {
-            width: 46px; height: 46px;
-            background: var(--orange);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Sora', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--text);
-            flex-shrink: 0;
-            box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.4);
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .brand-logo:hover .logo-icon {
-            transform: scale(1.06);
-            box-shadow: 0 0 20px rgba(15, 118, 110, 0.4);
-        }
         .logo-text {
+            position: relative;
+            padding-bottom: 3px;
             font-family: 'Sora', sans-serif;
             font-size: 1.2rem;
             font-weight: 800;
@@ -121,6 +106,18 @@
             color: var(--orange);
             font-style: normal;
         }
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            height: 2px; width: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .brand-logo:hover .logo-text::after { transform: scaleX(1); }
 
         .brand-desc {
             font-size: 0.875rem;
@@ -513,7 +510,6 @@
         {{-- COL 1: Brand --}}
         <div class="f-brand">
             <a href="#" class="brand-logo">
-                <div class="logo-icon">A</div>
                 <span class="logo-text">Ahsan Nawaz<em>.dev</em></span>
             </a>
 

@@ -304,8 +304,8 @@
 
     @include('layouts.partials.footer')
 
-    <script src="{{ asset('js/about.js') }}"></script>
-    <script src="{{ asset('js/popup.js') }}"></script>
-    <script src="{{ asset('js/contact-page.js') }}"></script>
+    @js('js/about.js')
+    @js('js/popup.js')
+    @js('js/contact-page.js')
 </body>
 </html>

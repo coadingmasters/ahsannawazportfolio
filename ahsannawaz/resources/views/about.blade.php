@@ -314,6 +314,6 @@
 
     @include('layouts.partials.footer')
 
-    <script src="{{ asset('js/about.js') }}"></script>
+    @js('js/about.js')
 </body>
 </html>

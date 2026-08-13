@@ -40,6 +40,14 @@ class AppServiceProvider extends ServiceProvider
         // @css('css/theme.css') — a stylesheet link stamped with the file's
         // mtime. Hostinger's CDN caches assets for 7 days, so without this a
         // deploy leaves visitors on the previous stylesheet until it expires.
+        // Same story for scripts — the CDN caches those for 7 days too.
+        Blade::directive('js', function ($expression) {
+            return "<?php \$__p = {$expression};
+                \$__f = public_path(\$__p);
+                echo '<script src=\"' . e(asset(\$__p))
+                   . (is_file(\$__f) ? '?v=' . filemtime(\$__f) : '') . '\"></script>'; ?>";
+        });
+
         Blade::directive('css', function ($expression) {
             return "<?php \$__p = {$expression};
                 \$__f = public_path(\$__p);

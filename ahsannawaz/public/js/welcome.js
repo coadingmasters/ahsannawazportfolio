@@ -35,10 +35,17 @@ function type() {
 }
 
 function animateCounters() {
+    // The markup already shows the final figure, so a visitor without JS (or
+    // with reduced motion) reads the real number rather than a stuck "0".
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     document.querySelectorAll('[data-target]').forEach((counterEl) => {
         const target = Number(counterEl.dataset.target || 0);
         const suffix = '+';
         let current = 0;
+
+        if (still) { counterEl.textContent = `${target}${suffix}`; return; }
+        counterEl.textContent = `0${suffix}`;
 
         const step = () => {
             current += Math.ceil(target / 40);

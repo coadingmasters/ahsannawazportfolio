@@ -40,6 +40,36 @@ body::before {
     align-items: center;
     overflow: hidden;
     padding: 0 5vw;
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 64px 64px, 64px 64px;
+    background-position: center;
+    /* Grid fades out toward the edges so it frames rather than dominates. */
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 40%, #000 35%, transparent 78%);
+    mask-image: radial-gradient(120% 90% at 50% 40%, #000 35%, transparent 78%);
+}
+
+/* The section itself carries the page colour; #hero only paints the grid. */
+.hero-wrap { position: relative; background: var(--bg); }
+
+/* Oversized </> watermark — reads as "developer" before a word is read. */
+#hero::before {
+    content: '</>';
+    position: absolute;
+    top: 50%;
+    left: 26%;
+    transform: translate(-50%, -50%);
+    font-family: 'Sora', monospace;
+    font-size: clamp(12rem, 24vw, 26rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: var(--accent);
+    opacity: 0.045;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
 }
 
 .blob {
@@ -262,7 +292,11 @@ body::before {
     animation: fadeIn 1s ease forwards 0.5s;
 }
 
-.profile-wrap { position: relative; width: 380px; height: 380px; }
+.profile-wrap {
+    position: relative;
+    width: clamp(300px, 34vw, 460px);
+    height: clamp(300px, 34vw, 460px);
+}
 
 .ring {
     position: absolute;
@@ -275,18 +309,18 @@ body::before {
 }
 
 .ring-1 {
-    width: 380px;
-    height: 380px;
-    margin-left: -190px;
-    margin-top: -190px;
+    width: 100%;
+    height: 100%;
+    margin-left: -50%;
+    margin-top: -50%;
     animation-duration: 20s;
 }
 
 .ring-2 {
-    width: 470px;
-    height: 470px;
-    margin-left: -235px;
-    margin-top: -235px;
+    width: 124%;
+    height: 124%;
+    margin-left: -62%;
+    margin-top: -62%;
     border-style: dotted;
     animation-duration: 30s;
     animation-direction: reverse;
@@ -307,7 +341,8 @@ body::before {
     border-radius: 50%;
     background: var(--orange);
     box-shadow: 0 0 10px var(--orange), 0 0 20px rgba(15, 118, 110, 0.5);
-    transform: translate(-190px, -5px);
+    left: 0;
+    transform: translate(-50%, -50%);
 }
 
 .photo-circle {
@@ -315,8 +350,8 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 280px;
-    height: 280px;
+    width: clamp(230px, 26vw, 348px);
+    height: clamp(230px, 26vw, 348px);
     border-radius: 50%;
     border: 2.5px solid var(--orange);
     overflow: hidden;
@@ -421,11 +456,11 @@ body::before {
     #hero { padding: 0 1.25rem; }
     .hero-inner { padding: 4rem 0; }
     .hero-title { font-size: 2.2rem; }
-    .profile-wrap { width: 280px; height: 280px; }
+    .profile-wrap { width: min(300px, 78vw); height: min(300px, 78vw); }
     .photo-circle { width: 210px; height: 210px; }
     .ring-1 { width: 280px; height: 280px; margin-left: -140px; margin-top: -140px; }
     .ring-2 { width: 350px; height: 350px; margin-left: -175px; margin-top: -175px; }
-    .ring-dot { transform: translate(-140px, -5px); }
+    .ring-dot { left: 0; transform: translate(-50%, -50%); }
     .float-card.card-top { right: -5px; top: -5px; }
     .float-card.card-bottom { left: -5px; bottom: 10px; }
     .stats-row { gap: 1.25rem; }
@@ -575,7 +610,8 @@ body::before {
 /* ── Main photo frame ── */
 .photo-frame {
     position: relative;
-    width: 290px; height: 290px;
+    width: clamp(240px, 27vw, 360px);
+    height: clamp(240px, 27vw, 360px);
     z-index: 3;
 }
 
@@ -2053,4 +2089,62 @@ a.ct-info-item:hover .ct-info-arr { opacity: 1; transform: translateX(3px); }
 
 @media (max-width: 640px) {
     #projects { padding: 70px 1.25rem; }
+}
+
+
+/* ===== HERO CODE SCATTER =====
+   Small monospace fragments drifting behind the content. They say
+   "developer" at a glance without competing with the copy, so they sit
+   at low opacity and never take pointer events. */
+.code-scatter {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.code-scatter span {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    font-family: 'Sora', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(0.72rem, 0.6rem + 0.4vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    opacity: 0.16;
+    white-space: nowrap;
+    animation: codeDrift 9s ease-in-out infinite;
+    animation-delay: var(--d);
+}
+
+@keyframes codeDrift {
+    0%, 100% { transform: translateY(0); opacity: 0.13; }
+    50%      { transform: translateY(-14px); opacity: 0.22; }
+}
+
+/* Below the two-column breakpoint the fragments would collide with the
+   copy, so only the far-edge ones survive. */
+@media (max-width: 900px) {
+    .code-scatter span:nth-child(2),
+    .code-scatter span:nth-child(3),
+    .code-scatter span:nth-child(5) { display: none; }
+
+    /* On a narrow screen the watermark stops being a background and starts
+       being the loudest thing on the page, so it shrinks and steps back. */
+    #hero::before {
+        left: 50%;
+        font-size: clamp(6rem, 30vw, 13rem);
+        opacity: 0.030;
+    }
+
+    /* A stacked hero does not need a full viewport of height — that only
+       pushes the real content below the fold. */
+    #hero { min-height: auto; }
+    .hero-inner { padding: 3.5rem 0 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .code-scatter span { animation: none; opacity: 0.15; }
 }

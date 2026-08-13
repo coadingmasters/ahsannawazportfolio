@@ -31,6 +31,17 @@
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
+    {{-- Decorative code fragments. Purely visual, so they are hidden from
+         assistive tech and never intercept clicks. --}}
+    <div class="code-scatter" aria-hidden="true">
+        <span style="--x:6%;  --y:18%; --d:0s">&lt;/&gt;</span>
+        <span style="--x:8%;  --y:90%; --d:1.4s">$ php artisan serve</span>
+        <span style="--x:47%; --y:11%; --d:0.7s">{ }</span>
+        <span style="--x:88%; --y:26%; --d:2.1s">&lt;div&gt;</span>
+        <span style="--x:70%; --y:86%; --d:1.1s">npm run build</span>
+        <span style="--x:93%; --y:66%; --d:1.8s">=&gt;</span>
+    </div>
+
     <div class="hero-inner">
 
         {{-- ── LEFT CONTENT ── --}}
@@ -50,22 +61,24 @@
             </p>
 
             <p class="hero-desc">
-                Passionate developer crafting clean, scalable and beautiful web experiences.
-                From dynamic Laravel backends to pixel-perfect React frontends — I build it all.
-                Also specializing in WordPress plugin development and custom solutions.
+                Full-stack web developer from Pakistan, building fast, secure and
+                search-friendly websites with <strong>Laravel</strong>, <strong>PHP</strong>,
+                <strong>React</strong> and <strong>WordPress</strong>. From custom web
+                applications and REST APIs to WooCommerce stores and plugin development —
+                shipped on time, built to scale, and easy to maintain.
             </p>
 
             <div class="stats-row">
                 <div class="stat">
-                    <span class="stat-num" data-target="23">0</span>
+                    <span class="stat-num" data-target="10">10+</span>
                     <span class="stat-label">Projects Delivered</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-num" data-target="2">0</span>
+                    <span class="stat-num" data-target="2">2+</span>
                     <span class="stat-label">Years Experience</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-num" data-target="10">0</span>
+                    <span class="stat-num" data-target="8">8+</span>
                     <span class="stat-label">Happy Clients</span>
                 </div>
             </div>
@@ -82,22 +95,8 @@
             </div>
 
             <div class="social-row">
-                <span class="social-label">Follow me:</span>
-                <a href="#" class="social-icon" title="Facebook">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                </a>
-                <a href="#" class="social-icon" title="LinkedIn">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                </a>
-                <a href="#" class="social-icon" title="GitHub">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                </a>
-                <a href="#" class="social-icon" title="Twitter / X">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.057zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
-                <a href="#" class="social-icon" title="Fiverr">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23 9.25h-9.37c.057-.487.258-.876.604-1.167.346-.29.864-.436 1.554-.436h1.1V4.5h-1.47c-1.83 0-3.29.52-4.35 1.56-1.06 1.04-1.6 2.47-1.62 4.29v.9H7v3.25h2.43V24H13V14.5h4.6V24h3.61V14.5H23V9.25zM6.03 8.75a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
-                </a>
+                <span class="social-label">Find me on:</span>
+                @include('layouts.partials.socials', ['class' => 'social-icon'])
             </div>
 
         </div>
@@ -121,7 +120,7 @@
                 <div class="float-card card-top">
                     <div class="card-icon">🚀</div>
                     <div class="card-text">
-                        <p>50+ Projects</p>
+                        <p>10+ Projects</p>
                         <p>Delivered</p>
                     </div>
                 </div>
@@ -214,7 +213,7 @@
             <div class="skill-chip chip-3">
                 <div class="chip-icon">🚀</div>
                 <div>
-                    <div>50+ Projects</div>
+                    <div>10+ Projects</div>
                     <div class="chip-sub">Delivered</div>
                 </div>
             </div>
@@ -363,19 +362,19 @@
         {{-- ── STATS STRIP ── --}}
         <div class="sk-stats sk-reveal" style="transition-delay:0.3s">
             <div class="sk-stat">
-                <span class="sk-stat-num" data-target="20">0</span>
+                <span class="sk-stat-num" data-target="20">20+</span>
                 <span class="sk-stat-label">Technologies Mastered</span>
             </div>
             <div class="sk-stat">
-                <span class="sk-stat-num" data-target="23">0</span>
+                <span class="sk-stat-num" data-target="23">23+</span>
                 <span class="sk-stat-label">Projects Delivered</span>
             </div>
             <div class="sk-stat">
-                <span class="sk-stat-num" data-target="3">0</span>
+                <span class="sk-stat-num" data-target="3">3+</span>
                 <span class="sk-stat-label">Years of Experience</span>
             </div>
             <div class="sk-stat">
-                <span class="sk-stat-num" data-target="23">0</span>
+                <span class="sk-stat-num" data-target="23">23+</span>
                 <span class="sk-stat-label">Happy Clients</span>
             </div>
         </div>
@@ -843,8 +842,8 @@
 
         @include('layouts.partials.footer')
 
-<script src="{{ asset('js/popup.js') }}"></script>
-<script src="{{ asset('js/about.js') }}"></script>
-<script src="{{ asset('js/welcome.js') }}"></script>
+@js('js/popup.js')
+@js('js/about.js')
+@js('js/welcome.js')
 </body>
 </html>
