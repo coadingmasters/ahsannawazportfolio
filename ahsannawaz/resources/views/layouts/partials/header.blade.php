@@ -1,25 +1,24 @@
 {{-- ============================================
      PORTFOLIO HEADER — Dark + Orange Theme
      Color Scheme Variables (use these site-wide):
-     --bg-dark:    #0d0d0d  (main background)
-     --bg-card:    #161616  (cards/sections)
-     --orange:     #f97316  (brand accent)
-     --orange-lgt: #fb923c  (hover orange)
-     --text-white: #f1f5f9  (primary text)
-     --text-muted: #94a3b8  (secondary text)
+     --bg-dark:    var(--bg)  (main background)
+     --bg-card:    var(--surface)  (cards/sections)
+     --orange:     var(--accent)  (brand accent)
+     --orange-lgt: var(--accent-hover)  (hover orange)
+     --text-white: var(--text)  (primary text)
+     --text-muted: var(--text-3)  (secondary text)
 ============================================ --}}
 
 <style>
 :root {
-    --bg-dark: #0d0d0d;
-    --bg-card: #161616;
-    --bg-nav: rgba(13, 13, 13, 0.96);
-    --orange: #f97316;
-    --orange-light: #fb923c;
-    --orange-dim: rgba(249, 115, 22, 0.12);
-    --text-white: #f1f5f9;
-    --text-muted: #94a3b8;
-    --border: rgba(249, 115, 22, 0.2);
+    --bg-dark: var(--bg);
+    --bg-card: var(--surface);
+    --bg-nav: rgba(255, 255, 255, 0.85);
+    --orange: var(--accent);
+    --orange-light: var(--accent-hover);
+    --orange-dim: rgba(15, 118, 110, 0.12);
+    --text-white: var(--text);
+    --text-muted: var(--text-3);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -69,14 +68,14 @@ header {
     justify-content: center;
     font-size: 18px;
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
     flex-shrink: 0;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .logo:hover .logo-icon {
     transform: scale(1.08) rotate(-4deg);
-    box-shadow: 0 0 18px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 0 18px rgba(15, 118, 110, 0.4);
 }
 
 .logo-text {
@@ -128,7 +127,7 @@ nav a.active { color: var(--orange); }
 /* ===== CTA BUTTON ===== */
 .btn-hire {
     background: var(--orange);
-    color: #fff;
+    color: var(--text);
     border: none;
     padding: 9px 20px;
     border-radius: 8px;
@@ -144,7 +143,7 @@ nav a.active { color: var(--orange); }
 .btn-hire:hover {
     background: var(--orange-light);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.35);
+    box-shadow: 0 4px 16px rgba(15, 118, 110, 0.35);
 }
 
 .btn-hire:active { transform: translateY(0); }

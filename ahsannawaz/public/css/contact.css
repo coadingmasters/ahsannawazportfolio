@@ -9,17 +9,17 @@
     display: inline-flex; align-items: center; gap: 8px;
     margin-top: 1.5rem;
     font-size: 0.78rem; font-weight: 600;
-    color: #4ade80;
-    background: rgba(74,222,128,0.08);
-    border: 1px solid rgba(74,222,128,0.25);
+    color: var(--green);
+    background: rgba(21, 128, 61, 0.08);
+    border: 1px solid rgba(21, 128, 61, 0.25);
     padding: 8px 16px; border-radius: 999px;
 }
 
 /* ══════════ METHOD CARDS ══════════ */
 .cp-methods {
     padding: 70px 2rem;
-    background: #0a0a0a;
-    border-bottom: 1px solid rgba(249,115,22,0.1);
+    background: var(--bg);
+    border-bottom: 1px solid rgba(15, 118, 110, 0.1);
 }
 .cp-method-grid {
     display: grid;
@@ -28,8 +28,8 @@
 }
 .cp-method {
     display: block;
-    background: linear-gradient(150deg, #111, #161616);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: linear-gradient(150deg, var(--bg), var(--surface));
+    border: 1px solid rgba(15, 23, 42, 0.06);
     border-radius: 16px;
     padding: 1.65rem 1.5rem;
     text-decoration: none;
@@ -42,44 +42,44 @@
     position: absolute;
     top: -60px; right: -60px;
     width: 160px; height: 160px;
-    background: radial-gradient(circle, var(--mc, #F97316) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--mc, var(--accent)) 0%, transparent 70%);
     opacity: 0.07;
     pointer-events: none;
     transition: opacity 0.3s;
 }
-.cp-method:hover { border-color: var(--mc, #F97316); transform: translateY(-5px); }
+.cp-method:hover { border-color: var(--mc, var(--accent)); transform: translateY(-5px); }
 .cp-method:hover::before { opacity: 0.18; }
 
 .cp-method-ico {
     display: grid; place-items: center;
     width: 42px; height: 42px;
     border-radius: 11px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--mc, #F97316);
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    color: var(--mc, var(--accent));
     font-size: 1.05rem;
     margin-bottom: 1rem;
     transition: transform 0.3s, border-color 0.3s;
 }
-.cp-method:hover .cp-method-ico { transform: scale(1.1) rotate(-6deg); border-color: var(--mc, #F97316); }
+.cp-method:hover .cp-method-ico { transform: scale(1.1) rotate(-6deg); border-color: var(--mc, var(--accent)); }
 
 .cp-method-title {
     font-family: 'Sora', sans-serif;
     font-size: 0.95rem; font-weight: 700;
-    color: #fff; margin-bottom: 0.4rem;
+    color: var(--text); margin-bottom: 0.4rem;
 }
-.cp-method-desc { font-size: 0.79rem; color: #666; line-height: 1.65; margin-bottom: 0.9rem; }
+.cp-method-desc { font-size: 0.79rem; color: var(--text-3); line-height: 1.65; margin-bottom: 0.9rem; }
 .cp-method-value {
     display: block;
     font-size: 0.8rem; font-weight: 600;
-    color: var(--mc, #F97316);
+    color: var(--mc, var(--accent));
     word-break: break-word;
 }
 
 /* ══════════ FORM + ASIDE ══════════ */
 .cp-form-section {
     padding: 90px 2rem;
-    background: #0d0d0d;
+    background: var(--bg);
     position: relative;
     overflow: hidden;
     scroll-margin-top: 80px;
@@ -95,21 +95,21 @@
 .cp-aside { display: flex; flex-direction: column; gap: 1.25rem; }
 
 .cp-aside-card {
-    background: linear-gradient(150deg, #121212, #171717);
-    border: 1px solid rgba(249,115,22,0.16);
+    background: linear-gradient(150deg, var(--bg), var(--surface));
+    border: 1px solid rgba(15, 118, 110, 0.16);
     border-radius: 18px;
     padding: 1.6rem 1.5rem;
     transition: border-color 0.3s;
 }
-.cp-aside-card:hover { border-color: rgba(249,115,22,0.38); }
+.cp-aside-card:hover { border-color: rgba(15, 118, 110, 0.38); }
 
 .cp-aside-title {
     font-family: 'Sora', sans-serif;
     font-size: 0.98rem; font-weight: 700;
-    color: #fff;
+    color: var(--text);
     padding-bottom: 0.85rem;
     margin-bottom: 1.1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 /* Steps */
@@ -119,24 +119,24 @@
     width: 26px; height: 26px; flex-shrink: 0;
     display: grid; place-items: center;
     border-radius: 50%;
-    background: rgba(249,115,22,0.1);
-    border: 1px solid rgba(249,115,22,0.3);
-    color: #F97316;
+    background: rgba(15, 118, 110, 0.1);
+    border: 1px solid rgba(15, 118, 110, 0.3);
+    color: var(--accent);
     font-family: 'Sora', sans-serif;
     font-size: 0.72rem; font-weight: 700;
 }
-.cp-step-body b { display: block; font-size: 0.82rem; color: #ddd; font-weight: 600; margin-bottom: 2px; }
-.cp-step-body i { display: block; font-size: 0.75rem; color: #666; font-style: normal; line-height: 1.6; }
+.cp-step-body b { display: block; font-size: 0.82rem; color: var(--text-3); font-weight: 600; margin-bottom: 2px; }
+.cp-step-body i { display: block; font-size: 0.75rem; color: var(--text-3); font-style: normal; line-height: 1.6; }
 
 /* Good fits */
 .cp-fits { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
 .cp-fits li {
     display: flex; align-items: flex-start; gap: 0.6rem;
-    font-size: 0.81rem; color: #888; line-height: 1.55;
+    font-size: 0.81rem; color: var(--text-3); line-height: 1.55;
 }
 .cp-fits li::before {
     content: '✓';
-    color: #4ade80;
+    color: var(--green);
     font-size: 0.75rem;
     font-weight: 700;
     flex-shrink: 0;
@@ -146,7 +146,7 @@
 .cp-socials-card .ct-socials-row { gap: 0.55rem; }
 
 /* ══════════ FAQ ══════════ */
-.cp-faq { padding: 90px 2rem; background: #0a0a0a; }
+.cp-faq { padding: 90px 2rem; background: var(--bg); }
 .cp-faq-list {
     max-width: 800px;
     margin: 0 auto;
@@ -156,14 +156,14 @@
 }
 
 .cp-faq-item {
-    background: linear-gradient(150deg, #111, #161616);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: linear-gradient(150deg, var(--bg), var(--surface));
+    border: 1px solid rgba(15, 23, 42, 0.07);
     border-radius: 14px;
     overflow: hidden;
     transition: border-color 0.3s;
 }
-.cp-faq-item:hover { border-color: rgba(249,115,22,0.3); }
-.cp-faq-item.open { border-color: rgba(249,115,22,0.42); }
+.cp-faq-item:hover { border-color: rgba(15, 118, 110, 0.3); }
+.cp-faq-item.open { border-color: rgba(15, 118, 110, 0.42); }
 
 .cp-faq-q {
     width: 100%;
@@ -176,11 +176,11 @@
     text-align: left;
     font-family: 'Sora', sans-serif;
     font-size: 0.9rem; font-weight: 600;
-    color: #ddd;
+    color: var(--text-3);
     transition: color 0.2s;
 }
-.cp-faq-q:hover { color: #fff; }
-.cp-faq-item.open .cp-faq-q { color: #F97316; }
+.cp-faq-q:hover { color: var(--text); }
+.cp-faq-item.open .cp-faq-q { color: var(--accent); }
 
 /* Plus → minus icon */
 .cp-faq-icon {
@@ -209,7 +209,7 @@
 .cp-faq-a p {
     padding: 0 1.4rem 1.25rem;
     font-size: 0.84rem;
-    color: #666;
+    color: var(--text-3);
     line-height: 1.75;
 }
 

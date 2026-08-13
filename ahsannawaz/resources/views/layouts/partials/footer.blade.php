@@ -2,18 +2,17 @@
 <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+        /* Only legacy alias names belong here. Redefining --bg/--surface/--text
+           as var(--bg) etc. creates a self-reference, which makes the token
+           invalid for the WHOLE page — that is what turned the hero panel dark. */
         :root {
-            --orange:       #F97316;
-            --orange-soft:  rgba(249,115,22,0.15);
-            --orange-glow:  rgba(249,115,22,0.08);
-            --bg:           #0d0d0d;
-            --surface:      #161616;
-            --surface2:     #1f1f1f;
-            --border:       rgba(255,255,255,0.07);
-            --border-o:     rgba(249,115,22,0.25);
-            --text:         #ffffff;
-            --muted:        #8a8a8a;
-            --muted2:       #555;
+            --orange:       var(--accent);
+            --orange-soft:  rgba(15, 118, 110, 0.15);
+            --orange-glow:  rgba(15, 118, 110, 0.08);
+            --surface2:     var(--surface-2);
+            --border-o:     var(--accent-line);
+            --muted:        var(--text-3);
+            --muted2:       var(--text-3);
         }
 
         body {
@@ -40,7 +39,7 @@
             background: linear-gradient(90deg,
                 transparent 0%,
                 var(--orange) 30%,
-                rgba(249,115,22,0.5) 50%,
+                rgba(15, 118, 110, 0.5) 50%,
                 var(--orange) 70%,
                 transparent 100%
             );
@@ -61,12 +60,12 @@
         }
         .f-blob-1 {
             width: 500px; height: 300px;
-            background: radial-gradient(ellipse, rgba(249,115,22,0.07) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(15, 118, 110, 0.07) 0%, transparent 70%);
             top: 0; left: -100px;
         }
         .f-blob-2 {
             width: 400px; height: 300px;
-            background: radial-gradient(ellipse, rgba(249,115,22,0.05) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(15, 118, 110, 0.05) 0%, transparent 70%);
             bottom: 0; right: -50px;
         }
 
@@ -102,14 +101,14 @@
             font-family: 'Sora', sans-serif;
             font-size: 1.25rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text);
             flex-shrink: 0;
-            box-shadow: 0 0 0 0 rgba(249,115,22,0.4);
+            box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.4);
             transition: box-shadow 0.3s, transform 0.3s;
         }
         .brand-logo:hover .logo-icon {
             transform: scale(1.06);
-            box-shadow: 0 0 20px rgba(249,115,22,0.4);
+            box-shadow: 0 0 20px rgba(15, 118, 110, 0.4);
         }
         .logo-text {
             font-family: 'Sora', sans-serif;
@@ -208,7 +207,7 @@
             transform: translateX(-4px);
             transition: opacity 0.2s, transform 0.2s;
         }
-        .f-nav a:hover { color: #fff; gap: 10px; }
+        .f-nav a:hover { color: var(--text); gap: 10px; }
         .f-nav a:hover .arr { opacity: 1; transform: translateX(0); }
 
         /* Services tags */
@@ -253,7 +252,7 @@
             position: absolute;
             top: -40px; right: -40px;
             width: 120px; height: 120px;
-            background: radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(15, 118, 110, 0.12) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -314,7 +313,7 @@
         .email-field input::placeholder { color: var(--muted2); }
         .email-field input:focus {
             border-color: var(--orange);
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
         }
         .email-icon {
             position: absolute;
@@ -331,7 +330,7 @@
             flex: 0 0 180px;
             width: auto;
             background: var(--orange);
-            color: #000;
+            color: var(--on-accent);
             font-weight: 700;
             font-size: 0.875rem;
             font-family: 'Sora', sans-serif;
@@ -352,14 +351,14 @@
             position: absolute;
             top: 0; left: -100%;
             width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.15), transparent);
             transition: left 0.4s;
         }
         .subscribe-btn:hover::before { left: 100%; }
         .subscribe-btn:hover {
-            background: #fb923c;
+            background: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(249,115,22,0.35);
+            box-shadow: 0 6px 24px rgba(15, 118, 110, 0.35);
         }
         .subscribe-btn:active { transform: translateY(0); }
         .subscribe-btn .btn-arrow { transition: transform 0.2s; }
@@ -370,12 +369,12 @@
             display: none;
             align-items: center;
             gap: 8px;
-            background: rgba(34,197,94,0.1);
-            border: 1px solid rgba(34,197,94,0.25);
+            background: rgba(21, 128, 61, 0.1);
+            border: 1px solid rgba(21, 128, 61, 0.25);
             border-radius: 9px;
             padding: 10px 14px;
             font-size: 0.8rem;
-            color: #4ade80;
+            color: var(--green);
         }
         .privacy-note {
             font-size: 0.7rem;
@@ -406,7 +405,7 @@
             color: var(--muted);
         }
         .copyright span { color: var(--orange); font-weight: 600; }
-        .heart { color: #ef4444; display: inline-block; animation: heartbeat 1.4s ease-in-out infinite; }
+        .heart { color: var(--red); display: inline-block; animation: heartbeat 1.4s ease-in-out infinite; }
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
             14%       { transform: scale(1.25); }
@@ -460,8 +459,8 @@
             padding: 10px 14px;
             border-radius: 999px;
             cursor: pointer;
-            background: rgba(22, 22, 22, 0.55);
-            border: 1px solid rgba(249, 115, 22, 0.30);
+            background: rgba(248, 250, 252, 0.55);
+            border: 1px solid rgba(15, 118, 110, 0.30);
             color: var(--muted);
             backdrop-filter: blur(10px);
             transition: transform 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
@@ -470,9 +469,9 @@
 
         .footer-backtop-floating:hover {
             transform: translateY(-3px);
-            border-color: rgba(249, 115, 22, 0.55);
-            background: rgba(249, 115, 22, 0.10);
-            color: #fff;
+            border-color: rgba(15, 118, 110, 0.55);
+            background: rgba(15, 118, 110, 0.10);
+            color: var(--text);
         }
 
         .footer-backtop-floating svg { flex-shrink: 0; }

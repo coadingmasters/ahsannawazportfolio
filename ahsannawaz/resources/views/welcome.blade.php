@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     {{-- Reused by the homepage projects section: .ab-* shell + .pj-card* --}}
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
@@ -230,7 +231,7 @@
             </h2>
 
             <p class="about-text reveal right" style="transition-delay:0.3s">
-                Hi, I'm <strong style="color:#fff">Ahsan Nawaz</strong>, a full-stack web developer based in Pakistan
+                Hi, I'm <strong style="color:var(--text)">Ahsan Nawaz</strong>, a full-stack web developer based in Pakistan
                 with over 5 years of hands-on experience building robust, scalable, and visually compelling
                 web applications. I specialise in Laravel, PHP, React JS, and WordPress — turning complex
                 ideas into elegant solutions.
@@ -258,7 +259,7 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Availability</span>
-                    <span class="info-value" style="color:#4ade80">● Open to Work</span>
+                    <span class="info-value" style="color:#15803d">● Open to Work</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Freelance</span>
@@ -447,9 +448,9 @@
         <div class="srv-grid">
 
             {{-- React JS --}}
-            <div class="srv-card" data-delay="0" style="--card-color:#22d3ee;--card-glow:rgba(34,211,238,0.08)">
+            <div class="srv-card" data-delay="0" style="--card-color:#0e7490;--card-glow:rgba(14,116,144,0.08)">
                 <span class="srv-num">01</span>
-                <div class="srv-icon" style="background:rgba(34,211,238,0.1);">⚛️</div>
+                <div class="srv-icon" style="background:rgba(14,116,144,0.1);">⚛️</div>
                 <h4 class="srv-card-title">React JS Development</h4>
                 <p class="srv-card-desc">Dynamic, fast, and interactive SPAs and dashboards built with modern React — hooks, context, and clean component architecture.</p>
                 <ul class="srv-list">
@@ -465,9 +466,9 @@
             </div>
 
             {{-- WordPress --}}
-            <div class="srv-card" data-delay="1" style="--card-color:#60a5fa;--card-glow:rgba(96,165,250,0.08)">
+            <div class="srv-card" data-delay="1" style="--card-color:#1d4ed8;--card-glow:rgba(29,78,216,0.08)">
                 <span class="srv-num">02</span>
-                <div class="srv-icon" style="background:rgba(96,165,250,0.1);">📝</div>
+                <div class="srv-icon" style="background:rgba(29,78,216,0.1);">📝</div>
                 <h4 class="srv-card-title">WordPress Development</h4>
                 <p class="srv-card-desc">Custom themes, full-site editing, and bespoke WordPress solutions that are fast, SEO-friendly, and easy to manage.</p>
                 <ul class="srv-list">
@@ -483,9 +484,9 @@
             </div>
 
             {{-- Plugin Dev --}}
-            <div class="srv-card" data-delay="2" style="--card-color:#a78bfa;--card-glow:rgba(167,139,250,0.08)">
+            <div class="srv-card" data-delay="2" style="--card-color:#6d28d9;--card-glow:rgba(109,40,217,0.08)">
                 <span class="srv-num">03</span>
-                <div class="srv-icon" style="background:rgba(167,139,250,0.1);">🔌</div>
+                <div class="srv-icon" style="background:rgba(109,40,217,0.1);">🔌</div>
                 <h4 class="srv-card-title">WordPress Plugin Dev</h4>
                 <p class="srv-card-desc">Tailor-made WordPress plugins built from scratch — extending functionality exactly how your business needs it, without bloat.</p>
                 <ul class="srv-list">
@@ -501,9 +502,9 @@
             </div>
 
             {{-- Frontend Dev --}}
-            <div class="srv-card" data-delay="3" style="--card-color:#fbbf24;--card-glow:rgba(251,191,36,0.08)">
+            <div class="srv-card" data-delay="3" style="--card-color:#b45309;--card-glow:rgba(180,83,9,0.08)">
                 <span class="srv-num">04</span>
-                <div class="srv-icon" style="background:rgba(251,191,36,0.1);">🎨</div>
+                <div class="srv-icon" style="background:rgba(180,83,9,0.1);">🎨</div>
                 <h4 class="srv-card-title">Frontend Development</h4>
                 <p class="srv-card-desc">Pixel-perfect HTML, CSS, JavaScript & jQuery interfaces — responsive on every device, smooth animations, and clean code.</p>
                 <ul class="srv-list">
@@ -519,9 +520,9 @@
             </div>
 
             {{-- REST API --}}
-            <div class="srv-card" data-delay="4" style="--card-color:#34d399;--card-glow:rgba(52,211,153,0.08)">
+            <div class="srv-card" data-delay="4" style="--card-color:#047857;--card-glow:rgba(4,120,87,0.08)">
                 <span class="srv-num">05</span>
-                <div class="srv-icon" style="background:rgba(52,211,153,0.1);">🔗</div>
+                <div class="srv-icon" style="background:rgba(4,120,87,0.1);">🔗</div>
                 <h4 class="srv-card-title">REST API Development</h4>
                 <p class="srv-card-desc">Scalable, well-documented REST APIs and third-party integrations — built for performance, security, and easy consumption.</p>
                 <ul class="srv-list">
@@ -537,9 +538,9 @@
             </div>
 
             {{-- Database --}}
-            <div class="srv-card" data-delay="5" style="--card-color:#F97316;--card-glow:rgba(249,115,22,0.1)">
+            <div class="srv-card" data-delay="5" style="--card-color:#c2410c;--card-glow:rgba(194,65,12,0.1)">
                 <span class="srv-num">06</span>
-                <div class="srv-icon" style="background:rgba(249,115,22,0.1);">🗄️</div>
+                <div class="srv-icon" style="background:rgba(194,65,12,0.1);">🗄️</div>
                 <h4 class="srv-card-title">Database Design & Optimisation</h4>
                 <p class="srv-card-desc">Efficient schema design, query optimisation, and database architecture for MySQL — making your app fast and reliable at scale.</p>
                 <ul class="srv-list">
@@ -560,9 +561,9 @@
         <div class="srv-strip srv-reveal" style="transition-delay:0.25s">
 
             {{-- Bug Fixing --}}
-            <div class="srv-card visible" style="--card-color:#f87171;--card-glow:rgba(248,113,113,0.08);opacity:1;transform:none;">
+            <div class="srv-card visible" style="--card-color:#b91c1c;--card-glow:rgba(185,28,28,0.08);opacity:1;transform:none;">
                 <span class="srv-num">07</span>
-                <div class="srv-icon" style="background:rgba(248,113,113,0.1);">🐛</div>
+                <div class="srv-icon" style="background:rgba(185,28,28,0.1);">🐛</div>
                 <h4 class="srv-card-title">Bug Fixing & Code Review</h4>
                 <p class="srv-card-desc">Fast, accurate debugging of Laravel, PHP, WordPress, and React codebases. I'll find the issue and fix it properly — not just patch it.</p>
                 <ul class="srv-list">
@@ -574,9 +575,9 @@
             </div>
 
             {{-- Deployment --}}
-            <div class="srv-card visible" style="--card-color:#818cf8;--card-glow:rgba(129,140,248,0.08);opacity:1;transform:none;">
+            <div class="srv-card visible" style="--card-color:#4338ca;--card-glow:rgba(67,56,202,0.08);opacity:1;transform:none;">
                 <span class="srv-num">08</span>
-                <div class="srv-icon" style="background:rgba(129,140,248,0.1);">☁️</div>
+                <div class="srv-icon" style="background:rgba(67,56,202,0.1);">☁️</div>
                 <h4 class="srv-card-title">Deployment & Server Setup</h4>
                 <p class="srv-card-desc">I'll deploy your application to cPanel, VPS, or cloud servers — with SSL, NGINX/Apache config, and CI/CD pipeline setup.</p>
                 <ul class="srv-list">

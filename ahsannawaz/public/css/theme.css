@@ -1,0 +1,181 @@
+/* ============================================================
+   THEME — design tokens for the whole site
+   Loaded before every other stylesheet.
+
+   Light is the default and the only mode the public site uses.
+   The admin panel opts into dark by setting data-theme="dark"
+   on <html>; nothing else in the site reads that attribute.
+
+   Accent is deep teal. Every colour below was contrast-checked
+   against the surface it sits on:
+     accent   #0f766e on #ffffff  → 5.47:1
+     text     #0f172a on #ffffff  → 17.85:1
+     muted    #475569 on #ffffff  → 7.58:1
+     subtle   #64748b on #ffffff  → 4.76:1
+     on-accent#ffffff on #0f766e  → 5.47:1
+============================================================ */
+
+:root {
+    color-scheme: light;
+
+    /* ── Surfaces ─────────────────────────────── */
+    --bg: #f8fafc;            /* page */
+    --surface: #ffffff;       /* cards, panels */
+    --surface-2: #f1f5f9;     /* insets, tracks, hovers */
+    --surface-3: #e2e8f0;     /* stronger insets */
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+
+    /* ── Ink ──────────────────────────────────── */
+    --text: #0f172a;          /* headings, primary copy */
+    --text-2: #475569;        /* body copy */
+    --text-3: #64748b;        /* captions, meta */
+    --on-accent: #ffffff;     /* text sitting on the accent fill */
+
+    /* ── Accent ───────────────────────────────── */
+    --accent: #0f766e;
+    --accent-hover: #115e59;
+    --accent-deep: #134e4a;
+    --accent-soft: #f0fdfa;   /* tinted background wash */
+    --accent-line: rgba(15, 118, 110, 0.20);
+    --accent-glow: rgba(15, 118, 110, 0.14);
+
+    /* ── Status ───────────────────────────────── */
+    --green: #15803d;
+    --red: #b91c1c;
+    --amber: #b45309;
+    --blue: #1d4ed8;
+    --green-soft: #f0fdf4;
+    --red-soft: #fef2f2;
+
+    /* ── Charts ───────────────────────────────── */
+    /* Ordinal ramp, light→dark, validated: monotone L,
+       ΔL ≥ 0.06, light end 2.49:1 on white. */
+    --ramp-1: #14b8a6;
+    --ramp-2: #0f766e;
+    --ramp-3: #134e4a;
+    --grid: #e2e8f0;          /* hairline gridlines */
+    --track: #f1f5f9;         /* unfilled bar/meter track */
+
+    /* ── Elevation ────────────────────────────── */
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow: 0 1px 3px rgba(15, 23, 42, 0.07), 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.10), 0 4px 8px rgba(15, 23, 42, 0.05);
+
+    /* ── Radius ───────────────────────────────── */
+    --r-sm: 8px;
+    --r: 12px;
+    --r-lg: 16px;
+    --r-xl: 22px;
+
+    /* ── Type scale ───────────────────────────── */
+    --step--1: clamp(0.80rem, 0.78rem + 0.10vw, 0.86rem);
+    --step-0:  clamp(0.95rem, 0.92rem + 0.15vw, 1.02rem);
+    --step-1:  clamp(1.12rem, 1.05rem + 0.35vw, 1.32rem);
+    --step-2:  clamp(1.40rem, 1.25rem + 0.75vw, 1.85rem);
+    --step-3:  clamp(1.80rem, 1.50rem + 1.50vw, 2.60rem);
+    --step-4:  clamp(2.30rem, 1.70rem + 3.00vw, 4.00rem);
+
+    /* ── Spacing rhythm ───────────────────────── */
+    --sp-1: 0.35rem;
+    --sp-2: 0.65rem;
+    --sp-3: 1rem;
+    --sp-4: 1.5rem;
+    --sp-5: 2.25rem;
+    --sp-6: 3.5rem;
+    --sp-7: 5rem;
+}
+
+/* ── Dark mode — admin panel only ─────────────────────────────
+   Surfaces darken, ink lightens, and the accent steps lighter so
+   it keeps clearing the surface (#2dd4bf on #111827 → 9.53:1).
+   The chart ramp flips direction for the same reason.
+------------------------------------------------------------- */
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg: #0b1220;
+    --surface: #111827;
+    --surface-2: #1a2332;
+    --surface-3: #243044;
+    --border: #243044;
+    --border-strong: #334155;
+
+    --text: #e2e8f0;
+    --text-2: #b6c2d2;
+    --text-3: #94a3b8;
+    --on-accent: #04211f;
+
+    --accent: #2dd4bf;
+    --accent-hover: #5eead4;
+    --accent-deep: #99f6e4;
+    --accent-soft: #12232b;
+    --accent-line: rgba(45, 212, 191, 0.24);
+    --accent-glow: rgba(45, 212, 191, 0.16);
+
+    --green: #4ade80;
+    --red: #f87171;
+    --amber: #fbbf24;
+    --blue: #60a5fa;
+    --green-soft: #10231a;
+    --red-soft: #2a1416;
+
+    /* Validated on #111827: monotone L, ΔL ≥ 0.06, end 4.74:1 */
+    --ramp-1: #0d9488;
+    --ramp-2: #2dd4bf;
+    --ramp-3: #99f6e4;
+    --grid: #243044;
+    --track: #1a2332;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.50), 0 2px 4px rgba(0, 0, 0, 0.30);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    background: var(--bg);
+    color: var(--text-2);
+    font-size: var(--step-0);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 { color: var(--text); line-height: 1.2; letter-spacing: -0.02em; }
+
+a { color: inherit; text-decoration: none; }
+
+img, svg { max-width: 100%; }
+
+::selection { background: var(--accent); color: var(--on-accent); }
+
+/* Visible keyboard focus everywhere — the old dark theme had none. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Theme swaps shouldn't animate every property on the page; only the
+   surfaces and ink need to cross-fade. */
+[data-theme] body,
+[data-theme] .card,
+[data-theme] .sidebar {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

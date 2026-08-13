@@ -10,7 +10,7 @@
     display: grid;
     place-items: center;
     padding: 1.5rem;
-    background: rgba(5, 5, 5, 0.75);
+    background: rgba(248, 250, 252, 0.75);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
     opacity: 0;
@@ -20,17 +20,17 @@
 .pop-backdrop.open { opacity: 1; visibility: visible; }
 
 .pop {
-    --pop-accent: #4ade80;
+    --pop-accent: var(--green);
     width: 100%;
     max-width: 440px;
-    background: linear-gradient(150deg, #141414, #1b1b1b);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: linear-gradient(150deg, var(--surface), var(--surface));
+    border: 1px solid rgba(15, 23, 42, 0.09);
     border-radius: 20px;
     padding: 2.25rem 1.9rem 1.75rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.14);
     transform: scale(0.9) translateY(16px);
     opacity: 0;
     transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.34s ease;
@@ -58,7 +58,7 @@
 }
 
 /* Error variant */
-.pop-backdrop.is-error .pop { --pop-accent: #f87171; }
+.pop-backdrop.is-error .pop { --pop-accent: var(--red); }
 
 .pop-ico {
     width: 66px; height: 66px;
@@ -118,12 +118,12 @@
     font-family: 'Sora', sans-serif;
     font-size: 1.3rem;
     font-weight: 800;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 0.5rem;
 }
 .pop-text {
     font-size: 0.88rem;
-    color: #888;
+    color: var(--text-3);
     line-height: 1.7;
     margin-bottom: 1.5rem;
 }
@@ -134,8 +134,8 @@
     text-align: left;
     margin: 0 0 1.5rem;
     padding: 0.9rem 1rem;
-    background: rgba(248, 113, 113, 0.06);
-    border: 1px solid rgba(248, 113, 113, 0.2);
+    background: rgba(185, 28, 28, 0.06);
+    border: 1px solid rgba(185, 28, 28, 0.2);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -146,12 +146,12 @@
     align-items: flex-start;
     gap: 0.5rem;
     font-size: 0.81rem;
-    color: #bbb;
+    color: var(--text-3);
     line-height: 1.55;
 }
 .pop-list li::before {
     content: '•';
-    color: #f87171;
+    color: var(--red);
     font-weight: 700;
     flex-shrink: 0;
 }
@@ -159,7 +159,7 @@
 .pop-btn {
     width: 100%;
     background: var(--pop-accent);
-    color: #0a0a0a;
+    color: var(--on-accent);
     font-family: 'Sora', sans-serif;
     font-weight: 700;
     font-size: 0.88rem;
@@ -179,7 +179,7 @@
     top: 14px; right: 16px;
     background: none;
     border: none;
-    color: #666;
+    color: var(--text-3);
     font-size: 1rem;
     cursor: pointer;
     line-height: 1;
@@ -187,7 +187,7 @@
     border-radius: 6px;
     transition: color 0.2s, background 0.2s;
 }
-.pop-close:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+.pop-close:hover { color: var(--text); background: rgba(15, 23, 42, 0.06); }
 
 /* Auto-dismiss progress bar (success only) */
 .pop-timer {

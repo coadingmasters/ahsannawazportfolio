@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
 </head>
@@ -190,12 +191,12 @@
             <div class="ab-val-grid">
                 @php
                     $values = [
-                        ['icon' => '🏗', 'title' => 'Clean Architecture', 'desc' => 'Code organised so the next developer — often future you — can change it without fear.', 'color' => '#F97316'],
-                        ['icon' => '⚡', 'title' => 'Performance First', 'desc' => 'Optimised queries, cached where it counts, and pages that load before you notice.', 'color' => '#22d3ee'],
-                        ['icon' => '📱', 'title' => 'Truly Responsive', 'desc' => 'Every layout tested from 320px phones up to ultrawide monitors. No excuses.', 'color' => '#a78bfa'],
-                        ['icon' => '🔒', 'title' => 'Security Minded', 'desc' => 'Validation, rate limiting, and escaping applied by default — not bolted on later.', 'color' => '#4ade80'],
-                        ['icon' => '💬', 'title' => 'Clear Communication', 'desc' => 'Honest timelines and plain-English updates. You always know where things stand.', 'color' => '#fbbf24'],
-                        ['icon' => '🤝', 'title' => 'Long-Term Support', 'desc' => "I don't disappear at launch. Handover, docs, and help when you need it.", 'color' => '#60a5fa'],
+                        ['icon' => '🏗', 'title' => 'Clean Architecture', 'desc' => 'Code organised so the next developer — often future you — can change it without fear.', 'color' => '#c2410c'],
+                        ['icon' => '⚡', 'title' => 'Performance First', 'desc' => 'Optimised queries, cached where it counts, and pages that load before you notice.', 'color' => '#0e7490'],
+                        ['icon' => '📱', 'title' => 'Truly Responsive', 'desc' => 'Every layout tested from 320px phones up to ultrawide monitors. No excuses.', 'color' => '#6d28d9'],
+                        ['icon' => '🔒', 'title' => 'Security Minded', 'desc' => 'Validation, rate limiting, and escaping applied by default — not bolted on later.', 'color' => '#15803d'],
+                        ['icon' => '💬', 'title' => 'Clear Communication', 'desc' => 'Honest timelines and plain-English updates. You always know where things stand.', 'color' => '#b45309'],
+                        ['icon' => '🤝', 'title' => 'Long-Term Support', 'desc' => "I don't disappear at launch. Handover, docs, and help when you need it.", 'color' => '#1d4ed8'],
                     ];
                 @endphp
 

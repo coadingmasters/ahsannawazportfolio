@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     {{-- Reused here: .pj-filter* pills, .pj-empty / .pj-noresults, and the pjPop keyframe --}}
@@ -107,9 +108,9 @@
 
                 {{-- Level legend --}}
                 <div class="sp-legend">
-                    <span class="sp-legend-item"><i style="background:#F97316"></i> Expert</span>
-                    <span class="sp-legend-item"><i style="background:#22d3ee"></i> Advanced</span>
-                    <span class="sp-legend-item"><i style="background:#4ade80"></i> Good</span>
+                    <span class="sp-legend-item"><i style="background:#c2410c"></i> Expert</span>
+                    <span class="sp-legend-item"><i style="background:#0e7490"></i> Advanced</span>
+                    <span class="sp-legend-item"><i style="background:#15803d"></i> Good</span>
                 </div>
             </div>
 

@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
@@ -54,28 +55,28 @@
         <div class="ab-inner">
             <div class="cp-method-grid">
 
-                <a href="mailto:hello@ahsannawaz.dev" class="cp-method ab-rv" data-delay="0" style="--mc:#F97316">
+                <a href="mailto:hello@ahsannawaz.dev" class="cp-method ab-rv" data-delay="0" style="--mc:#c2410c">
                     <span class="cp-method-ico">✉</span>
                     <h3 class="cp-method-title">Email Me</h3>
                     <p class="cp-method-desc">The fastest way to reach me. I reply to everything.</p>
                     <span class="cp-method-value">hello@ahsannawaz.dev</span>
                 </a>
 
-                <div class="cp-method ab-rv" data-delay="1" style="--mc:#22d3ee">
+                <div class="cp-method ab-rv" data-delay="1" style="--mc:#0e7490">
                     <span class="cp-method-ico">◎</span>
                     <h3 class="cp-method-title">Location</h3>
                     <p class="cp-method-desc">Based in Pakistan, working with clients worldwide.</p>
                     <span class="cp-method-value">Pakistan 🇵🇰 · Remote</span>
                 </div>
 
-                <div class="cp-method ab-rv" data-delay="2" style="--mc:#4ade80">
+                <div class="cp-method ab-rv" data-delay="2" style="--mc:#15803d">
                     <span class="cp-method-ico">◷</span>
                     <h3 class="cp-method-title">Response Time</h3>
                     <p class="cp-method-desc">No message goes unanswered for more than a day.</p>
                     <span class="cp-method-value">Within 24 hours</span>
                 </div>
 
-                <a href="#" class="cp-method ab-rv" data-delay="3" style="--mc:#fbbf24">
+                <a href="#" class="cp-method ab-rv" data-delay="3" style="--mc:#b45309">
                     <span class="cp-method-ico">⭐</span>
                     <h3 class="cp-method-title">Hire on Fiverr</h3>
                     <p class="cp-method-desc">Prefer an escrow platform? Find me there.</p>
