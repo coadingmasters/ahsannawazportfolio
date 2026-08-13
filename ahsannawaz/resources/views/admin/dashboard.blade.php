@@ -12,6 +12,13 @@
     // spread, light end at 3.49:1.
     $levelColor = ['good' => '#c2410c', 'advanced' => '#f97316', 'expert' => '#fdba74'];
     $totalLevels = $levelMix->sum('count') ?: 1;
+
+    // ucfirst() alone would render these as "Cms" / "Api" / "Wordpress".
+    $labelMap = [
+        'cms' => 'CMS', 'api' => 'API', 'seo' => 'SEO', 'ui' => 'UI', 'ux' => 'UX',
+        'wordpress' => 'WordPress', 'ios' => 'iOS',
+    ];
+    $label = fn ($v) => $labelMap[strtolower($v)] ?? ucfirst($v);
 @endphp
 
 {{-- ══════════ KPI ROW ══════════ --}}
@@ -208,9 +215,9 @@
             <div class="hbar-list">
                 @foreach ($skillsByCategory as $row)
                     <div class="hbar-row"
-                         title="{{ ucfirst($row['category']) }} — {{ $row['count'] }} skills, {{ $row['avg'] }}% average">
+                         title="{{ $label($row['category']) }} — {{ $row['count'] }} skills, {{ $row['avg'] }}% average">
                         <div class="hbar-meta">
-                            <span class="hbar-name">{{ $row['category'] }}</span>
+                            <span class="hbar-name">{{ $label($row['category']) }}</span>
                             <span class="hbar-val"><b>{{ $row['count'] }}</b> · {{ $row['avg'] }}% avg</span>
                         </div>
                         <div class="hbar-track">
@@ -225,7 +232,7 @@
                     <thead><tr><th>Category</th><th>Skills</th><th>Avg %</th></tr></thead>
                     <tbody>
                     @foreach ($skillsByCategory as $row)
-                        <tr><td>{{ $row['category'] }}</td><td>{{ $row['count'] }}</td><td>{{ $row['avg'] }}</td></tr>
+                        <tr><td>{{ $label($row['category']) }}</td><td>{{ $row['count'] }}</td><td>{{ $row['avg'] }}</td></tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -340,9 +347,9 @@
         @else
             <div class="hbar-list">
                 @foreach ($projectsByCategory as $row)
-                    <div class="hbar-row" title="{{ ucfirst($row['category']) }} — {{ $row['count'] }} projects">
+                    <div class="hbar-row" title="{{ $label($row['category']) }} — {{ $row['count'] }} projects">
                         <div class="hbar-meta">
-                            <span class="hbar-name">{{ $row['category'] }}</span>
+                            <span class="hbar-name">{{ $label($row['category']) }}</span>
                             <span class="hbar-val"><b>{{ $row['count'] }}</b></span>
                         </div>
                         <div class="hbar-track">

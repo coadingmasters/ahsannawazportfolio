@@ -732,7 +732,7 @@ table.tbl tr.is-selected { background: rgba(249, 115, 22, 0.06); }
     gap: 1.25rem;
     margin-bottom: 1.25rem;
 }
-.chart-row.two   { grid-template-columns: 1.5fr 1fr; }
+.chart-row.two   { grid-template-columns: 1.5fr 1fr; align-items: start; }
 .chart-row.split { grid-template-columns: 1.55fr 1fr; align-items: start; }
 
 .card-head .sub {
