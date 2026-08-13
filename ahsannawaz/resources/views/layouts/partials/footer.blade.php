@@ -459,7 +459,7 @@
             padding: 10px 14px;
             border-radius: 999px;
             cursor: pointer;
-            background: rgba(248, 250, 252, 0.55);
+            background: var(--surface-blur);
             border: 1px solid rgba(15, 118, 110, 0.30);
             color: var(--muted);
             backdrop-filter: blur(10px);

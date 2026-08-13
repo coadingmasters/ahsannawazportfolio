@@ -10,7 +10,7 @@
     display: grid;
     place-items: center;
     padding: 1.5rem;
-    background: rgba(248, 250, 252, 0.75);
+    background: var(--surface-blur);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
     opacity: 0;

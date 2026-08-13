@@ -29,11 +29,14 @@ class Skill extends Model
 
     public function getLevelBadgeColorAttribute(): string
     {
+        // Level is an ordered scale, so it wears the ordinal ramp. Returning the
+        // token rather than a literal keeps it readable in the admin's dark mode,
+        // where the ramp re-steps against the darker surface.
         return match ($this->level) {
-            'expert'   => '#F97316',
-            'advanced' => '#22d3ee',
-            'good'     => '#4ade80',
-            default    => '#94a3b8',
+            'expert' => 'var(--ramp-3)',
+            'advanced' => 'var(--ramp-2)',
+            'good' => 'var(--ramp-1)',
+            default => 'var(--text-3)',
         };
     }
 }

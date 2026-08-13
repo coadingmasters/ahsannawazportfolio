@@ -213,7 +213,7 @@
 .ab-float-chip {
     position: absolute;
     display: flex; align-items: center; gap: 10px;
-    background: rgba(248, 250, 252, 0.94);
+    background: var(--surface-blur);
     border: 1px solid rgba(15, 118, 110, 0.22);
     backdrop-filter: blur(10px);
     padding: 10px 14px;

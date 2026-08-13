@@ -220,7 +220,7 @@
     border-radius: 999px;
     padding: 1px 6px;
 }
-.pj-filter.is-active .pj-filter-n { background: rgba(248, 250, 252, 0.18); opacity: 0.85; }
+.pj-filter.is-active .pj-filter-n { background: var(--surface-blur); opacity: 0.85; }
 
 /* ── Grid ── */
 .pj-grid {
@@ -290,7 +290,7 @@
 
 .pj-card-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(248, 250, 252, 0.1) 0%, rgba(248, 250, 252, 0.85) 100%);
+    background: linear-gradient(180deg, var(--surface-blur) 0%, var(--surface-blur) 100%);
     opacity: 0;
     display: flex;
     align-items: flex-end;
@@ -384,7 +384,7 @@
     .pj-feat-links .ab-btn-primary,
     .pj-feat-links .ab-btn-ghost { flex: 1; justify-content: center; }
     /* Touch devices have no hover — keep actions visible */
-    .pj-card-overlay { opacity: 1; background: linear-gradient(180deg, transparent 55%, rgba(248, 250, 252, 0.8) 100%); }
+    .pj-card-overlay { opacity: 1; background: linear-gradient(180deg, transparent 55%, var(--surface-blur) 100%); }
     .pj-action { opacity: 1; transform: none; }
 }
 

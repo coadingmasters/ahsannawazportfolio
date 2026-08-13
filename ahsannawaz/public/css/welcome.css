@@ -1368,7 +1368,7 @@ body::before {
 .srv-feat-img-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(15, 118, 110, 0.18) 0%, rgba(248, 250, 252, 0.55) 100%);
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.18) 0%, var(--surface-blur) 100%);
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;

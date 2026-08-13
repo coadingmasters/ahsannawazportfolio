@@ -252,7 +252,7 @@ textarea.input { resize: vertical; min-height: 110px; }
     align-items: center;
     justify-content: space-between;
     padding: 0 1.75rem;
-    background: rgba(248, 250, 252, 0.9);
+    background: var(--surface-blur);
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
@@ -475,7 +475,7 @@ table.tbl tbody tr:hover { background: rgba(15, 23, 42, 0.02); }
     display: grid;
     place-items: center;
     padding: 1.5rem;
-    background: rgba(248, 250, 252, 0.72);
+    background: var(--surface-blur);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     opacity: 0;

@@ -108,9 +108,9 @@
 
                 {{-- Level legend --}}
                 <div class="sp-legend">
-                    <span class="sp-legend-item"><i style="background:#c2410c"></i> Expert</span>
-                    <span class="sp-legend-item"><i style="background:#0e7490"></i> Advanced</span>
-                    <span class="sp-legend-item"><i style="background:#15803d"></i> Good</span>
+                    <span class="sp-legend-item"><i style="background:var(--ramp-3)"></i> Expert</span>
+                    <span class="sp-legend-item"><i style="background:var(--ramp-2)"></i> Advanced</span>
+                    <span class="sp-legend-item"><i style="background:var(--ramp-1)"></i> Good</span>
                 </div>
             </div>
 
