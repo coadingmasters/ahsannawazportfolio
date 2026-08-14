@@ -225,41 +225,67 @@
 
     {{-- ══════════════════ SERVICES + PROCESS ══════════════════ --}}
     <section class="sec sec-tint">
-        <div class="sec-inner svc-split">
-            <div class="svc-panel rv">
-                <h3>What I Do</h3>
-                <ul>
-                    @foreach ([
-                        'Web Application Development (Laravel)',
-                        'REST API Integration',
-                        'Admin Panel Development',
-                        'Database Design &amp; Optimisation',
-                    ] as $item)
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>
-                            {!! $item !!}
-                        </li>
-                    @endforeach
-                </ul>
-                <a href="{{ route('contact') }}" class="btn-light">
-                    Start a project
-                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                </a>
-            </div>
+        <div class="sec-inner">
+            <div class="svc-split">
+                <div class="svc-panel rv">
+                    <h3>What I Do</h3>
+                    <ul>
+                        @foreach ([
+                            'Web Application Development (Laravel)',
+                            'REST API Integration',
+                            'Admin Panel Development',
+                            'Database Design &amp; Optimisation',
+                        ] as $item)
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>
+                                {!! $item !!}
+                            </li>
+                        @endforeach
+                    </ul>
+                    <a href="{{ route('contact') }}" class="btn-light">
+                        Start a project
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </a>
+                </div>
 
-            <div class="rv rv-d1">
-                <h2 class="sec-title" style="text-align:left">My Development Process</h2>
-                <p class="sec-sub" style="text-align:left">Clean code. Smart planning. Better results.</p>
-
-                <div class="steps">
-                    @foreach (['Discuss Requirements', 'Plan &amp; Design', 'Develop &amp; Test', 'Deploy', 'Support'] as $i => $label)
-                        <div class="step">
-                            <i>{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</i>
-                            <b>{!! $label !!}</b>
-                        </div>
-                    @endforeach
+                <div class="rv rv-d1">
+                    <h2 class="sec-title" style="text-align:left">My Development Process</h2>
+                    <p class="sec-sub" style="text-align:left;margin-bottom:0">
+                        Clean code. Smart planning. Better results. Every project runs through the
+                        same five stages, so you always know where things stand.
+                    </p>
                 </div>
             </div>
+
+            {{-- Each stage says what actually happens in it — a number and a
+                 two-word label alone told the reader nothing. --}}
+            @php
+                $process = [
+                    ['Discuss Requirements', 'We talk through what you need, who it is for, and what "done" looks like.',
+                     'M8 10h8M8 14h5M21 12a8 8 0 0 1-8 8H7l-4 3v-6.5A8 8 0 0 1 11 4h2a8 8 0 0 1 8 8z'],
+                    ['Plan &amp; Design', 'Scope, database schema and screens mapped out before a line of code is written.',
+                     'M3 3v18h18M7 15l3-4 3 3 5-7'],
+                    ['Develop &amp; Test', 'Built in small reviewable pieces, tested as it goes rather than all at the end.',
+                     'm8 8-4 4 4 4m8-8 4 4-4 4M14 4l-4 16'],
+                    ['Deploy', 'Shipped to your server with SSL, backups and caching configured properly.',
+                     'M12 2 4 7v10l8 5 8-5V7l-8-5zM12 12l8-5M12 12v10M12 12 4 7'],
+                    ['Support', 'Fixes, updates and improvements after launch — I do not disappear at handover.',
+                     'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'],
+                ];
+            @endphp
+
+            <ol class="proc-grid">
+                @foreach ($process as $i => $step)
+                    <li class="proc rv rv-d{{ min($i % 4, 3) }}">
+                        <span class="proc-n">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <span class="proc-ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ $step[2] }}"/></svg>
+                        </span>
+                        <h3>{!! $step[0] !!}</h3>
+                        <p>{{ $step[1] }}</p>
+                    </li>
+                @endforeach
+            </ol>
         </div>
     </section>
 
