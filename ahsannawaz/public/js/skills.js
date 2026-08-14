@@ -140,3 +140,36 @@
         if (target) target.click();
     }
 })();
+
+/* Fill the rings and bars when a card scrolls into view. The percentage is
+   already in the markup, so nothing is hidden if this never runs. */
+(function () {
+    const cards = document.querySelectorAll('.sk-card');
+    if (!cards.length) return;
+
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const CIRC = 270.2;   // 2πr for r = 43
+
+    const fill = (card) => {
+        const ring = card.querySelector('.sk-ring-fill');
+        const bar = card.querySelector('.sk-bar i');
+        const pct = Number(ring?.dataset.pct || bar?.dataset.pct || 0);
+        if (ring) ring.style.strokeDashoffset = CIRC - (CIRC * pct) / 100;
+        if (bar) bar.style.width = pct + '%';
+    };
+
+    if (still || !('IntersectionObserver' in window)) {
+        cards.forEach(fill);
+        return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            fill(e.target);
+            io.unobserve(e.target);
+        });
+    }, { threshold: 0.25 });
+
+    cards.forEach((c) => io.observe(c));
+})();

@@ -366,7 +366,8 @@
                             @endunless
                             <h3><a href="{{ route('post', $post) }}">{{ $post->title }}</a></h3>
                             <p>{{ $post->excerpt ?: \App\Support\PostHtml::toText($post->body, 110) }}</p>
-                            <a href="{{ route('post', $post) }}" class="read-more">
+                            <a href="{{ route('post', $post) }}" class="read-more"
+                                   aria-label="Read More: {{ $post->title }}">
                                 Read More
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                             </a>

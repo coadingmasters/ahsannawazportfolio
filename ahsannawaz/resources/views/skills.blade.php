@@ -127,31 +127,34 @@
             @else
                 <div class="sp-grid" id="sp-grid">
                     @foreach ($all as $skill)
-                        <article class="sp-card ab-rv"
+                        {{-- The proficiency ring doubles as the icon frame: one
+                             mark carrying both the brand and the level, instead
+                             of an emoji beside a bar. --}}
+                        <article class="sk-card ab-rv"
                                  data-category="{{ $skill->category }}"
-                                 data-delay="{{ $loop->index % 4 }}"
-                                 style="--sc:{{ $skill->color }}">
+                                 data-delay="{{ $loop->index % 4 }}">
 
-                            <div class="sp-ring-wrap">
-                                <svg class="sp-ring" viewBox="0 0 100 100" aria-hidden="true">
-                                    <circle class="sp-ring-track" cx="50" cy="50" r="42"></circle>
-                                    <circle class="sp-ring-fill" cx="50" cy="50" r="42"
-                                            data-pct="{{ $skill->percentage }}"
-                                            stroke="{{ $skill->color }}"></circle>
+                            <div class="sk-ring-wrap">
+                                <svg class="sk-ring" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="sk-ring-track" cx="50" cy="50" r="43"/>
+                                    <circle class="sk-ring-fill" cx="50" cy="50" r="43"
+                                            data-pct="{{ $skill->percentage }}"/>
                                 </svg>
-                                <span class="sp-ring-ico">{{ $skill->icon }}</span>
+                                <span class="sk-ring-ico">
+                                    @include('layouts.partials.tech-icon', ['name' => $skill->name])
+                                </span>
                             </div>
 
-                            <div class="sp-card-body">
-                                <h3 class="sp-card-name">{{ $skill->name }}</h3>
-                                <span class="sp-card-cat">{{ $label($skill->category) }}</span>
+                            <h3 class="sk-name">{{ $skill->name }}</h3>
+                            <span class="sk-cat">{{ $label($skill->category) }}</span>
 
-                                <div class="sp-card-foot">
-                                    <span class="sp-pct" data-pct="{{ $skill->percentage }}">0%</span>
-                                    <span class="sp-level" style="color:{{ $skill->level_badge_color }}">
-                                        {{ $skill->level }}
-                                    </span>
-                                </div>
+                            <div class="sk-bar" aria-hidden="true">
+                                <i data-pct="{{ $skill->percentage }}"></i>
+                            </div>
+
+                            <div class="sk-foot">
+                                <span class="sk-pct" data-pct="{{ $skill->percentage }}">{{ $skill->percentage }}%</span>
+                                <span class="sk-badge sk-badge-{{ $skill->level }}">{{ $skill->level }}</span>
                             </div>
                         </article>
                     @endforeach

@@ -328,3 +328,154 @@
     .sp-card:hover { transform: none; }
     .sp-card.is-filtering { animation: none; }
 }
+
+/* ============================================================
+   SKILL CARDS — rebuilt
+   The ring is the icon frame, so proficiency and brand read as one mark
+   rather than an emoji sitting next to a bar.
+============================================================ */
+.sp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: clamp(0.9rem, 2vw, 1.4rem);
+}
+
+.sk-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 1.6rem 1.2rem 1.3rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.32s, border-color 0.32s;
+}
+
+/* Accent rule grows across the top edge on hover. */
+.sk-card::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sk-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--accent-line);
+    box-shadow: 0 18px 40px rgba(20, 83, 45, 0.14), 0 6px 14px rgba(15, 23, 42, 0.07);
+}
+.sk-card:hover::after { transform: scaleX(1); }
+
+/* ── Ring ─────────────────────────────────────────────────── */
+.sk-ring-wrap {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 1rem;
+}
+.sk-ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.sk-ring circle { fill: none; stroke-width: 6; }
+.sk-ring-track { stroke: var(--surface-2); }
+.sk-ring-fill {
+    stroke: var(--accent);
+    stroke-linecap: round;
+    /* 2πr for r=43. Filled by JS; starts empty so it can animate in. */
+    stroke-dasharray: 270.2;
+    stroke-dashoffset: 270.2;
+    transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sk-card:hover .sk-ring-fill { stroke: var(--accent-strong); }
+
+.sk-ring-ico {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sk-ring-ico svg { width: 34px; height: 34px; }
+.sk-ring-ico .tech-letter {
+    width: 38px; height: 38px;
+    display: grid; place-items: center;
+    margin: 0;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 0.86rem;
+}
+.sk-card:hover .sk-ring-ico { transform: scale(1.08); }
+
+/* ── Text ─────────────────────────────────────────────────── */
+.sk-name {
+    font-family: 'Sora', sans-serif;
+    font-size: var(--step-0);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+}
+.sk-cat {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin: 0.2rem 0 0.9rem;
+}
+
+.sk-bar {
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+.sk-bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sk-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.sk-pct {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--accent);
+}
+.sk-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.22rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+}
+/* Named sk-badge, not sk-level: welcome.css already uses that class for the
+   homepage list and positions it absolutely. Level is an ordered scale, so
+   it takes the ordinal ramp. */
+.sk-badge-good     { color: var(--ramp-1); }
+.sk-badge-advanced { color: var(--ramp-2); }
+.sk-badge-expert   { color: var(--ramp-3); }
+
+@media (max-width: 480px) {
+    .sp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+    .sk-card { padding: 1.3rem 0.8rem 1.1rem; }
+    .sk-ring-wrap { width: 72px; height: 72px; }
+    .sk-ring-ico svg { width: 28px; height: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sk-ring-fill, .sk-bar i, .sk-card, .sk-card::after { transition: none; }
+}
