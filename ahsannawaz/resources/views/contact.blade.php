@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => 'Contact',
-        "description" => "Hire Ahsan Nawaz for Laravel, PHP, React or WordPress work. Available for freelance projects and long-term contracts — every message answered within 24 hours.",
+        'titleFull' => "Hire a Laravel Developer | Contact Ahsan Nawaz",
+        "description" => "Hire Ahsan Nawaz for Laravel, PHP, React or WordPress work. Free for freelance projects and long-term contracts — every message answered within 24 hours.",
         'keywords' => 'hire Laravel developer, hire PHP developer, freelance WordPress developer, contact web developer Pakistan',
         'type' => 'website',
     ])

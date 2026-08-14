@@ -935,3 +935,68 @@ table.tbl tr.is-selected { background: rgba(21, 128, 61, 0.06); }
 [data-theme="dark"] .theme-toggle .tt-sun { display: block; }
 .theme-toggle .tt-sun { display: none; }
 :root:not([data-theme="dark"]) .theme-toggle .tt-moon { display: block; }
+
+/* ===== RICH TEXT EDITOR ===== */
+.rte { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); overflow: hidden; }
+.rte:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+
+.rte-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.45rem 0.5rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+}
+.rte-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--text-2);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.4rem 0.55rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.rte-btn:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-line); }
+.rte-sep { width: 1px; height: 20px; background: var(--border); margin: 0 0.2rem; }
+.rte-count { margin-left: auto; font-size: 0.72rem; color: var(--muted); padding-right: 0.25rem; }
+
+.rte-canvas {
+    min-height: 340px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1rem 1.1rem;
+    border: 0;
+    border-radius: 0;
+    line-height: 1.75;
+}
+.rte-canvas:focus { outline: none; box-shadow: none; }
+.rte-canvas p { margin-bottom: 0.9rem; }
+.rte-canvas h2 { font-size: 1.25rem; margin: 1.3rem 0 0.5rem; }
+.rte-canvas h3 { font-size: 1.05rem; margin: 1.1rem 0 0.4rem; }
+.rte-canvas ul, .rte-canvas ol { margin: 0 0 0.9rem 1.3rem; }
+.rte-canvas li { margin-bottom: 0.3rem; }
+.rte-canvas blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 0.9rem;
+    color: var(--muted);
+    margin: 0 0 0.9rem;
+}
+.rte-canvas pre {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 0.9rem;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.84rem;
+}
+.rte-canvas a { color: var(--accent); text-decoration: underline; }
+
+/* The textarea still submits the form; it just is not the thing you type in. */
+.rte-source { display: none; }

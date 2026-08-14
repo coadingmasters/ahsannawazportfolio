@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => 'Skills',
-        "description" => "Technical skills of Ahsan Nawaz — Laravel, PHP, React JS, JavaScript, WordPress, MySQL, Tailwind CSS, REST APIs, Git and Docker, with honest proficiency levels.",
+        'titleFull' => "Laravel, PHP & React Skills | Ahsan Nawaz",
+        "description" => "Laravel, PHP, React JS, JavaScript, WordPress, MySQL and Tailwind CSS — the tools Ahsan Nawaz works with, rated honestly rather than all at 100%.",
         'keywords' => 'Laravel skills, PHP developer skills, React JS, WordPress plugin development, MySQL, Tailwind CSS',
         'type' => 'website',
     ])

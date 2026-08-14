@@ -90,30 +90,39 @@ Route::get('/cv', [CvController::class, 'download'])->name('cv.download');
 
 // Generated rather than a static file, so it never drifts from the routes.
 Route::get('/sitemap.xml', function () {
+    // Per-page lastmod. Every URL used to carry the same date, which tells a
+    // crawler nothing about what actually changed and wastes its budget
+    // re-fetching pages that did not.
+    $skillsChanged = Skill::max('updated_at');
+    $projectsChanged = Project::max('updated_at');
+    $postsChanged = Post::published()->max('updated_at');
+    $anyContent = collect([$skillsChanged, $projectsChanged, $postsChanged])->filter()->max();
+
+    $stamp = fn ($value) => Carbon::parse($value ?: now())->toAtomString();
+
     $pages = [
-        ['loc' => url('/'), 'priority' => '1.0', 'freq' => 'weekly'],
-        ['loc' => route('about'), 'priority' => '0.8', 'freq' => 'monthly'],
-        ['loc' => route('skills'), 'priority' => '0.8', 'freq' => 'monthly'],
-        ['loc' => route('projects'), 'priority' => '0.9', 'freq' => 'weekly'],
-        ['loc' => route('contact'), 'priority' => '0.7', 'freq' => 'yearly'],
+        ['loc' => url('/'), 'priority' => '1.0', 'freq' => 'weekly', 'lastmod' => $stamp($anyContent)],
+        ['loc' => route('projects'), 'priority' => '0.9', 'freq' => 'weekly', 'lastmod' => $stamp($projectsChanged)],
+        ['loc' => route('skills'), 'priority' => '0.8', 'freq' => 'monthly', 'lastmod' => $stamp($skillsChanged)],
+        ['loc' => route('about'), 'priority' => '0.8', 'freq' => 'monthly', 'lastmod' => $stamp($anyContent)],
+        ['loc' => route('contact'), 'priority' => '0.7', 'freq' => 'yearly', 'lastmod' => $stamp($anyContent)],
     ];
 
-    // Every published article is its own entry.
-    foreach (Post::published()->latestFirst()->get() as $post) {
-        $pages[] = ['loc' => route('post', $post), 'priority' => '0.6', 'freq' => 'monthly'];
-    }
-
     if (Post::published()->exists()) {
-        $pages[] = ['loc' => route('blog'), 'priority' => '0.7', 'freq' => 'weekly'];
-    }
+        $pages[] = ['loc' => route('blog'), 'priority' => '0.7', 'freq' => 'weekly', 'lastmod' => $stamp($postsChanged)];
 
-    // Newest content date doubles as the site's lastmod.
-    $lastmod = optional(Project::max('updated_at'))
-        ? Carbon::parse(Project::max('updated_at'))->toAtomString()
-        : now()->toAtomString();
+        foreach (Post::published()->latestFirst()->get() as $post) {
+            $pages[] = [
+                'loc' => route('post', $post),
+                'priority' => '0.6',
+                'freq' => 'monthly',
+                'lastmod' => $stamp($post->updated_at),
+            ];
+        }
+    }
 
     return response()
-        ->view('sitemap', compact('pages', 'lastmod'))
+        ->view('sitemap', compact('pages'))
         ->header('Content-Type', 'application/xml');
 })->name('sitemap');
 

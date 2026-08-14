@@ -45,7 +45,11 @@
     <div class="field span-2">
         <label for="body">Body *</label>
         <textarea id="body" class="input" name="body" rows="16" required
-                  placeholder="Write the article. Blank lines start a new paragraph; lines beginning with ## become headings.">{{ old('body', $post->body) }}</textarea>
+                  placeholder="Write the article…">{{ old('body', $post->body) }}</textarea>
+        <div class="field-hint">
+            Formatting is saved as HTML and cleaned on save — only headings, lists,
+            links, quotes and code survive, so a paste from Word cannot break the page.
+        </div>
         @error('body') <div class="field-error">{{ $message }}</div> @enderror
     </div>
 
@@ -79,6 +83,7 @@
 </div>
 
 @push('scripts')
+@js('js/editor.js')
 <script>
 // Show what the URL will look like while the title is typed.
 (function () {

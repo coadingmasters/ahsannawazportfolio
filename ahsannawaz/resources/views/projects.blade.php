@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => 'Projects',
+        'titleFull' => "Laravel & WordPress Portfolio | Ahsan Nawaz",
         "description" => "Portfolio of Ahsan Nawaz — Laravel SaaS platforms, React admin dashboards, REST APIs, WooCommerce plugins and custom WordPress themes built for real clients.",
         'keywords' => 'Laravel projects, React dashboard, REST API project, WooCommerce plugin, WordPress theme portfolio',
         'type' => 'website',

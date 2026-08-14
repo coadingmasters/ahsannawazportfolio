@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Support\PostHtml;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -80,6 +81,12 @@ class PostController extends Controller
         ]);
 
         $data['slug'] = Str::slug($data['slug'] ?: $data['title']);
+
+        // The body arrives as HTML from the editor, so it is sanitised here.
+        // Storing it already clean means the article template can print it
+        // without escaping, and nothing unsafe is ever written to the table.
+        $data['body'] = PostHtml::clean($data['body']);
+        $data['excerpt'] = $data['excerpt'] ?: PostHtml::toText($data['body'], 180);
         $data['is_published'] = $request->boolean('is_published');
         $data['published_at'] = $data['published_at'] ?? now();
         unset($data['image']);

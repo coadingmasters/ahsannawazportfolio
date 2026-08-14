@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => 'About',
+        'titleFull' => "About Ahsan Nawaz — Laravel Developer in Pakistan",
         "description" => "About Ahsan Nawaz — a full-stack developer with 2+ years building Laravel backends, React frontends and custom WordPress solutions for clients worldwide.",
         'keywords' => 'about Ahsan Nawaz, Laravel developer Pakistan, full stack developer experience',
         'type' => 'profile',

@@ -510,3 +510,28 @@
 @media (prefers-reduced-motion: reduce) {
     .typed-caret { animation: none; opacity: 1; }
 }
+
+/* Article body elements the editor can produce. */
+.post-body h3 { font-family: 'Sora', sans-serif; font-size: var(--step-1); margin: 1.5rem 0 0.5rem; }
+.post-body ul, .post-body ol { margin: 0 0 1.15rem 1.4rem; color: var(--text-2); }
+.post-body li { margin-bottom: 0.4rem; line-height: 1.75; }
+.post-body blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.2rem 0 0.2rem 1.1rem;
+    margin: 0 0 1.15rem;
+    color: var(--text-3);
+    font-style: italic;
+}
+.post-body pre {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86rem;
+    line-height: 1.6;
+    margin-bottom: 1.15rem;
+}
+.post-body code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+.post-body img { max-width: 100%; height: auto; border-radius: var(--r-sm); margin: 0.5rem 0 1.15rem; }

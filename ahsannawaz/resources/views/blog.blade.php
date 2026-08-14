@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => 'Blog',
-        'description' => 'Articles on Laravel, PHP, REST APIs and WordPress by Ahsan Nawaz — practical notes from building real client projects.',
+        'titleFull' => "Laravel & PHP Development Blog | Ahsan Nawaz",
+        "description" => "Practical Laravel, PHP and REST API articles from Ahsan Nawaz — notes from real client projects, not theory. New posts on building and shipping web apps.",
         'keywords' => 'Laravel blog, PHP tutorials, REST API guide, WordPress development tips',
     ])
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('fonts/sora-latin.woff2') }}">
@@ -46,7 +47,7 @@
                                     <h2 style="font-size:var(--step-0);line-height:1.4;margin-bottom:.4rem">
                                         <a href="{{ route('post', $post) }}">{{ $post->title }}</a>
                                     </h2>
-                                    <p>{{ Str::limit($post->excerpt ?: strip_tags($post->body), 120) }}</p>
+                                    <p>{{ $post->excerpt ?: \App\Support\PostHtml::toText($post->body, 120) }}</p>
                                     <a href="{{ route('post', $post) }}" class="read-more">
                                         Read More
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>

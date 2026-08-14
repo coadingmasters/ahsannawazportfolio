@@ -365,7 +365,7 @@
                                 <span class="bpost-date" style="position:static;align-self:flex-start;margin-bottom:.5rem">{{ $post->date_label }}</span>
                             @endunless
                             <h3><a href="{{ route('post', $post) }}">{{ $post->title }}</a></h3>
-                            <p>{{ Str::limit($post->excerpt ?: strip_tags($post->body), 110) }}</p>
+                            <p>{{ $post->excerpt ?: \App\Support\PostHtml::toText($post->body, 110) }}</p>
                             <a href="{{ route('post', $post) }}" class="read-more">
                                 Read More
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>

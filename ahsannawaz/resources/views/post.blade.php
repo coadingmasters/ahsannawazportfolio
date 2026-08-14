@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => $post->title,
-        'description' => Str::limit($post->excerpt ?: strip_tags($post->body), 155),
+        'description' => $post->excerpt ?: \App\Support\PostHtml::toText($post->body, 155),
         'image' => $post->image_url ?: asset('images/ahsannawaz-720.webp'),
         'type' => 'article',
     ])
@@ -20,7 +20,7 @@
         $ctx => 'https://schema.org',
         '@type' => 'BlogPosting',
         'headline' => $post->title,
-        'description' => Str::limit($post->excerpt ?: strip_tags($post->body), 155),
+        'description' => $post->excerpt ?: \App\Support\PostHtml::toText($post->body, 155),
         'image' => $post->image_url ?: asset('images/ahsannawaz-720.webp'),
         'datePublished' => optional($post->published_at ?? $post->created_at)->toAtomString(),
         'dateModified' => optional($post->updated_at)->toAtomString(),
@@ -50,20 +50,10 @@
                          style="width:100%;height:auto;border-radius:var(--r-lg);margin:1.5rem 0;box-shadow:var(--shadow)">
                 @endif
 
+                {{-- Sanitised on save by App\Support\PostHtml, so it is safe to
+                     print. Nothing unescaped ever reaches the database. --}}
                 <div class="post-body">
-                    {{-- Stored as plain text. Blank lines start a paragraph and a
-                         leading ## makes a heading, so nothing has to be escaped
-                         by hand and no raw HTML is trusted. --}}
-                    @foreach (preg_split('/\n\s*\n/', trim($post->body)) as $block)
-                        @php $block = trim($block); @endphp
-                        @if (Str::startsWith($block, '## '))
-                            <h2>{{ Str::after($block, '## ') }}</h2>
-                        @elseif (Str::startsWith($block, '# '))
-                            <h2>{{ Str::after($block, '# ') }}</h2>
-                        @else
-                            <p>{!! nl2br(e($block)) !!}</p>
-                        @endif
-                    @endforeach
+                    {!! $post->body !!}
                 </div>
             </div>
         </article>
@@ -83,7 +73,7 @@
                             @endif
                             <div class="bpost-body">
                                 <h3><a href="{{ route('post', $r) }}">{{ $r->title }}</a></h3>
-                                <p>{{ Str::limit($r->excerpt ?: strip_tags($r->body), 100) }}</p>
+                                <p>{{ $r->excerpt ?: \App\Support\PostHtml::toText($r->body, 100) }}</p>
                                 <a href="{{ route('post', $r) }}" class="read-more">Read More
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                                 </a>

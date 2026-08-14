@@ -12,15 +12,19 @@
 ============================================ --}}
 
 @php
+    $titleFull = $titleFull ?? null;
     $brand    = 'Ahsan Nawaz';
     $tagline  = 'Full-Stack Web Developer';
     $siteName = $brand . ' — ' . $tagline;
 
-    // A page passes its own name; the homepage leads with the brand instead.
-    // Kept under ~60 characters so search results show the whole thing.
-    $pageTitle = isset($title) && $title !== ''
-        ? $title . ' | ' . $brand . ' — Web Developer'
-        : $brand . ' — Laravel, React & WordPress Developer';
+    // A page can pass `titleFull` to lead with the words people search for:
+    // "Skills | Ahsan Nawaz" buries the keyword behind a name nobody is
+    // looking for yet, while "Laravel, PHP & React Skills" does not. Keep
+    // these under ~60 characters or Google truncates them.
+    $pageTitle = $titleFull
+        ?: (isset($title) && $title !== ''
+            ? $title . ' | ' . $brand . ' — Web Developer'
+            : $brand . ' — Laravel, React & WordPress Developer');
 
     // Search engines truncate around 160 characters, so keep the useful part first.
     $desc = trim($description ?? 'Ahsan Nawaz is a full-stack web developer from Pakistan building fast, secure and search-friendly websites with Laravel, PHP, React JS and WordPress.');
