@@ -14,7 +14,7 @@ return [
 
     'entity' => 'Ahsan Nawaz',
     'country' => 'Pakistan',
-    'email' => 'hello@ahsannawaz.dev',
+    'email' => 'ahsannawaz.ahsanai@gmail.com',
 
     // Bumped whenever the wording materially changes.
     'updated' => '15 August 2026',

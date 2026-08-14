@@ -60,11 +60,11 @@
         <div class="ab-inner">
             <div class="cp-method-grid">
 
-                <a href="mailto:hello@ahsannawaz.dev" class="cp-method ab-rv" data-delay="0" style="--mc:var(--accent)">
+                <a href="mailto:ahsannawaz.ahsanai@gmail.com" class="cp-method ab-rv" data-delay="0" style="--mc:var(--accent)">
                     <span class="cp-method-ico">✉</span>
                     <h3 class="cp-method-title">Email Me</h3>
                     <p class="cp-method-desc">The fastest way to reach me. I reply to everything.</p>
-                    <span class="cp-method-value">hello@ahsannawaz.dev</span>
+                    <span class="cp-method-value">ahsannawaz.ahsanai@gmail.com</span>
                 </a>
 
                 <div class="cp-method ab-rv" data-delay="1" style="--mc:var(--accent)">
@@ -288,7 +288,7 @@
                     <p>A two-line message is enough to start. We can figure out the details together.</p>
                 </div>
                 <div class="ab-cta-btns">
-                    <a href="mailto:hello@ahsannawaz.dev" class="ab-btn-primary">
+                    <a href="mailto:ahsannawaz.ahsanai@gmail.com" class="ab-btn-primary">
                         ✉ Email Me Directly
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>

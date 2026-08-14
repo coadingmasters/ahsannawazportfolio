@@ -6,7 +6,7 @@
     @include('layouts.partials.seo', [
         'title' => 'Privacy Policy',
         'titleFull' => "Privacy Policy | Ahsan Nawaz",
-        'description' => "What data ahsannawaz.dev collects, why it is collected, how long it is kept and how to have it deleted. Short, specific, and true to what the site does.",
+        'description' => "What data this site collects, why it is collected, how long it is kept and how to have it deleted. Short, specific, and true to what the site does.",
     ])
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('fonts/sora-latin.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('fonts/dm-sans-latin.woff2') }}">

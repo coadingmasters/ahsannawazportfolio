@@ -6,7 +6,7 @@
     @include('layouts.partials.seo', [
         'title' => 'Sitemap',
         'titleFull' => "Sitemap | Ahsan Nawaz — Web Developer",
-        'description' => "Every page on ahsannawaz.dev in one place — services, projects, skills, articles and contact details for Laravel developer Ahsan Nawaz.",
+        'description' => "Every page on this site in one place — services, projects, skills, articles and contact details for Laravel developer Ahsan Nawaz.",
     ])
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('fonts/sora-latin.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('fonts/dm-sans-latin.woff2') }}">

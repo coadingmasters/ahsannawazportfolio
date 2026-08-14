@@ -133,7 +133,7 @@
                         </div>
                         <div class="ab-info">
                             <span class="ab-info-label">Email</span>
-                            <span class="ab-info-value"><a href="mailto:hello@ahsannawaz.dev">hello@ahsannawaz.dev</a></span>
+                            <span class="ab-info-value"><a href="mailto:ahsannawaz.ahsanai@gmail.com">ahsannawaz.ahsanai@gmail.com</a></span>
                         </div>
                         <div class="ab-info">
                             <span class="ab-info-label">Languages</span>
