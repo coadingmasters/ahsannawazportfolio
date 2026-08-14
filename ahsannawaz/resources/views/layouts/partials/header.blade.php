@@ -10,19 +10,20 @@
 <header class="site-header" id="mainHeader">
     <div class="header-inner">
 
-        <a href="{{ url('/') }}" class="brand" aria-label="Ahsan Nawaz — home">
-            {{-- The mark is the artwork; the name stays live text so it holds
-                 its edge at any size and keeps the entrance animation. --}}
-            <img class="brand-mark"
-                 src="{{ asset('images/brand/logo-mark-96.webp') }}"
-                 srcset="{{ asset('images/brand/logo-mark-96.webp') }} 96w,
-                         {{ asset('images/brand/logo-mark-144.webp') }} 144w,
-                         {{ asset('images/brand/logo-mark-192.webp') }} 192w"
-                 sizes="64px" width="64" height="39" alt="" aria-hidden="true"
+        <a href="{{ url('/') }}" class="brand" aria-label="Ahsan Nawaz — Web Developer, home">
+            {{-- A horizontal build of the supplied logo. The original stacks the
+                 monogram over the name, which in an 88px bar leaves "WEB
+                 DEVELOPER" about 4px tall; side by side it stays readable. --}}
+            <img class="brand-logo-img"
+                 src="{{ asset('images/brand/logo-h-96.webp') }}"
+                 srcset="{{ asset('images/brand/logo-h-48.webp') }} 282w,
+                         {{ asset('images/brand/logo-h-72.webp') }} 423w,
+                         {{ asset('images/brand/logo-h-96.webp') }} 564w,
+                         {{ asset('images/brand/logo-h-144.webp') }} 846w"
+                 sizes="(max-width: 380px) 200px, (max-width: 860px) 235px, 282px"
+                 width="282" height="48"
+                 alt="Ahsan Nawaz — Web Developer"
                  fetchpriority="high" decoding="async">
-            <span class="brand-name">
-                <span>Ahsan</span><span>&nbsp;Nawaz</span><span class="dot">.dev</span>
-            </span>
         </a>
 
         <nav class="nav" id="primaryNav" aria-label="Primary">
