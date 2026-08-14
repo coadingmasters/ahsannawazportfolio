@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login — {{ config('app.name') }}</title>
-    @css('css/fonts.css')
-    @css('css/theme.css')
-    @css('css/admin.css')
+    @css('dist/css/page-admin.css')
 </head>
 <body>
     <div class="login-wrap">

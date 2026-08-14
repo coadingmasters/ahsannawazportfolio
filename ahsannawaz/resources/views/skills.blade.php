@@ -13,13 +13,9 @@
           href="{{ asset('fonts/sora-latin.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin
           href="{{ asset('fonts/dm-sans-latin.woff2') }}">
-    @css('css/fonts.css')
-    @css('css/theme.css')
-    @css('css/welcome.css')
-    @css('css/about.css')
+    {{-- One bundled stylesheet: six blocking requests became one. --}}
+    @css('dist/css/page-skills.css')
     {{-- Reused here: .pj-filter* pills, .pj-empty / .pj-noresults, and the pjPop keyframe --}}
-    @css('css/projects.css')
-    @css('css/skills.css')
 </head>
 <body>
 

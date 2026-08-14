@@ -14,9 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard') — Admin</title>
-    @css('css/fonts.css')
-    @css('css/theme.css')
-    @css('css/admin.css')
+    @css('dist/css/page-admin.css')
 </head>
 <body>
 <div class="admin">

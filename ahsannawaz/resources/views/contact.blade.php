@@ -13,12 +13,8 @@
           href="{{ asset('fonts/sora-latin.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin
           href="{{ asset('fonts/dm-sans-latin.woff2') }}">
-    @css('css/fonts.css')
-    @css('css/theme.css')
-    @css('css/welcome.css')
-    @css('css/about.css')
-    @css('css/contact.css')
-    @css('css/popup.css')
+    {{-- One bundled stylesheet: six blocking requests became one. --}}
+    @css('dist/css/page-contact.css')
 </head>
 <body>
 

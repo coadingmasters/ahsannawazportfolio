@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         // Both directives resolve through App\Support\Asset, which adds the
         // cache-busting stamp and prefers the minified build when present.
         Blade::directive('js', function ($expression) {
-            return "<?php echo '<script src=\"' . e(\App\Support\Asset::url({$expression})) . '\"></script>'; ?>";
+            return "<?php echo '<script defer src=\"' . e(\App\Support\Asset::url({$expression})) . '\"></script>'; ?>";
         });
 
         Blade::directive('css', function ($expression) {

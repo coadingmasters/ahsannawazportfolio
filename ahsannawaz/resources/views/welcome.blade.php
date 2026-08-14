@@ -12,13 +12,9 @@
           href="{{ asset('fonts/sora-latin.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin
           href="{{ asset('fonts/dm-sans-latin.woff2') }}">
-    @css('css/fonts.css')
-    @css('css/theme.css')
-    @css('css/welcome.css')
+    {{-- One bundled stylesheet: six blocking requests became one. --}}
+    @css('dist/css/page-welcome.css')
     {{-- Reused by the homepage projects section: .ab-* shell + .pj-card* --}}
-    @css('css/about.css')
-    @css('css/projects.css')
-    @css('css/popup.css')
 </head>
     <body>
         @include('layouts.partials.header')
@@ -120,7 +116,7 @@
                 <!-- Profile photo circle -->
                  <div class="photo-frame">
                 <div class="photo-circle">
-                    <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React">
+                    <img src="{{ asset('images/ahsannawaz-540.webp') }}" srcset="{{ asset('images/ahsannawaz-360.webp') }} 360w, {{ asset('images/ahsannawaz-540.webp') }} 540w, {{ asset('images/ahsannawaz-720.webp') }} 720w" sizes="(max-width: 640px) 78vw, 360px" width="360" height="452" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React">
                 </div>
                 </div>
 
@@ -186,7 +182,7 @@
             <div class="photo-frame">
                 <div class="photo-img">
                     
-                        <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:22px;">
+                        <img src="{{ asset('images/ahsannawaz-540.webp') }}" srcset="{{ asset('images/ahsannawaz-360.webp') }} 360w, {{ asset('images/ahsannawaz-540.webp') }} 540w, {{ asset('images/ahsannawaz-720.webp') }} 720w" sizes="(max-width: 640px) 78vw, 360px" width="360" height="452" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:22px;">
                    
                     <!-- <div class="photo-placeholder">
                         <span>AN</span>
@@ -437,7 +433,8 @@
             <div class="srv-featured-right">
                 <div class="srv-feat-img-wrap">
                     <img
-                        src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=700&q=80"
+                        src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=480&q=70&fm=webp"
+                        loading="lazy" decoding="async" width="480" height="320"
                         alt="Laravel Backend Development"
                         class="srv-feat-img"
                     >
