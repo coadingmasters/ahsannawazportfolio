@@ -141,7 +141,7 @@
                             <div class="bpost-body">
                                 <h3><a href="{{ route('post', $r) }}">{{ $r->title }}</a></h3>
                                 <p>{{ $r->excerpt ?: \App\Support\PostHtml::toText($r->body, 100) }}</p>
-                                <a href="{{ route('post', $r) }}" class="read-more" aria-label="Read More: {{ $r->title }}">Read More
+                                <a href="{{ route('post', $r) }}" class="read-more">Read More<span class="sr-only"> about {{ $r->title }}</span>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                                 </a>
                             </div>
