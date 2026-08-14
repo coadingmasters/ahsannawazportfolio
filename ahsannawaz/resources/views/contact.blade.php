@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — {{ config('app.name') }}</title>
-    <meta name="description" content="Get in touch with Ahsan Nawaz — Laravel, PHP, React JS and WordPress developer. Available for freelance projects and long-term collaborations.">
+    @include('layouts.partials.seo', [
+        'title' => 'Contact',
+        "description" => "Hire Ahsan Nawaz for Laravel, PHP, React or WordPress work. Available for freelance projects and long-term contracts — every message answered within 24 hours.",
+        'keywords' => 'hire Laravel developer, hire PHP developer, freelance WordPress developer, contact web developer Pakistan',
+        'type' => 'website',
+    ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">

@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# The admin panel has nothing for a search engine and should never be indexed.
+Disallow: /admin
+Disallow: /admin/
+
+Sitemap: https://ahsannawaz.purrquery.com/sitemap.xml

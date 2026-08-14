@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills — {{ config('app.name') }}</title>
-    <meta name="description" content="The technologies Ahsan Nawaz works with — Laravel, PHP, React JS, WordPress, MySQL and more, with honest proficiency levels.">
+    @include('layouts.partials.seo', [
+        'title' => 'Skills',
+        "description" => "Technical skills of Ahsan Nawaz — Laravel, PHP, React JS, JavaScript, WordPress, MySQL, Tailwind CSS, REST APIs, Git and Docker, with honest proficiency levels.",
+        'keywords' => 'Laravel skills, PHP developer skills, React JS, WordPress plugin development, MySQL, Tailwind CSS',
+        'type' => 'website',
+    ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">

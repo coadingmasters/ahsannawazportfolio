@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me — {{ config('app.name') }}</title>
-    <meta name="description" content="Ahsan Nawaz — full-stack web developer from Pakistan specialising in Laravel, PHP, React JS and WordPress.">
+    @include('layouts.partials.seo', [
+        'title' => 'About',
+        "description" => "About Ahsan Nawaz — a full-stack developer with 2+ years building Laravel backends, React frontends and custom WordPress solutions for clients worldwide.",
+        'keywords' => 'about Ahsan Nawaz, Laravel developer Pakistan, full stack developer experience',
+        'type' => 'profile',
+    ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -54,7 +58,7 @@
                     <div class="ab-photo-deco ab-photo-deco-2"></div>
 
                     <div class="ab-photo-frame">
-                        <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz" class="ab-photo">
+                        <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React" class="ab-photo">
                         <div class="ab-photo-glow"></div>
                     </div>
 

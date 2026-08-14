@@ -1,15 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CvController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\ProjectController;
-use App\Models\Skill;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CvController;
 use App\Models\Project;
+use App\Models\Skill;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,9 @@ use App\Models\Project;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
-    $skills   = Skill::active()->ordered()->get()->groupBy('category');
+    $skills = Skill::active()->ordered()->get()->groupBy('category');
     $projects = Project::active()->ordered()->get();
+
     return view('welcome', compact('skills', 'projects'));
 });
 
@@ -28,7 +30,7 @@ Route::get('/about', function () {
 
     $stats = [
         'projects' => Project::active()->count(),
-        'skills'   => Skill::active()->count(),
+        'skills' => Skill::active()->count(),
     ];
 
     return view('about', compact('skills', 'stats'));
@@ -38,10 +40,10 @@ Route::get('/skills', function () {
     $all = Skill::active()->ordered()->get();
 
     $stats = [
-        'total'      => $all->count(),
+        'total' => $all->count(),
         'categories' => $all->groupBy('category')->count(),
-        'expert'     => $all->where('level', 'expert')->count(),
-        'average'    => (int) round($all->avg('percentage') ?? 0),
+        'expert' => $all->where('level', 'expert')->count(),
+        'average' => (int) round($all->avg('percentage') ?? 0),
     ];
 
     // Filters built from what's actually in the DB, with live counts.
@@ -55,7 +57,7 @@ Route::get('/projects', function () {
 
     // The editorial spread takes the first featured project; the grid shows the rest.
     $featured = $projects->firstWhere('is_featured', true);
-    $grid     = $featured ? $projects->whereNotIn('id', [$featured->id]) : $projects;
+    $grid = $featured ? $projects->whereNotIn('id', [$featured->id]) : $projects;
 
     // Filters are built from what's actually in the DB, with live counts.
     $categories = $grid->groupBy('category')->map->count();
@@ -64,6 +66,32 @@ Route::get('/projects', function () {
 })->name('projects');
 
 Route::get('/cv', [CvController::class, 'download'])->name('cv.download');
+
+/*
+|--------------------------------------------------------------------------
+| SEO
+|--------------------------------------------------------------------------
+*/
+
+// Generated rather than a static file, so it never drifts from the routes.
+Route::get('/sitemap.xml', function () {
+    $pages = [
+        ['loc' => url('/'), 'priority' => '1.0', 'freq' => 'weekly'],
+        ['loc' => route('about'), 'priority' => '0.8', 'freq' => 'monthly'],
+        ['loc' => route('skills'), 'priority' => '0.8', 'freq' => 'monthly'],
+        ['loc' => route('projects'), 'priority' => '0.9', 'freq' => 'weekly'],
+        ['loc' => route('contact'), 'priority' => '0.7', 'freq' => 'yearly'],
+    ];
+
+    // Newest content date doubles as the site's lastmod.
+    $lastmod = optional(Project::max('updated_at'))
+        ? Carbon::parse(Project::max('updated_at'))->toAtomString()
+        : now()->toAtomString();
+
+    return response()
+        ->view('sitemap', compact('pages', 'lastmod'))
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -77,7 +105,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Guest-only routes
     Route::middleware('guest')->group(function () {
-        Route::get('/login',  [AuthController::class, 'showLogin'])->name('login');
+        Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     });
 

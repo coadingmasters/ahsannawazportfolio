@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
+    @include('layouts.partials.seo', [
+        "description" => "Full-stack web developer from Pakistan building fast, secure Laravel, PHP, React and WordPress websites, REST APIs and WooCommerce stores. Hire me.",
+        'keywords' => 'full stack web developer, Laravel developer, PHP developer, React developer, WordPress developer Pakistan, REST API developer, WooCommerce developer, freelance web developer',
+        'type' => 'profile',
+    ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -112,7 +116,7 @@
                 <!-- Profile photo circle -->
                  <div class="photo-frame">
                 <div class="photo-circle">
-                    <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz">
+                    <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React">
                 </div>
                 </div>
 
@@ -178,7 +182,7 @@
             <div class="photo-frame">
                 <div class="photo-img">
                     
-                        <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:22px;">
+                        <img src="{{ asset('images/ahsannawaz.webp') }}" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:22px;">
                    
                     <!-- <div class="photo-placeholder">
                         <span>AN</span>
@@ -635,7 +639,7 @@
                     <span class="pj-card-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
 
                     <div class="pj-card-media">
-                        <img src="{{ $project->image_url }}" alt="{{ $project->title }}" class="pj-card-img" loading="lazy">
+                        <img src="{{ $project->image_url }}" alt="{{ $project->title }} — {{ $catLabels[$project->category] ?? ucfirst($project->category) }} project by Ahsan Nawaz" class="pj-card-img" loading="lazy">
                         <div class="pj-card-overlay">
                             <div class="pj-card-actions">
                                 @if ($project->live_url)

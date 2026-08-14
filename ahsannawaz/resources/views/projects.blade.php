@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects — {{ config('app.name') }}</title>
-    <meta name="description" content="Selected work by Ahsan Nawaz — Laravel SaaS platforms, React dashboards, REST APIs and custom WordPress builds.">
+    @include('layouts.partials.seo', [
+        'title' => 'Projects',
+        "description" => "Portfolio of Ahsan Nawaz — Laravel SaaS platforms, React admin dashboards, REST APIs, WooCommerce plugins and custom WordPress themes built for real clients.",
+        'keywords' => 'Laravel projects, React dashboard, REST API project, WooCommerce plugin, WordPress theme portfolio',
+        'type' => 'website',
+    ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -78,7 +82,7 @@
 
                 <div class="pj-feat-media">
                     <div class="pj-feat-img-wrap">
-                        <img src="{{ $featured->image_url }}" alt="{{ $featured->title }}" class="pj-feat-img" loading="eager">
+                        <img src="{{ $featured->image_url }}" alt="{{ $featured->title }} — featured {{ $catLabels[$featured->category] ?? ucfirst($featured->category) }} project by Ahsan Nawaz" class="pj-feat-img" loading="eager">
                         <span class="pj-feat-shine"></span>
                     </div>
                     <span class="pj-feat-tag">★ Featured</span>
@@ -158,7 +162,7 @@
                             <span class="pj-card-num">{{ str_pad($loop->iteration + 1, 2, '0', STR_PAD_LEFT) }}</span>
 
                             <div class="pj-card-media">
-                                <img src="{{ $project->image_url }}" alt="{{ $project->title }}" class="pj-card-img" loading="lazy">
+                                <img src="{{ $project->image_url }}" alt="{{ $project->title }} — {{ $catLabels[$project->category] ?? ucfirst($project->category) }} project by Ahsan Nawaz" class="pj-card-img" loading="lazy">
                                 <div class="pj-card-overlay">
                                     <div class="pj-card-actions">
                                         @if ($project->live_url)
