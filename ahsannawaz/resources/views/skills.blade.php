@@ -191,12 +191,16 @@
 
                         <div class="sp-break-list">
                             @foreach ($group as $skill)
+                                {{-- Same brand marks as the cards above, so the
+                                     two sections read as one set rather than
+                                     emoji in one place and logos in the other. --}}
                                 <div class="sp-break-row">
-                                    <span class="sp-break-name">
-                                        <span class="sp-break-ico">{{ $skill->icon }}</span>{{ $skill->name }}
+                                    <span class="sp-break-ico">
+                                        @include('layouts.partials.tech-icon', ['name' => $skill->name])
                                     </span>
+                                    <span class="sp-break-name">{{ $skill->name }}</span>
                                     <div class="sp-break-bar">
-                                        <i data-width="{{ $skill->percentage }}" style="background:{{ $skill->color_gradient }}"></i>
+                                        <i data-width="{{ $skill->percentage }}"></i>
                                     </div>
                                     <span class="sp-break-pct">{{ $skill->percentage }}%</span>
                                 </div>
