@@ -13,8 +13,8 @@
           href="{{ asset('fonts/sora-latin.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin
           href="{{ asset('fonts/dm-sans-latin.woff2') }}">
-    {{-- One bundled stylesheet: six blocking requests became one. --}}
-    @css('dist/css/page-projects.css')
+    {{-- Critical CSS inline; the rest loads without blocking paint. --}}
+    @styles('projects')
 </head>
 <body>
 

@@ -119,4 +119,14 @@ echo "-- done"
 $PHP artisan about --only=environment 2>/dev/null || true
 REMOTE_SCRIPT
 
+# Critical CSS is measured against the deployed pages, so it runs after the
+# upload and is pushed in a second, tiny sync.
+if [ "${SKIP_CRITICAL:-0}" != "1" ]; then
+  say "Extracting critical CSS (from a local snapshot — the CDN bot check
+     serves headless Chrome an interstitial, not the site)"
+  ( cd "$LOCAL" && ./snapshot.sh ) \
+    && rsync -az --info=stats0 "$LOCAL/public/dist/css/" "$HOST:$REMOTE/public/dist/css/" \
+    || echo "WARNING: critical CSS step failed - pages still work, just without inlining"
+fi
+
 say "Deployed -> https://ahsannawaz.purrquery.com"

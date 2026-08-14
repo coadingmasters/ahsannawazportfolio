@@ -30,4 +30,31 @@ class Asset
 
         return asset($public).(is_file($file) ? '?v='.filemtime($file) : '');
     }
+
+    /**
+     * Inline a page's above-the-fold CSS and fetch the rest without blocking.
+     *
+     * The critical file is produced by build-critical.mjs from what the browser
+     * actually paints in the first screen. Inlining it means the first paint
+     * needs no stylesheet request at all; the full bundle then arrives via
+     * preload and upgrades itself to a stylesheet once it lands.
+     */
+    public static function pageStyles(string $page): string
+    {
+        $bundle = self::url("dist/css/page-{$page}.css");
+        $critical = public_path("dist/css/critical-{$page}.css");
+
+        // No critical file means we cannot safely defer: loading the bundle
+        // asynchronously without inlined styles would show an unstyled page
+        // first. Fall back to a normal blocking link instead.
+        if (! is_file($critical)) {
+            return '<link rel="stylesheet" href="'.e($bundle).'">';
+        }
+
+        return '<style id="critical-css">'.file_get_contents($critical).'</style>'
+            .'<link rel="preload" as="style" href="'.e($bundle).'"'
+            .' onload="this.onload=null;this.rel=\'stylesheet\'">'
+            // Without JS the preload never upgrades, so state the plain link too.
+            .'<noscript><link rel="stylesheet" href="'.e($bundle).'"></noscript>';
+    }
 }

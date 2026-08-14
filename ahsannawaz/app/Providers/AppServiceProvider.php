@@ -46,6 +46,11 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo '<script defer src=\"' . e(\App\Support\Asset::url({$expression})) . '\"></script>'; ?>";
         });
 
+        // @styles('welcome') — inline critical CSS, async-load the bundle.
+        Blade::directive('styles', function ($expression) {
+            return "<?php echo \App\Support\Asset::pageStyles({$expression}); ?>";
+        });
+
         Blade::directive('css', function ($expression) {
             return "<?php echo '<link rel=\"stylesheet\" href=\"' . e(\App\Support\Asset::url({$expression})) . '\">'; ?>";
         });
