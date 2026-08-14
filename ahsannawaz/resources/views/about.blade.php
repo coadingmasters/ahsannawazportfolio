@@ -97,7 +97,7 @@
 
                     <p class="ab-text ab-rv" style="transition-delay:0.14s">
                         Hi, I'm <strong>Ahsan Nawaz</strong> — a full-stack web developer based in Pakistan with
-                        over 5 years of hands-on experience building robust, scalable, and visually compelling
+                        over {{ $siteStats['years'] }} years of hands-on experience building robust, scalable, and visually compelling
                         web applications. I specialise in Laravel, PHP, React JS, and WordPress.
                     </p>
 

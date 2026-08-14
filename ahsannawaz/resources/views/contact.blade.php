@@ -60,21 +60,21 @@
         <div class="ab-inner">
             <div class="cp-method-grid">
 
-                <a href="mailto:hello@ahsannawaz.dev" class="cp-method ab-rv" data-delay="0" style="--mc:#c2410c">
+                <a href="mailto:hello@ahsannawaz.dev" class="cp-method ab-rv" data-delay="0" style="--mc:var(--accent)">
                     <span class="cp-method-ico">✉</span>
                     <h3 class="cp-method-title">Email Me</h3>
                     <p class="cp-method-desc">The fastest way to reach me. I reply to everything.</p>
                     <span class="cp-method-value">hello@ahsannawaz.dev</span>
                 </a>
 
-                <div class="cp-method ab-rv" data-delay="1" style="--mc:#0e7490">
+                <div class="cp-method ab-rv" data-delay="1" style="--mc:var(--accent)">
                     <span class="cp-method-ico">◎</span>
                     <h3 class="cp-method-title">Location</h3>
                     <p class="cp-method-desc">Based in Pakistan, working with clients worldwide.</p>
                     <span class="cp-method-value">Pakistan 🇵🇰 · Remote</span>
                 </div>
 
-                <div class="cp-method ab-rv" data-delay="2" style="--mc:#15803d">
+                <div class="cp-method ab-rv" data-delay="2" style="--mc:var(--accent)">
                     <span class="cp-method-ico">◷</span>
                     <h3 class="cp-method-title">Response Time</h3>
                     <p class="cp-method-desc">No message goes unanswered for more than a day.</p>
@@ -83,7 +83,7 @@
 
                 @if (config('social.fiverr'))
                 <a href="{{ config('social.fiverr') }}" target="_blank" rel="noopener noreferrer"
-                   class="cp-method ab-rv" data-delay="3" style="--mc:#b45309">
+                   class="cp-method ab-rv" data-delay="3" style="--mc:var(--accent)">
                     <span class="cp-method-ico">⭐</span>
                     <h3 class="cp-method-title">Hire on Fiverr</h3>
                     <p class="cp-method-desc">Prefer an escrow platform? Find me there.</p>
