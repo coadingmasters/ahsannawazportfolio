@@ -595,3 +595,21 @@
     .faq-wrap { grid-template-columns: 1fr; }
     .faq-aside { position: static; }
 }
+
+/* Article header: the back link and the category chip share a row with
+   real space between them rather than running together. */
+.post-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.4rem;
+}
+.post-top .cat-tag {
+    text-transform: capitalize;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent-line);
+    font-weight: 600;
+}

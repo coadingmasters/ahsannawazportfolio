@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('layouts.partials.seo', [
         'title' => $post->title,
-        'description' => $post->excerpt ?: \App\Support\PostHtml::toText($post->body, 155),
+        {{-- An article's own headline IS the search title. Appending the brand
+             pushes it past the ~60 characters Google shows, and the half that
+             gets cut is the half carrying the keyword. --}}
+        'titleFull' => Str::limit($post->title, 62, ''),
+        'description' => Str::limit($post->excerpt ?: \App\Support\PostHtml::toText($post->body, 200), 155),
         'image' => $post->image_url ?: asset('images/ahsannawaz-720.webp'),
         'type' => 'article',
     ])
@@ -35,9 +39,10 @@
     <main id="main-content">
         <article class="sec">
             <div style="max-width:760px;margin:0 auto">
-                <a href="{{ route('blog') }}" class="read-more" style="margin-bottom:1rem">← Back to all articles</a>
-
-                <span class="cat-tag" style="text-transform:capitalize">{{ $post->category }}</span>
+                <div class="post-top">
+                    <a href="{{ route('blog') }}" class="read-more">← Back to all articles</a>
+                    <span class="cat-tag">{{ $post->category }}</span>
+                </div>
                 <h1 style="font-family:'Sora',sans-serif;font-size:clamp(1.7rem,1.3rem+1.8vw,2.5rem);line-height:1.2;margin:.6rem 0 .5rem">
                     {{ $post->title }}
                 </h1>
