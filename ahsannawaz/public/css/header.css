@@ -10,7 +10,7 @@
     --bg-nav: rgba(255, 255, 255, 0.72);
     --orange: var(--accent);
     --orange-light: var(--accent-hover);
-    --orange-dim: rgba(15, 118, 110, 0.10);
+    --orange-dim: rgba(21, 128, 61, 0.10);
     --text-white: var(--text);
     --text-muted: var(--text-3);
 
@@ -162,7 +162,7 @@ body {
 .btn-hire:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
+    box-shadow: 0 8px 20px rgba(21, 128, 61, 0.25);
 }
 .btn-hire:active { transform: translateY(0); }
 

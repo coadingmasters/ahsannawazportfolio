@@ -14,833 +14,354 @@
           href="{{ asset('fonts/dm-sans-latin.woff2') }}">
     {{-- Critical CSS inline; the rest loads without blocking paint. --}}
     @styles('welcome')
-    {{-- Reused by the homepage projects section: .ab-* shell + .pj-card* --}}
 </head>
-    <body>
-        @include('layouts.partials.header')
+<body>
+    @include('layouts.partials.header')
 
-        <main id="main-content">
+    <main id="main-content">
 
-        @php
-            // ucfirst() would render "Cms"/"Api" — spell these properly.
-            $catLabels = [
-                'backend' => 'Backend', 'frontend' => 'Frontend', 'cms' => 'CMS',
-                'database' => 'Database', 'tools' => 'Tools',
-                'web' => 'Web', 'mobile' => 'Mobile', 'api' => 'API', 'wordpress' => 'WordPress',
-            ];
-        @endphp
-<section id="hero">
+    {{-- ══════════════════ HERO ══════════════════ --}}
+    <section id="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
 
-    <!-- Ambient blobs -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="badge"><span class="badge-dot"></span> Laravel Developer</div>
 
-    {{-- Decorative code fragments. Purely visual, so they are hidden from
-         assistive tech and never intercept clicks. --}}
-    <div class="code-scatter" aria-hidden="true">
-        <span style="--x:6%;  --y:18%; --d:0s">&lt;/&gt;</span>
-        <span style="--x:8%;  --y:90%; --d:1.4s">$ php artisan serve</span>
-        <span style="--x:47%; --y:11%; --d:0.7s">{ }</span>
-        <span style="--x:88%; --y:26%; --d:2.1s">&lt;div&gt;</span>
-        <span style="--x:70%; --y:86%; --d:1.1s">npm run build</span>
-        <span style="--x:93%; --y:66%; --d:1.8s">=&gt;</span>
-    </div>
+                <h1 class="hero-title">Hi, I'm <span>Ahsan</span> Nawaz</h1>
 
-    <div class="hero-inner">
+                <p class="hero-lead">Building secure &amp; scalable web applications with Laravel</p>
 
-        {{-- ── LEFT CONTENT ── --}}
-        <div class="hero-left">
+                <p class="hero-desc">
+                    I'm a backend-focused developer with 2+ years of experience building modern web
+                    applications using <strong>Laravel</strong>, <strong>REST APIs</strong> and
+                    <strong>MySQL</strong>. I turn ideas into real-world solutions with clean code
+                    and great performance.
+                </p>
 
-            <div class="badge">
-                <span class="badge-dot"></span>
-                Available for  work
-            </div>
-
-            <h1 class="hero-title">
-                Hi, I'm <span>Ahsan</span><br>Nawaz
-            </h1>
-
-            <p class="role-line">
-                I'm a <span class="role-highlight" id="typewriter"></span>
-            </p>
-
-            <p class="hero-desc">
-                Full-stack web developer from Pakistan, building fast, secure and
-                search-friendly websites with <strong>Laravel</strong>, <strong>PHP</strong>,
-                <strong>React</strong> and <strong>WordPress</strong>. From custom web
-                applications and REST APIs to WooCommerce stores and plugin development —
-                shipped on time, built to scale, and easy to maintain.
-            </p>
-
-            <div class="stats-row">
-                <div class="stat">
-                    <span class="stat-num" data-target="10">10+</span>
-                    <span class="stat-label">Projects Delivered</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-num" data-target="2">2+</span>
-                    <span class="stat-label">Years Experience</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-num" data-target="8">8+</span>
-                    <span class="stat-label">Happy Clients</span>
-                </div>
-            </div>
-
-            <div class="cta-row">
-                <a href="#contact" class="btn-primary">
-                    ✉ Hire Me
-                </a>
-                @if ($hasCv)
-                    <a href="{{ route('cv.download') }}" class="btn-secondary">
-                        ↓ Download CV
+                <div class="cta-row">
+                    @if ($hasCv)
+                        <a href="{{ route('cv.download') }}" class="btn-primary">
+                            Download CV
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
+                        </a>
+                    @endif
+                    <a href="{{ route('contact') }}" class="btn-outline">
+                        Let's Talk
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
                     </a>
-                @endif
-            </div>
-
-            <div class="social-row">
-                <span class="social-label">Find me on:</span>
-                @include('layouts.partials.socials', ['class' => 'social-icon'])
-            </div>
-
-        </div>
-
-        {{-- ── RIGHT VISUAL ── --}}
-        <div class="hero-right">
-            <div class="profile-wrap">
-
-                <!-- Orbit rings -->
-                <div class="ring ring-1"><div class="ring-dot"></div></div>
-                <div class="ring ring-2"></div>
-
-                <!-- Profile photo circle -->
-                 <div class="photo-frame">
-                <div class="photo-circle">
-                    <img src="{{ asset('images/ahsannawaz-540.webp') }}" srcset="{{ asset('images/ahsannawaz-360.webp') }} 360w, {{ asset('images/ahsannawaz-420.webp') }} 420w, {{ asset('images/ahsannawaz-540.webp') }} 540w, {{ asset('images/ahsannawaz-640.webp') }} 640w, {{ asset('images/ahsannawaz-720.webp') }} 720w" sizes="(max-width: 640px) 78vw, 390px" width="390" height="490" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React">
-                </div>
                 </div>
 
-                <!-- Floating badge: Projects -->
-                <div class="float-card card-top">
-                    <div class="card-icon">🚀</div>
-                    <div class="card-text">
-                        <p>10+ Projects</p>
-                        <p>Delivered</p>
+                <div class="social-row">
+                    @include('layouts.partials.socials', ['class' => 'social-icon'])
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="profile-wrap">
+                    <div class="ring ring-1"><div class="ring-dot"></div></div>
+                    <div class="ring ring-2"></div>
+
+                    <div class="photo-frame">
+                        <div class="photo-circle">
+                            <img src="{{ asset('images/ahsannawaz-540.webp') }}"
+                                 srcset="{{ asset('images/ahsannawaz-360.webp') }} 360w,
+                                         {{ asset('images/ahsannawaz-420.webp') }} 420w,
+                                         {{ asset('images/ahsannawaz-540.webp') }} 540w,
+                                         {{ asset('images/ahsannawaz-640.webp') }} 640w,
+                                         {{ asset('images/ahsannawaz-720.webp') }} 720w"
+                                 sizes="(max-width: 640px) 78vw, 390px" width="390" height="490"
+                                 alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React"
+                                 fetchpriority="high">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Floating badge: Rating -->
-                <div class="float-card card-bottom">
-                    <div class="card-icon">⭐</div>
-                    <div class="card-text">
-                        <p>5 Star Rating</p>
-                        <p>On Fiverr</p>
+                    {{-- The stack, orbiting the portrait. Decorative, so hidden
+                         from assistive tech — the skills section states it. --}}
+                    <span class="orbit orbit-1" aria-hidden="true">@include('layouts.partials.tech-icon', ['name' => 'Laravel'])</span>
+                    <span class="orbit orbit-2" aria-hidden="true">@include('layouts.partials.tech-icon', ['name' => 'MySQL'])</span>
+                    <span class="orbit orbit-3" aria-hidden="true">@include('layouts.partials.tech-icon', ['name' => 'PHP'])</span>
+                    <span class="orbit orbit-4" aria-hidden="true">@include('layouts.partials.tech-icon', ['name' => 'REST API'])</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ══════════════════ STATS ══════════════════ --}}
+    <section class="sec" style="padding-top:0">
+        <div class="sec-inner">
+            <div class="stats">
+                @php
+                    $statCards = [
+                        ['n' => $stats['years'].'+',    'l' => 'Years Experience',   'i' => 'M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'],
+                        ['n' => $stats['projects'].'+', 'l' => 'Projects Completed', 'i' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z'],
+                        ['n' => $stats['clients'].'+',  'l' => 'Happy Clients',      'i' => 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87'],
+                        ['n' => '99%',                  'l' => 'Client Satisfaction','i' => 'm12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z'],
+                        ['n' => '24/7',                 'l' => 'Support Availability','i' => 'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'],
+                    ];
+                @endphp
+                @foreach ($statCards as $i => $c)
+                    <div class="stat-c rv rv-d{{ min($i, 3) }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ $c['i'] }}"/></svg>
+                        <div class="stat-n">{{ $c['n'] }}</div>
+                        <div class="stat-l">{{ $c['l'] }}</div>
                     </div>
-                </div>
-
-                <!-- Floating badge: Tech -->
-                <div class="float-card card-left">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-text">
-                        <p>Laravel Expert</p>
-                        <p>PHP & React</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-{{-- ═══════════════════════════════════════════════
-    About Me Section — Ahsan Nawaz Portfolio
-═══════════════════════════════════════════════ --}}
-<section id="about">
-
-    <div class="about-inner">
-
-        {{-- ── LEFT: ANIMATED IMAGE ── --}}
-        <div class="about-left reveal left">
-
-            {{-- Orbit rings --}}
-            <div class="a-ring a-ring-1"></div>
-            <div class="a-ring a-ring-2"></div>
-            <div class="a-ring a-ring-3"></div>
-
-            {{-- Orbiting dots --}}
-            <div class="orbit-dot orbit-dot-1"></div>
-            <div class="orbit-dot orbit-dot-2"></div>
-            <div class="orbit-dot orbit-dot-3"></div>
-
-            {{-- Corner brackets --}}
-            <div class="bracket bracket-tl"></div>
-            <div class="bracket bracket-tr"></div>
-            <div class="bracket bracket-bl"></div>
-            <div class="bracket bracket-br"></div>
-
-            {{-- Main photo --}}
-            <div class="photo-frame">
-                <div class="photo-img">
-                    
-                        <img src="{{ asset('images/ahsannawaz-540.webp') }}" srcset="{{ asset('images/ahsannawaz-360.webp') }} 360w, {{ asset('images/ahsannawaz-420.webp') }} 420w, {{ asset('images/ahsannawaz-540.webp') }} 540w, {{ asset('images/ahsannawaz-640.webp') }} 640w, {{ asset('images/ahsannawaz-720.webp') }} 720w" sizes="(max-width: 640px) 78vw, 390px" width="390" height="490" alt="Ahsan Nawaz, full-stack web developer specialising in Laravel, PHP and React" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:22px;">
-                   
-                    <!-- <div class="photo-placeholder">
-                        <span>AN</span>
-                        <span>YOUR PHOTO</span>
-                    </div> -->
-                </div>
-
-                {{-- Experience badge --}}
-                <div class="exp-badge">
-                    <span>5+</span>
-                    <span>Years<br>Exp.</span>
-                </div>
-            </div>
-
-            {{-- Floating chips --}}
-            <div class="skill-chip chip-1">
-                <div class="chip-icon">⚡</div>
-                <div>
-                    <div>Laravel</div>
-                    <div class="chip-sub">Backend Expert</div>
-                </div>
-            </div>
-
-            <div class="skill-chip chip-2">
-                <div class="chip-icon">⭐</div>
-                <div>
-                    <div>5-Star Rated</div>
-                    <div class="chip-sub">On Fiverr</div>
-                </div>
-            </div>
-
-            <div class="skill-chip chip-3">
-                <div class="chip-icon">🚀</div>
-                <div>
-                    <div>10+ Projects</div>
-                    <div class="chip-sub">Delivered</div>
-                </div>
-            </div>
-
-        </div>
-
-        {{-- ── RIGHT: CONTENT ── --}}
-        <div class="about-right">
-
-            <span class="section-label reveal right" style="transition-delay:0.1s">About Me</span>
-
-            <h2 class="about-heading reveal right" style="transition-delay:0.2s">
-                Passionate Developer<br>Building <em>Digital Excellence</em>
-            </h2>
-
-            <p class="about-text reveal right" style="transition-delay:0.3s">
-                Hi, I'm <strong style="color:var(--text)">Ahsan Nawaz</strong>, a full-stack web developer based in Pakistan
-                with over 5 years of hands-on experience building robust, scalable, and visually compelling
-                web applications. I specialise in Laravel, PHP, React JS, and WordPress — turning complex
-                ideas into elegant solutions.
-            </p>
-
-            <p class="about-text about-extra reveal right" style="transition-delay:0.35s" id="about-extra-text">
-                I've worked with clients across the globe — from startups to established businesses —
-                delivering high-quality code, clean architecture, and pixel-perfect frontends.
-                Whether it's a custom WordPress plugin, a full-scale Laravel SaaS, or a
-                lightning-fast React interface, I bring the same level of dedication and craft to every project.
-            </p>
-
-            <div class="info-grid reveal right" style="transition-delay:0.4s">
-                <div class="info-item">
-                    <span class="info-label">Name</span>
-                    <span class="info-value">Ahsan Nawaz</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Location</span>
-                    <span class="info-value">Pakistan 🇵🇰</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Experience</span>
-                    <span class="info-value">5+ Years</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Availability</span>
-                    <span class="info-value" style="color:#15803d">● Open to Work</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Freelance</span>
-                    <span class="info-value"><a href="#">Fiverr Profile →</a></span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Email</span>
-                    <span class="info-value"><a href="mailto:hello@ahsannawaz.dev">hello@ahsan.dev</a></span>
-                </div>
-            </div>
-
-            {{-- Skill bars --}}
-            <div class="skill-bars reveal right" style="transition-delay:0.5s" id="skill-bars">
-                <div class="skill-bar-item">
-                    <div class="skill-bar-top"><span>Laravel / PHP</span><span>95%</span></div>
-                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
-                </div>
-                <div class="skill-bar-item">
-                    <div class="skill-bar-top"><span>React JS</span><span>88%</span></div>
-                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
-                </div>
-                <div class="skill-bar-item">
-                    <div class="skill-bar-top"><span>WordPress & Plugins</span><span>92%</span></div>
-                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
-                </div>
-                <div class="skill-bar-item">
-                    <div class="skill-bar-top"><span>REST API / MySQL</span><span>90%</span></div>
-                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
-                </div>
-            </div>
-
-            {{-- Read More button --}}
-            <a href="#" class="read-more-btn reveal right" style="transition-delay:0.6s" id="read-more-btn" onclick="toggleReadMore(event)">
-                <span id="read-more-label">Read More</span>
-                <svg class="btn-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" id="read-more-arrow">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-
-        </div>
-    </div>
-
-</section>
-{{-- ═══════════════════════════════════════════════
-    Skills / Tech Stack Section — Ahsan Nawaz
-═══════════════════════════════════════════════ --}}
-
-
-
-
-<section id="skills">
-    <div class="sk-blob sk-blob-1"></div>
-    <div class="sk-blob sk-blob-2"></div>
-
-    <div class="skills-inner">
-
-        {{-- ── HEADER ── --}}
-        <div class="sk-header sk-reveal">
-            <div class="sk-label">What I Work With</div>
-            <h2 class="sk-title">Skills & <em>Tech Stack</em></h2>
-            <p class="sk-desc">A curated set of technologies I've mastered over 5+ years of building real-world, production-grade web applications.</p>
-        </div>
-
-        {{-- ── FILTER TABS — built from the categories actually in the DB ── --}}
-        <div class="sk-tabs sk-reveal" style="transition-delay:0.1s" id="sk-tabs">
-            <button class="sk-tab active" data-filter="all">All</button>
-            @foreach ($skills->keys() as $cat)
-                <button class="sk-tab" data-filter="{{ $cat }}">{{ $catLabels[$cat] ?? ucfirst($cat) }}</button>
-            @endforeach
-        </div>
-
-        {{-- ── CARDS GRID ── --}}
-        <div class="sk-grid" id="sk-grid">
-
-            {{-- Cards come straight from the DB (admin → Skills) --}}
-            @foreach ($skills->flatten() as $skill)
-                <div class="sk-card" data-cat="{{ $skill->category }}">
-                    <span class="sk-level level-{{ $skill->level }}">{{ ucfirst($skill->level) }}</span>
-                    <div class="sk-card-icon" style="background:{{ $skill->color }}1f;">{{ $skill->icon }}</div>
-                    <div class="sk-card-name">{{ $skill->name }}</div>
-                    <div class="sk-card-cat">{{ $catLabels[$skill->category] ?? ucfirst($skill->category) }}</div>
-                    <div class="sk-bar-track">
-                        <div class="sk-bar-fill" data-w="{{ $skill->percentage }}" style="background:{{ $skill->color_gradient }}"></div>
-                    </div>
-                    <div class="sk-bar-pct">{{ $skill->percentage }}%</div>
-                </div>
-            @endforeach
-
-        </div>
-
-        {{-- ── TAG CLOUD ── --}}
-        <div class="sk-tagcloud-wrap sk-reveal" style="transition-delay:0.2s">
-            <div class="sk-tagcloud-title">Also Familiar With</div>
-            <div class="sk-tagcloud">
-                @foreach(['AJAX','Livewire','Alpine.js','Vue.js','SASS/SCSS','Webpack','Vite','Blade Templates','Eloquent ORM','Sanctum / Passport','PHPUnit','Redis','Stripe API','PayPal API','SendGrid','Twilio','Figma','Postman','VS Code','Linux CLI','SEO Basics','Google Analytics','WooCommerce','ACF Pro','Elementor','WPML','CPT UI','Yoast SEO','REST API Auth','JWT','OAuth2','MVC Pattern','SOLID Principles','Agile / Scrum'] as $tag)
-                <span class="sk-tag">{{ $tag }}</span>
                 @endforeach
             </div>
         </div>
+    </section>
 
-        {{-- ── STATS STRIP ── --}}
-        <div class="sk-stats sk-reveal" style="transition-delay:0.3s">
-            <div class="sk-stat">
-                <span class="sk-stat-num" data-target="20">20+</span>
-                <span class="sk-stat-label">Technologies Mastered</span>
-            </div>
-            <div class="sk-stat">
-                <span class="sk-stat-num" data-target="23">23+</span>
-                <span class="sk-stat-label">Projects Delivered</span>
-            </div>
-            <div class="sk-stat">
-                <span class="sk-stat-num" data-target="3">3+</span>
-                <span class="sk-stat-label">Years of Experience</span>
-            </div>
-            <div class="sk-stat">
-                <span class="sk-stat-num" data-target="23">23+</span>
-                <span class="sk-stat-label">Happy Clients</span>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-{{-- ═══════════════════════════════════════════════
-    Services Section — Ahsan Nawaz Portfolio
-═══════════════════════════════════════════════ --}}
-
-
-
-<section id="services">
-    <div class="srv-blob srv-blob-1"></div>
-    <div class="srv-blob srv-blob-2"></div>
-
-    <div class="srv-inner">
-
-        {{-- ── HEADER ── --}}
-        <div class="srv-header srv-reveal">
-            <div class="srv-label">What I Offer</div>
-            <h2 class="srv-title">My <em>Services</em></h2>
-            <p class="srv-desc">End-to-end web development solutions — from scalable backends to pixel-perfect frontends. Here's how I can help your business grow.</p>
-        </div>
-
-        {{-- ── FEATURED CARD — Laravel ── --}}
-        <div class="srv-featured srv-reveal" style="transition-delay:0.1s">
-            <div class="srv-featured-left">
-                <div class="srv-feat-badge">
-                    <span>⭐</span> Most Popular
+    {{-- ══════════════════ ABOUT ══════════════════ --}}
+    <section class="sec" style="padding-top:0">
+        <div class="sec-inner">
+            <div class="about-strip rv">
+                <div class="about-shot">
+                    <img src="{{ asset('images/ahsannawaz-540.webp') }}" width="420" height="330"
+                         alt="Ahsan Nawaz at work on a Laravel project" loading="lazy" decoding="async">
+                    <div class="about-ticks">
+                        <span>✓ Clean Code</span>
+                        <span>✓ Scalable</span>
+                        <span>✓ Secure</span>
+                    </div>
                 </div>
-                <h3 class="srv-feat-title">Laravel & PHP<br><em>Backend Development</em></h3>
-                <p class="srv-feat-desc">
-                    I build robust, secure, and scalable Laravel applications — from REST APIs and SaaS platforms to complex multi-tenant systems. Clean architecture, optimised queries, and production-grade code every time.
-                </p>
-                <div class="srv-feat-pills">
-                    <span class="srv-pill">Laravel 11</span>
-                    <span class="srv-pill">RESTful API</span>
-                    <span class="srv-pill">Sanctum / Passport</span>
-                    <span class="srv-pill">Eloquent ORM</span>
-                    <span class="srv-pill">Queue Jobs</span>
-                    <span class="srv-pill">Events & Listeners</span>
-                    <span class="srv-pill">PHPUnit Tests</span>
-                    <span class="srv-pill">Multi-tenancy</span>
-                </div>
-                <a href="#contact" class="srv-feat-cta">
-                    Get a Quote
-                    <svg class="arr" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-            <div class="srv-featured-right">
-                <div class="srv-feat-img-wrap">
-                    <img
-                        src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=480&q=70&fm=webp"
-                        loading="lazy" decoding="async" width="480" height="320"
-                        alt="Laravel Backend Development"
-                        class="srv-feat-img"
-                    >
-                    <div class="srv-feat-img-overlay">
-                        <div class="srv-feat-img-badge">
-                            <span>🔥</span>
-                            <span>Laravel Expert</span>
-                        </div>
+
+                <div>
+                    <span class="sec-eyebrow" style="font-size:var(--step--1);letter-spacing:.08em;text-transform:uppercase">About Me</span>
+                    <h2 class="sec-title" style="text-align:left;margin:.3rem 0 .7rem">
+                        Building digital solutions with passion &amp; precision.
+                    </h2>
+                    <p style="color:var(--text-3);font-size:var(--step--1);line-height:1.75">
+                        I specialise in <strong style="color:var(--text)">Laravel development</strong> and have
+                        strong experience building REST APIs, admin panels and dynamic web applications.
+                        I focus on writing clean, efficient and maintainable code that delivers real business value.
+                    </p>
+
+                    <div class="chip-grid">
+                        @foreach ([
+                            ['REST API Development', 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7'],
+                            ['Admin Panel Development', 'M3 5h18M3 12h18M3 19h18'],
+                            ['Database Design', 'M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3z'],
+                            ['Performance Optimisation', 'm13 2-9 12h7l-1 8 9-12h-7l1-8z'],
+                        ] as $chip)
+                            <div class="chip">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ $chip[1] }}"/></svg>
+                                {{ $chip[0] }}
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        {{-- ── MAIN 3-COL GRID ── --}}
-        <div class="srv-grid">
+    {{-- ══════════════════ TECH STACK ══════════════════ --}}
+    @if ($skills->isNotEmpty())
+    <section class="sec sec-tint" id="skills">
+        <div class="sec-inner">
+            <div class="sec-head">
+                <span class="sec-eyebrow">My Tech Stack</span>
+                <h2 class="sec-title">Technologies &amp; tools I work with</h2>
+            </div>
 
-            {{-- React JS --}}
-            <div class="srv-card" data-delay="0" style="--card-color:#0e7490;--card-glow:rgba(14,116,144,0.08)">
-                <span class="srv-num">01</span>
-                <div class="srv-icon" style="background:rgba(14,116,144,0.1);">⚛️</div>
-                <h4 class="srv-card-title">React JS Development</h4>
-                <p class="srv-card-desc">Dynamic, fast, and interactive SPAs and dashboards built with modern React — hooks, context, and clean component architecture.</p>
-                <ul class="srv-list">
-                    <li>Single Page Applications</li>
-                    <li>Custom Dashboards & Admin Panels</li>
-                    <li>REST API Integration</li>
-                    <li>Redux / Context State Management</li>
-                </ul>
-                <a href="#contact" class="srv-link">
-                    Learn More
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="tech-grid">
+                @foreach ($skills->take(12) as $i => $skill)
+                    <div class="tech rv rv-d{{ min($i % 4, 3) }}">
+                        @include('layouts.partials.tech-icon', ['name' => $skill->name])
+                        <b>{{ $skill->name }}</b>
+                    </div>
+                @endforeach
+            </div>
+
+            <div style="text-align:center;margin-top:1.6rem">
+                <a href="{{ route('skills') }}" class="btn-outline">
+                    View all skills
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </a>
-            </div>
-
-            {{-- WordPress --}}
-            <div class="srv-card" data-delay="1" style="--card-color:#1d4ed8;--card-glow:rgba(29,78,216,0.08)">
-                <span class="srv-num">02</span>
-                <div class="srv-icon" style="background:rgba(29,78,216,0.1);">📝</div>
-                <h4 class="srv-card-title">WordPress Development</h4>
-                <p class="srv-card-desc">Custom themes, full-site editing, and bespoke WordPress solutions that are fast, SEO-friendly, and easy to manage.</p>
-                <ul class="srv-list">
-                    <li>Custom Theme Development</li>
-                    <li>WooCommerce Stores</li>
-                    <li>Page Speed Optimisation</li>
-                    <li>Elementor & ACF Pro</li>
-                </ul>
-                <a href="#contact" class="srv-link">
-                    Learn More
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-            {{-- Plugin Dev --}}
-            <div class="srv-card" data-delay="2" style="--card-color:#6d28d9;--card-glow:rgba(109,40,217,0.08)">
-                <span class="srv-num">03</span>
-                <div class="srv-icon" style="background:rgba(109,40,217,0.1);">🔌</div>
-                <h4 class="srv-card-title">WordPress Plugin Dev</h4>
-                <p class="srv-card-desc">Tailor-made WordPress plugins built from scratch — extending functionality exactly how your business needs it, without bloat.</p>
-                <ul class="srv-list">
-                    <li>Custom Post Types & Taxonomies</li>
-                    <li>Payment Gateway Plugins</li>
-                    <li>Third-party API Plugins</li>
-                    <li>Admin Settings Panels</li>
-                </ul>
-                <a href="#contact" class="srv-link">
-                    Learn More
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-            {{-- Frontend Dev --}}
-            <div class="srv-card" data-delay="3" style="--card-color:#b45309;--card-glow:rgba(180,83,9,0.08)">
-                <span class="srv-num">04</span>
-                <div class="srv-icon" style="background:rgba(180,83,9,0.1);">🎨</div>
-                <h4 class="srv-card-title">Frontend Development</h4>
-                <p class="srv-card-desc">Pixel-perfect HTML, CSS, JavaScript & jQuery interfaces — responsive on every device, smooth animations, and clean code.</p>
-                <ul class="srv-list">
-                    <li>HTML5 / CSS3 / Tailwind</li>
-                    <li>Bootstrap & Custom Layouts</li>
-                    <li>jQuery & AJAX Interactions</li>
-                    <li>Cross-browser Compatibility</li>
-                </ul>
-                <a href="#contact" class="srv-link">
-                    Learn More
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-            {{-- REST API --}}
-            <div class="srv-card" data-delay="4" style="--card-color:#047857;--card-glow:rgba(4,120,87,0.08)">
-                <span class="srv-num">05</span>
-                <div class="srv-icon" style="background:rgba(4,120,87,0.1);">🔗</div>
-                <h4 class="srv-card-title">REST API Development</h4>
-                <p class="srv-card-desc">Scalable, well-documented REST APIs and third-party integrations — built for performance, security, and easy consumption.</p>
-                <ul class="srv-list">
-                    <li>Laravel API with Sanctum/JWT</li>
-                    <li>Stripe, PayPal, Twilio APIs</li>
-                    <li>Webhook Implementation</li>
-                    <li>API Documentation (Postman)</li>
-                </ul>
-                <a href="#contact" class="srv-link">
-                    Learn More
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-            {{-- Database --}}
-            <div class="srv-card" data-delay="5" style="--card-color:#c2410c;--card-glow:rgba(194,65,12,0.1)">
-                <span class="srv-num">06</span>
-                <div class="srv-icon" style="background:rgba(194,65,12,0.1);">🗄️</div>
-                <h4 class="srv-card-title">Database Design & Optimisation</h4>
-                <p class="srv-card-desc">Efficient schema design, query optimisation, and database architecture for MySQL — making your app fast and reliable at scale.</p>
-                <ul class="srv-list">
-                    <li>MySQL Schema Architecture</li>
-                    <li>Query Optimisation & Indexing</li>
-                    <li>Laravel Migrations & Seeders</li>
-                    <li>Data Migration & Backup</li>
-                </ul>
-                <a href="#contact" class="srv-link">
-                    Learn More
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-        </div>
-
-        {{-- ── BOTTOM STRIP — 2 smaller cards ── --}}
-        <div class="srv-strip srv-reveal" style="transition-delay:0.25s">
-
-            {{-- Bug Fixing --}}
-            <div class="srv-card visible" style="--card-color:#b91c1c;--card-glow:rgba(185,28,28,0.08);opacity:1;transform:none;">
-                <span class="srv-num">07</span>
-                <div class="srv-icon" style="background:rgba(185,28,28,0.1);">🐛</div>
-                <h4 class="srv-card-title">Bug Fixing & Code Review</h4>
-                <p class="srv-card-desc">Fast, accurate debugging of Laravel, PHP, WordPress, and React codebases. I'll find the issue and fix it properly — not just patch it.</p>
-                <ul class="srv-list">
-                    <li>Laravel / PHP Debugging</li>
-                    <li>WordPress Error Resolution</li>
-                    <li>Performance Bottleneck Fixes</li>
-                </ul>
-                <a href="#contact" class="srv-link">Get Help <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-            </div>
-
-            {{-- Deployment --}}
-            <div class="srv-card visible" style="--card-color:#4338ca;--card-glow:rgba(67,56,202,0.08);opacity:1;transform:none;">
-                <span class="srv-num">08</span>
-                <div class="srv-icon" style="background:rgba(67,56,202,0.1);">☁️</div>
-                <h4 class="srv-card-title">Deployment & Server Setup</h4>
-                <p class="srv-card-desc">I'll deploy your application to cPanel, VPS, or cloud servers — with SSL, NGINX/Apache config, and CI/CD pipeline setup.</p>
-                <ul class="srv-list">
-                    <li>cPanel & VPS Deployment</li>
-                    <li>SSL & Domain Configuration</li>
-                    <li>Git-based CI/CD Workflows</li>
-                </ul>
-                <a href="#contact" class="srv-link">Get Help <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-            </div>
-
-        </div>
-
-        {{-- ── CTA BANNER ── --}}
-        <div class="srv-cta-banner srv-reveal" style="transition-delay:0.35s">
-            <div class="srv-cta-text">
-                <h3>Have a project in mind? Let's <em>build it together.</em></h3>
-                <p>Whether it's a quick fix or a full-scale application, I'm ready to bring your vision to life. Let's talk about what you need.</p>
-            </div>
-            <div class="srv-cta-btns">
-                <a href="#contact" class="srv-cta-btn-primary">
-                    ✉ Hire Me
-                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                @if ($hasCv)
-                    <a href="{{ route('cv.download') }}" class="srv-cta-btn-secondary">
-                        ↓ Download CV
-                    </a>
-                @endif
             </div>
         </div>
+    </section>
+    @endif
 
-    </div>
-</section>
+    {{-- ══════════════════ FEATURED PROJECTS ══════════════════ --}}
+    @if ($featured->isNotEmpty())
+    <section class="sec" id="projects">
+        <div class="sec-inner">
+            <div class="sec-head">
+                <span class="sec-eyebrow">Featured Projects</span>
+                <h2 class="sec-title">Some of my recent work</h2>
+            </div>
 
-
-{{-- ══════════════════════════════════════
-     PROJECTS — straight from the DB (admin → Projects)
-══════════════════════════════════════ --}}
-@if ($projects->isNotEmpty())
-<section id="projects">
-    <div class="hp-blob hp-blob-1"></div>
-
-    <div class="hp-inner">
-
-        <div class="hp-header ab-rv">
-            <div class="ab-label">Recent Work</div>
-            <h2 class="hp-title">Featured <em>Projects</em></h2>
-            <p class="hp-desc">
-                A few things I've shipped recently. Every one built for a real client with real deadlines.
-            </p>
-        </div>
-
-        <div class="pj-grid hp-grid">
-            @foreach ($projects->take(6) as $project)
-                <article class="pj-card ab-rv" data-delay="{{ $loop->index % 3 }}">
-                    <span class="pj-card-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-
-                    <div class="pj-card-media">
-                        <img src="{{ $project->image_url }}" alt="{{ $project->title }} — {{ $catLabels[$project->category] ?? ucfirst($project->category) }} project by Ahsan Nawaz" class="pj-card-img" loading="lazy">
-                        <div class="pj-card-overlay">
-                            <div class="pj-card-actions">
-                                @if ($project->live_url)
-                                    <a href="{{ $project->live_url }}" target="_blank" rel="noopener"
-                                       class="pj-action" title="View live" aria-label="View {{ $project->title }} live">↗</a>
-                                @endif
-                                @if ($project->github_url)
-                                    <a href="{{ $project->github_url }}" target="_blank" rel="noopener"
-                                       class="pj-action" title="View source" aria-label="View {{ $project->title }} source">⎇</a>
-                                @endif
+            <div class="proj-grid">
+                @foreach ($featured as $i => $project)
+                    <article class="h-card proj rv rv-d{{ min($i, 3) }}">
+                        <div class="proj-shot">
+                            <img src="{{ $project->image_url }}" width="480" height="300" loading="lazy" decoding="async"
+                                 alt="{{ $project->title }} — {{ ucfirst($project->category) }} project by Ahsan Nawaz">
+                            <span class="proj-tag">{{ $project->category === 'api' ? 'API' : ucfirst($project->category) }}</span>
+                        </div>
+                        <div class="proj-body">
+                            <h3>{{ $project->title }}</h3>
+                            <p>{{ Str::limit($project->description, 120) }}</p>
+                            <div class="stack-row">
+                                @foreach (array_slice($project->tech_stack ?? [], 0, 3) as $tech)
+                                    <span>{{ $tech }}</span>
+                                @endforeach
                             </div>
                         </div>
-                        @if ($project->is_featured)
-                            <span class="pj-card-star" title="Featured">★</span>
-                        @endif
-                    </div>
+                    </article>
+                @endforeach
+            </div>
 
-                    <div class="pj-card-body">
-                        <span class="pj-cat">{{ $catLabels[$project->category] ?? ucfirst($project->category) }}</span>
-                        <h3 class="pj-card-title">{{ $project->title }}</h3>
-                        <p class="pj-card-desc">{{ $project->description }}</p>
+            <div style="text-align:center;margin-top:1.8rem">
+                <a href="{{ route('projects') }}" class="btn-primary">
+                    View all projects
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    @endif
 
-                        @if ($project->tech_stack)
-                            <div class="pj-stack">
-                                @foreach (array_slice($project->tech_stack, 0, 4) as $tech)
-                                    <span class="pj-chip">{{ $tech }}</span>
-                                @endforeach
-                                @if (count($project->tech_stack) > 4)
-                                    <span class="pj-chip pj-chip-more">+{{ count($project->tech_stack) - 4 }}</span>
-                                @endif
+    {{-- ══════════════════ SERVICES + PROCESS ══════════════════ --}}
+    <section class="sec sec-tint">
+        <div class="sec-inner svc-split">
+            <div class="svc-panel rv">
+                <h3>What I Do</h3>
+                <ul>
+                    @foreach ([
+                        'Web Application Development (Laravel)',
+                        'REST API Integration',
+                        'Admin Panel Development',
+                        'Database Design &amp; Optimisation',
+                    ] as $item)
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>
+                            {!! $item !!}
+                        </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('contact') }}" class="btn-light">
+                    Start a project
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <div class="rv rv-d1">
+                <h2 class="sec-title" style="text-align:left">My Development Process</h2>
+                <p class="sec-sub" style="text-align:left">Clean code. Smart planning. Better results.</p>
+
+                <div class="steps">
+                    @foreach (['Discuss Requirements', 'Plan &amp; Design', 'Develop &amp; Test', 'Deploy', 'Support'] as $i => $label)
+                        <div class="step">
+                            <i>{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</i>
+                            <b>{!! $label !!}</b>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ══════════════════ TESTIMONIALS ══════════════════ --}}
+    @if ($testimonials->isNotEmpty())
+    <section class="sec">
+        <div class="sec-inner">
+            <div class="sec-head">
+                <h2 class="sec-title">What Clients Say</h2>
+                <p class="sec-sub">Real feedback from real people</p>
+            </div>
+
+            <div class="quote-grid">
+                @foreach ($testimonials->take(3) as $i => $t)
+                    <figure class="h-card quote rv rv-d{{ min($i, 3) }}">
+                        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote><p>{{ $t->quote }}</p></blockquote>
+                        <figcaption class="quote-by">
+                            @if ($t->avatar_url)
+                                <img src="{{ $t->avatar_url }}" alt="" width="42" height="42" loading="lazy">
+                            @else
+                                <span class="quote-av" aria-hidden="true">{{ $t->initials }}</span>
+                            @endif
+                            <span>
+                                <b>{{ $t->name }}</b>
+                                <span>{{ $t->role }}{{ $t->company ? ', '.$t->company : '' }}</span>
+                            </span>
+                            <span class="stars" aria-label="{{ $t->rating }} out of 5">{{ str_repeat('★', $t->rating) }}</span>
+                        </figcaption>
+                    </figure>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    {{-- ══════════════════ BLOG ══════════════════ --}}
+    @if ($posts->isNotEmpty())
+    <section class="sec sec-tint">
+        <div class="sec-inner">
+            <div class="sec-head">
+                <h2 class="sec-title">Latest from the Blog</h2>
+                <p class="sec-sub">Insights, tips and Laravel best practices</p>
+            </div>
+
+            <div class="blog-grid">
+                @foreach ($posts as $i => $post)
+                    <article class="h-card bpost rv rv-d{{ min($i, 3) }}">
+                        @if ($post->image_url)
+                            <div class="bpost-shot">
+                                <img src="{{ $post->image_url }}" width="420" height="236" loading="lazy" decoding="async"
+                                     alt="{{ $post->title }}">
+                                <span class="bpost-date">{{ $post->date_label }}</span>
                             </div>
                         @endif
-                    </div>
-                </article>
-            @endforeach
-        </div>
-
-        <div class="hp-more ab-rv">
-            <a href="{{ route('projects') }}" class="ab-btn-primary">
-                View All Projects
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-
-    </div>
-</section>
-@endif
-
-{{-- ══════════════════════════════════════
-     CONTACT
-══════════════════════════════════════ --}}
-<section id="contact">
-
-    <!-- Ambient blobs -->
-    <div class="ct-blob ct-blob-1"></div>
-    <div class="ct-blob ct-blob-2"></div>
-
-    <div class="ct-inner">
-
-        {{-- ── HEADER ── --}}
-        <div class="ct-header ct-reveal">
-            <div class="ct-label">Get In Touch</div>
-            <h2 class="ct-title">Let's <em>Work Together</em></h2>
-            <p class="ct-desc">
-                Have a project, an idea, or just a question? Drop me a message and I'll reply within 24 hours.
-            </p>
-        </div>
-
-        <div class="ct-grid">
-
-            {{-- ── LEFT — INFO ── --}}
-            <div class="ct-aside ct-reveal" style="transition-delay:0.1s">
-
-                <div class="ct-status">
-                    <span class="ct-status-dot"></span>
-                    Available for new projects
-                </div>
-
-                <h3 class="ct-aside-title">Let's build something <em>great.</em></h3>
-                <p class="ct-aside-text">
-                    I'm currently taking on freelance work and long-term collaborations.
-                    Tell me what you're building and I'll get back to you with a plan.
-                </p>
-
-                <div class="ct-info-list">
-                    <a href="mailto:hello@ahsannawaz.dev" class="ct-info-item">
-                        <span class="ct-info-ico">✉</span>
-                        <span class="ct-info-body">
-                            <span class="ct-info-label">Email</span>
-                            <span class="ct-info-value">hello@ahsannawaz.dev</span>
-                        </span>
-                        <svg class="ct-info-arr" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-
-                    <div class="ct-info-item">
-                        <span class="ct-info-ico">◎</span>
-                        <span class="ct-info-body">
-                            <span class="ct-info-label">Location</span>
-                            <span class="ct-info-value">Pakistan 🇵🇰 · Remote worldwide</span>
-                        </span>
-                    </div>
-
-                    <div class="ct-info-item">
-                        <span class="ct-info-ico">◷</span>
-                        <span class="ct-info-body">
-                            <span class="ct-info-label">Response Time</span>
-                            <span class="ct-info-value">Usually within 24 hours</span>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="ct-socials">
-                    <span class="ct-socials-label">Follow me</span>
-                    <div class="ct-socials-row">
-                @include('layouts.partials.socials', ['class' => 'ct-social'])
-            
-                    </div>
-                </div>
+                        <div class="bpost-body">
+                            @unless ($post->image_url)
+                                <span class="bpost-date" style="position:static;align-self:flex-start;margin-bottom:.5rem">{{ $post->date_label }}</span>
+                            @endunless
+                            <h3><a href="{{ route('post', $post) }}">{{ $post->title }}</a></h3>
+                            <p>{{ Str::limit($post->excerpt ?: strip_tags($post->body), 110) }}</p>
+                            <a href="{{ route('post', $post) }}" class="read-more">
+                                Read More
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                @endforeach
             </div>
 
-            {{-- ── RIGHT — FORM ── --}}
-            <div class="ct-form-wrap ct-reveal" style="transition-delay:0.2s">
-
-                <form method="POST" action="{{ route('contact.store') }}" class="ct-form">
-                    @csrf
-
-                    {{-- Honeypot — hidden from humans, catches bots --}}
-                    <div class="ct-hp" aria-hidden="true">
-                        <label for="website">Website</label>
-                        <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
-                    </div>
-
-                    <div class="ct-row">
-                        <div class="ct-field">
-                            <label for="ct-name">Your Name <span>*</span></label>
-                            <input id="ct-name" type="text" name="name" value="{{ old('name') }}"
-                                   placeholder="John Doe" maxlength="100" required>
-                            @error('name') <div class="ct-err">{{ $message }}</div> @enderror
-                        </div>
-
-                        <div class="ct-field">
-                            <label for="ct-email">Email <span>*</span></label>
-                            <input id="ct-email" type="email" name="email" value="{{ old('email') }}"
-                                   placeholder="john@company.com" maxlength="150" required>
-                            @error('email') <div class="ct-err">{{ $message }}</div> @enderror
-                        </div>
-                    </div>
-
-                    <div class="ct-row">
-                        <div class="ct-field">
-                            <label for="ct-subject">Subject <span>*</span></label>
-                            <input id="ct-subject" type="text" name="subject" value="{{ old('subject') }}"
-                                   placeholder="Laravel project enquiry" maxlength="200" required>
-                            @error('subject') <div class="ct-err">{{ $message }}</div> @enderror
-                        </div>
-
-                        <div class="ct-field">
-                            <label for="ct-budget">Budget <span class="ct-opt">(optional)</span></label>
-                            <select id="ct-budget" name="budget">
-                                <option value="">Select a range</option>
-                                @foreach (['< $500', '$500 – $1k', '$1k – $5k', '$5k – $10k', '$10k+'] as $range)
-                                    <option value="{{ $range }}" @selected(old('budget') === $range)>{{ $range }}</option>
-                                @endforeach
-                            </select>
-                            @error('budget') <div class="ct-err">{{ $message }}</div> @enderror
-                        </div>
-                    </div>
-
-                    <div class="ct-field">
-                        <label for="ct-message">Message <span>*</span></label>
-                        <textarea id="ct-message" name="message" rows="5" maxlength="5000"
-                                  placeholder="Tell me about your project, timeline, and what you're hoping to achieve…" required>{{ old('message') }}</textarea>
-                        <div class="ct-meta">
-                            <span class="ct-count"><b id="ct-count">0</b> / 5000</span>
-                        </div>
-                        @error('message') <div class="ct-err">{{ $message }}</div> @enderror
-                    </div>
-
-                    <button type="submit" class="ct-submit">
-                        <span class="ct-submit-txt">✉ Send Message</span>
-                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
-
-                    <p class="ct-note">Your details stay private — never shared with anyone.</p>
-                </form>
+            <div style="text-align:center;margin-top:1.8rem">
+                <a href="{{ route('blog') }}" class="btn-outline">
+                    All articles
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
+    @endif
 
+    {{-- ══════════════════ CTA ══════════════════ --}}
+    <section class="sec" style="padding-top:clamp(2rem,4vw,3rem)">
+        <div class="sec-inner">
+            <div class="cta-band rv">
+                <span class="rocket" aria-hidden="true">🚀</span>
+                <div>
+                    <h3>Let's Build Something Great Together</h3>
+                    <p>Have a project in mind? I'd love to help.</p>
+                </div>
+                <a href="{{ route('contact') }}" class="btn-primary">
+                    Hire Me Now
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
 
-        @include('layouts.partials.popup')
+    </main>
 
-        </main>
+    @include('layouts.partials.footer')
 
-        @include('layouts.partials.footer')
-
-@js('js/popup.js')
-@js('js/about.js')
-@js('js/welcome.js')
+    @js('js/home.js')
+    @stack('scripts')
 </body>
 </html>

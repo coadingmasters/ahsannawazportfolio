@@ -10,7 +10,7 @@
     padding: 110px 2rem 70px;
     background: var(--bg);
     overflow: hidden;
-    border-bottom: 1px solid rgba(15, 118, 110, 0.12);
+    border-bottom: 1px solid rgba(21, 128, 61, 0.12);
     text-align: center;
 }
 .sp-masthead .ab-inner { max-width: 900px; }
@@ -212,7 +212,7 @@
     background: var(--bg);
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(15, 118, 110, 0.1);
+    border-top: 1px solid rgba(21, 128, 61, 0.1);
 }
 .sp-break-grid {
     display: grid;
@@ -221,12 +221,12 @@
 }
 .sp-break-card {
     background: linear-gradient(150deg, var(--bg), var(--surface));
-    border: 1px solid rgba(15, 118, 110, 0.14);
+    border: 1px solid rgba(21, 128, 61, 0.14);
     border-radius: 18px;
     padding: 1.6rem 1.5rem;
     transition: border-color 0.3s;
 }
-.sp-break-card:hover { border-color: rgba(15, 118, 110, 0.4); }
+.sp-break-card:hover { border-color: rgba(21, 128, 61, 0.4); }
 
 .sp-break-head {
     display: flex;

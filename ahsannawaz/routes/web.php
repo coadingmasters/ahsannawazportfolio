@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CvController;
+use App\Http\Controllers\HomeController;
+use App\Models\Post;
 use App\Models\Project;
 use App\Models\Skill;
 use Illuminate\Support\Carbon;
@@ -17,12 +21,7 @@ use Illuminate\Support\Facades\Route;
 | Public Frontend
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    $skills = Skill::active()->ordered()->get()->groupBy('category');
-    $projects = Project::active()->ordered()->get();
-
-    return view('welcome', compact('skills', 'projects'));
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
     // Skills come straight from the DB, so the admin panel drives this page.
@@ -65,6 +64,22 @@ Route::get('/projects', function () {
     return view('projects', compact('grid', 'featured', 'categories'));
 })->name('projects');
 
+Route::get('/blog', function () {
+    return view('blog', [
+        'posts' => Post::published()->latestFirst()->paginate(9),
+    ]);
+})->name('blog');
+
+Route::get('/blog/{post}', function (Post $post) {
+    abort_unless($post->is_published, 404);
+
+    return view('post', [
+        'post' => $post,
+        'related' => Post::published()->latestFirst()
+            ->where('id', '!=', $post->id)->take(3)->get(),
+    ]);
+})->name('post');
+
 Route::get('/cv', [CvController::class, 'download'])->name('cv.download');
 
 /*
@@ -82,6 +97,15 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('projects'), 'priority' => '0.9', 'freq' => 'weekly'],
         ['loc' => route('contact'), 'priority' => '0.7', 'freq' => 'yearly'],
     ];
+
+    // Every published article is its own entry.
+    foreach (Post::published()->latestFirst()->get() as $post) {
+        $pages[] = ['loc' => route('post', $post), 'priority' => '0.6', 'freq' => 'monthly'];
+    }
+
+    if (Post::published()->exists()) {
+        $pages[] = ['loc' => route('blog'), 'priority' => '0.7', 'freq' => 'weekly'];
+    }
 
     // Newest content date doubles as the site's lastmod.
     $lastmod = optional(Project::max('updated_at'))
@@ -132,5 +156,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('projects/bulk-destroy', [ProjectController::class, 'bulkDestroy'])->name('projects.bulk-destroy');
         Route::resource('projects', ProjectController::class)->except('show');
         Route::post('projects/{project}/toggle', [ProjectController::class, 'toggleActive'])->name('projects.toggle');
+
+        // Blog posts
+        Route::resource('posts', PostController::class)->except('show');
+        Route::post('posts/{post}/toggle', [PostController::class, 'toggleActive'])->name('posts.toggle');
+
+        // Testimonials
+        Route::resource('testimonials', TestimonialController::class)->except('show');
+        Route::post('testimonials/{testimonial}/toggle', [TestimonialController::class, 'toggleActive'])->name('testimonials.toggle');
     });
 });

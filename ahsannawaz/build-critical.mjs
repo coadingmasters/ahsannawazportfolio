@@ -29,6 +29,7 @@ const CHROME = '/usr/bin/google-chrome';
 
 const PAGES = {
   welcome: '/',
+  blog: '/blog',
   about: '/about',
   skills: '/skills',
   projects: '/projects',
@@ -227,8 +228,16 @@ for (const [name, path] of Object.entries(PAGES)) {
   page.on('request', (r) => (/page-\w+\.css/.test(r.url()) ? r.abort() : r.continue()));
   await page.evaluateOnNewDocument(
     (css) => document.addEventListener('DOMContentLoaded', () => {
-      const el = document.getElementById('critical-css');
-      if (el) el.textContent = css;
+      // A page being built for the first time has no inline block yet — it is
+      // still serving the fallback <link> — so create one. Without this the
+      // check renders the page with no CSS at all and reports a false failure.
+      let el = document.getElementById('critical-css');
+      if (!el) {
+        el = document.createElement('style');
+        el.id = 'critical-css';
+        document.head.appendChild(el);
+      }
+      el.textContent = css;
     }),
     code.toString()
   );

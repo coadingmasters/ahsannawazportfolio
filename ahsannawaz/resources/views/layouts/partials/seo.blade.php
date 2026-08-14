@@ -42,7 +42,7 @@
 <meta name="author" content="{{ $brand }}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="{{ $canonical }}">
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#15803d">
 
 {{-- Icons. The .ico carries 16/32/48 for browsers that still ask for it. --}}
 <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">

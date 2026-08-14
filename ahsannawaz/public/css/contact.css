@@ -19,7 +19,7 @@
 .cp-methods {
     padding: 70px 2rem;
     background: var(--bg);
-    border-bottom: 1px solid rgba(15, 118, 110, 0.1);
+    border-bottom: 1px solid rgba(21, 128, 61, 0.1);
 }
 .cp-method-grid {
     display: grid;
@@ -96,12 +96,12 @@
 
 .cp-aside-card {
     background: linear-gradient(150deg, var(--bg), var(--surface));
-    border: 1px solid rgba(15, 118, 110, 0.16);
+    border: 1px solid rgba(21, 128, 61, 0.16);
     border-radius: 18px;
     padding: 1.6rem 1.5rem;
     transition: border-color 0.3s;
 }
-.cp-aside-card:hover { border-color: rgba(15, 118, 110, 0.38); }
+.cp-aside-card:hover { border-color: rgba(21, 128, 61, 0.38); }
 
 .cp-aside-title {
     font-family: 'Sora', sans-serif;
@@ -119,8 +119,8 @@
     width: 26px; height: 26px; flex-shrink: 0;
     display: grid; place-items: center;
     border-radius: 50%;
-    background: rgba(15, 118, 110, 0.1);
-    border: 1px solid rgba(15, 118, 110, 0.3);
+    background: rgba(21, 128, 61, 0.1);
+    border: 1px solid rgba(21, 128, 61, 0.3);
     color: var(--accent);
     font-family: 'Sora', sans-serif;
     font-size: 0.72rem; font-weight: 700;
@@ -162,8 +162,8 @@
     overflow: hidden;
     transition: border-color 0.3s;
 }
-.cp-faq-item:hover { border-color: rgba(15, 118, 110, 0.3); }
-.cp-faq-item.open { border-color: rgba(15, 118, 110, 0.42); }
+.cp-faq-item:hover { border-color: rgba(21, 128, 61, 0.3); }
+.cp-faq-item.open { border-color: rgba(21, 128, 61, 0.42); }
 
 .cp-faq-q {
     width: 100%;

@@ -6,13 +6,14 @@
    The admin panel opts into dark by setting data-theme="dark"
    on <html>; nothing else in the site reads that attribute.
 
-   Accent is deep teal. Every colour below was contrast-checked
+   Accent is forest green. Every colour below was contrast-checked
    against the surface it sits on:
-     accent   #0f766e on #ffffff  → 5.47:1
-     text     #0f172a on #ffffff  → 17.85:1
-     muted    #475569 on #ffffff  → 7.58:1
-     subtle   #64748b on #ffffff  → 4.76:1
-     on-accent#ffffff on #0f766e  → 5.47:1
+     accent        #15803d on #ffffff  → 5.02:1
+     accent-strong #14532d on #ffffff  → 9.11:1  (button + panel fill)
+     text          #0f172a on #ffffff  → 17.85:1
+     muted         #475569 on #ffffff  → 7.58:1
+     subtle        #64748b on #ffffff  → 4.76:1
+     on-accent     #ffffff on #14532d  → 9.11:1
 ============================================================ */
 
 :root {
@@ -33,12 +34,13 @@
     --on-accent: #ffffff;     /* text sitting on the accent fill */
 
     /* ── Accent ───────────────────────────────── */
-    --accent: #0f766e;
-    --accent-hover: #115e59;
-    --accent-deep: #134e4a;
-    --accent-soft: #f0fdfa;   /* tinted background wash */
-    --accent-line: rgba(15, 118, 110, 0.20);
-    --accent-glow: rgba(15, 118, 110, 0.14);
+    --accent: #15803d;         /* links, small marks, labels */
+    --accent-strong: #14532d;  /* button + dark-panel fill */
+    --accent-hover: #166534;
+    --accent-deep: #052e16;
+    --accent-soft: #f0fdf4;    /* tinted background wash */
+    --accent-line: rgba(21, 128, 61, 0.20);
+    --accent-glow: rgba(21, 128, 61, 0.14);
 
     /* ── Status ───────────────────────────────── */
     --green: #15803d;
@@ -50,10 +52,10 @@
 
     /* ── Charts ───────────────────────────────── */
     /* Ordinal ramp, light→dark, validated: monotone L,
-       ΔL ≥ 0.06, light end 2.49:1 on white. */
-    --ramp-1: #14b8a6;
-    --ramp-2: #0f766e;
-    --ramp-3: #134e4a;
+       ΔL ≥ 0.06, light end 2.28:1 on white. */
+    --ramp-1: #22c55e;
+    --ramp-2: #15803d;
+    --ramp-3: #14532d;
     --grid: #e2e8f0;          /* hairline gridlines */
     --track: #f1f5f9;         /* unfilled bar/meter track */
 
@@ -93,7 +95,7 @@
 
 /* ── Dark mode — admin panel only ─────────────────────────────
    Surfaces darken, ink lightens, and the accent steps lighter so
-   it keeps clearing the surface (#2dd4bf on #111827 → 9.53:1).
+   it keeps clearing the surface (#4ade80 on #111827 → 9.53:1).
    The chart ramp flips direction for the same reason.
 ------------------------------------------------------------- */
 [data-theme="dark"] {
@@ -109,14 +111,15 @@
     --text: #e2e8f0;
     --text-2: #b6c2d2;
     --text-3: #94a3b8;
-    --on-accent: #04211f;
+    --on-accent: #052e16;
 
-    --accent: #2dd4bf;
-    --accent-hover: #5eead4;
-    --accent-deep: #99f6e4;
-    --accent-soft: #12232b;
-    --accent-line: rgba(45, 212, 191, 0.24);
-    --accent-glow: rgba(45, 212, 191, 0.16);
+    --accent: #4ade80;
+    --accent-strong: #22c55e;
+    --accent-hover: #86efac;
+    --accent-deep: #bbf7d0;
+    --accent-soft: #10241a;
+    --accent-line: rgba(74, 222, 128, 0.24);
+    --accent-glow: rgba(74, 222, 128, 0.16);
 
     --green: #4ade80;
     --red: #f87171;
@@ -125,10 +128,10 @@
     --green-soft: #10231a;
     --red-soft: #2a1416;
 
-    /* Validated on #111827: monotone L, ΔL ≥ 0.06, end 4.74:1 */
-    --ramp-1: #0d9488;
-    --ramp-2: #2dd4bf;
-    --ramp-3: #99f6e4;
+    /* Validated on #111827: monotone L, ΔL ≥ 0.06, end 3.54:1 */
+    --ramp-1: #15803d;
+    --ramp-2: #22c55e;
+    --ramp-3: #86efac;
     --grid: #243044;
     --track: #1a2332;
 

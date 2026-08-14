@@ -32,6 +32,9 @@
             <a href="{{ route('about') }}"    class="{{ request()->is('about') ? 'active' : '' }}">About</a>
             <a href="{{ route('skills') }}"   class="{{ request()->is('skills') ? 'active' : '' }}">Skills</a>
             <a href="{{ route('projects') }}" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
+            @if (\App\Models\Post::published()->exists())
+                <a href="{{ route('blog') }}" class="{{ request()->is('blog*') ? 'active' : '' }}">Blog</a>
+            @endif
             <a href="{{ route('contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
         </nav>
 
@@ -53,6 +56,9 @@
         <a href="{{ route('about') }}"    class="{{ request()->is('about') ? 'active' : '' }}">About</a>
         <a href="{{ route('skills') }}"   class="{{ request()->is('skills') ? 'active' : '' }}">Skills</a>
         <a href="{{ route('projects') }}" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
+        @if (\App\Models\Post::published()->exists())
+            <a href="{{ route('blog') }}" class="{{ request()->is('blog*') ? 'active' : '' }}">Blog</a>
+        @endif
         <a href="{{ route('contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
         <a href="{{ route('contact') }}"  class="btn-hire">Hire Me</a>
     </div>

@@ -24,11 +24,12 @@ const OUT = 'public/dist/css';
 // header/footer come last: they were inline at the end of the document, so
 // that is where they sat in the cascade.
 const BUNDLES = {
-  welcome: ['fonts', 'theme', 'welcome', 'about', 'projects', 'popup', 'header', 'footer'],
+  welcome: ['fonts', 'theme', 'welcome', 'about', 'projects', 'popup', 'home', 'header', 'footer'],
   about: ['fonts', 'theme', 'welcome', 'about', 'header', 'footer'],
   skills: ['fonts', 'theme', 'welcome', 'about', 'projects', 'skills', 'header', 'footer'],
   projects: ['fonts', 'theme', 'welcome', 'about', 'projects', 'header', 'footer'],
   contact: ['fonts', 'theme', 'welcome', 'about', 'contact', 'popup', 'header', 'footer'],
+  blog: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
   admin: ['fonts', 'theme', 'admin'],
 };
 

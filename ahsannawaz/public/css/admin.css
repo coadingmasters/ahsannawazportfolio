@@ -652,7 +652,7 @@ table.tbl tbody tr:hover { background: rgba(15, 23, 42, 0.02); }
 table.tbl th.col-check,
 table.tbl td.col-check { width: 34px; padding-right: 0; }
 
-table.tbl tr.is-selected { background: rgba(15, 118, 110, 0.06); }
+table.tbl tr.is-selected { background: rgba(21, 128, 61, 0.06); }
 
 @media (prefers-reduced-motion: reduce) {
     .modal-backdrop, .modal { transition: none; }

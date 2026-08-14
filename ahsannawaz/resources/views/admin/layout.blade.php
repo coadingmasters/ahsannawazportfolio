@@ -47,6 +47,16 @@
             <span class="ico">◧</span> Projects
         </a>
 
+        <a href="{{ route('admin.posts.index') }}"
+           class="nav-item {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
+            <span class="ico">✎</span> Blog
+        </a>
+
+        <a href="{{ route('admin.testimonials.index') }}"
+           class="nav-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
+            <span class="ico">❝</span> Testimonials
+        </a>
+
         <div class="nav-label">Site</div>
 
         <a href="{{ route('admin.settings.index') }}"
