@@ -9,9 +9,11 @@
         'keywords' => 'Laravel projects, React dashboard, REST API project, WooCommerce plugin, WordPress theme portfolio',
         'type' => 'website',
     ])
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="{{ asset('fonts/sora-latin.woff2') }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="{{ asset('fonts/dm-sans-latin.woff2') }}">
+    @css('css/fonts.css')
     @css('css/theme.css')
     @css('css/welcome.css')
     @css('css/about.css')
@@ -20,6 +22,8 @@
 <body>
 
     @include('layouts.partials.header')
+
+    <main id="main-content">
 
     @php
         // ucfirst() would render "Api" and "Wordpress" — spell them properly.
@@ -227,6 +231,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     @include('layouts.partials.footer')
 

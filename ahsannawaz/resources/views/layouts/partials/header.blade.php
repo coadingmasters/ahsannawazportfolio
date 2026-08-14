@@ -27,6 +27,22 @@ body {
     font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
 }
 
+/* Off-screen until focused, then it drops into view. */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 1100;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 0.6rem 1rem;
+    border-radius: 0 0 10px 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: top 0.2s ease;
+}
+.skip-link:focus { top: 0; }
+
 /* ═══════════════ HEADER SHELL ═══════════════ */
 .site-header {
     position: sticky;
@@ -309,6 +325,8 @@ body {
     .mobile-menu.open a { opacity: 1; transform: none; }
 }
 </style>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="site-header" id="mainHeader">
     <div class="header-inner">

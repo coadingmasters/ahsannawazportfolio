@@ -37,8 +37,14 @@ if [ "$BUILD" = 1 ]; then
   say "Building Vite assets locally"
   ( cd "$LOCAL" && npm run build )
 else
-  say "Skipping build (--no-build)"
+  say "Skipping Vite build (--no-build)"
 fi
+
+# Always minify CSS — it is quick, and shipping the unminified copies would
+# undo the saving on every deploy. Hostinger cannot run this itself: its
+# process limits make the bundler panic, so it happens here.
+say "Minifying CSS"
+( cd "$LOCAL" && node build-assets.mjs )
 
 if [ ! -f "$LOCAL/public/build/manifest.json" ]; then
   echo "public/build/manifest.json missing — run without --no-build" >&2
