@@ -31,6 +31,9 @@ const BUNDLES = {
   contact: ['fonts', 'theme', 'welcome', 'about', 'contact', 'popup', 'header', 'footer'],
   blog: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
   faq: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
+  privacy: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
+  terms: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
+  sitemap: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
   admin: ['fonts', 'theme', 'admin'],
 };
 

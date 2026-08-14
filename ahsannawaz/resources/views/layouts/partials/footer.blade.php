@@ -31,18 +31,19 @@
         </div>
 
         {{-- Every link here resolves to a real route; none is a "#". --}}
-        <nav class="f-col" aria-label="Site">
-            <h2 class="f-title">Site</h2>
+        {{-- Trimmed to the pages a visitor actually goes looking for. The
+             rest are one click away on the sitemap rather than listed twice,
+             and FAQ and Contact already sit in the bottom bar. --}}
+        <nav class="f-col" aria-label="Quick links">
+            <h2 class="f-title">Quick Links</h2>
             <ul>
                 <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ route('about') }}">About</a></li>
-                <li><a href="{{ route('skills') }}">Skills</a></li>
                 <li><a href="{{ route('projects') }}">Projects</a></li>
                 @if (\App\Models\Post::published()->exists())
                     <li><a href="{{ route('blog') }}">Blog</a></li>
                 @endif
-                <li><a href="{{ route('faq') }}">FAQ</a></li>
-                <li><a href="{{ route('contact') }}">Contact</a></li>
+                <li><a href="{{ route('sitemap.page') }}">All pages</a></li>
             </ul>
         </nav>
 
@@ -86,7 +87,11 @@
         <p class="f-bar-links">
             <a href="{{ route('faq') }}">FAQ</a>
             <span aria-hidden="true">·</span>
-            <a href="{{ route('sitemap') }}">Sitemap</a>
+            <a href="{{ route('privacy') }}">Privacy Policy</a>
+            <span aria-hidden="true">·</span>
+            <a href="{{ route('terms') }}">Terms</a>
+            <span aria-hidden="true">·</span>
+            <a href="{{ route('sitemap.page') }}">Sitemap</a>
             <span aria-hidden="true">·</span>
             <a href="{{ route('contact') }}">Contact</a>
         </p>

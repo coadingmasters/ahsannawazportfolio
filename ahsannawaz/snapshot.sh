@@ -28,6 +28,9 @@ save "/projects"  "projects/index.html"
 save "/contact"   "contact/index.html"
 save "/blog"      "blog/index.html"
 save "/faq"       "faq/index.html"
+save "/privacy-policy"    "privacy-policy/index.html"
+save "/terms-of-service"  "terms-of-service/index.html"
+save "/sitemap"           "sitemap/index.html"
 
 python3 -m http.server "$PORT" --directory "$SNAP" >/dev/null 2>&1 &
 SERVER=$!

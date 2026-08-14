@@ -81,6 +81,15 @@ Route::get('/blog/{post}', function (Post $post) {
 })->name('post');
 
 Route::view('/faq', 'faq')->name('faq');
+Route::view('/privacy-policy', 'privacy')->name('privacy');
+Route::view('/terms-of-service', 'terms')->name('terms');
+
+// The readable index. Search engines get /sitemap.xml instead.
+Route::get('/sitemap', function () {
+    return view('sitemap-page', [
+        'posts' => Post::published()->latestFirst()->get(),
+    ]);
+})->name('sitemap.page');
 
 Route::get('/cv', [CvController::class, 'download'])->name('cv.download');
 
@@ -109,6 +118,9 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('about'), 'priority' => '0.8', 'freq' => 'monthly', 'lastmod' => $stamp($anyContent)],
         ['loc' => route('contact'), 'priority' => '0.7', 'freq' => 'yearly', 'lastmod' => $stamp($anyContent)],
         ['loc' => route('faq'), 'priority' => '0.7', 'freq' => 'monthly', 'lastmod' => $stamp($anyContent)],
+        ['loc' => route('sitemap.page'), 'priority' => '0.4', 'freq' => 'monthly', 'lastmod' => $stamp($anyContent)],
+        ['loc' => route('privacy'), 'priority' => '0.3', 'freq' => 'yearly', 'lastmod' => $stamp($anyContent)],
+        ['loc' => route('terms'), 'priority' => '0.3', 'freq' => 'yearly', 'lastmod' => $stamp($anyContent)],
     ];
 
     if (Post::published()->exists()) {
