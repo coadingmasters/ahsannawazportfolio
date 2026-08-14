@@ -104,27 +104,59 @@
 }
 .about-ticks span { display: flex; align-items: center; gap: 0.4rem; }
 
+/* Two fixed columns. auto-fit with a 150px minimum fitted four across in
+   this ~600px column, leaving each label ~145px and wrapping every one of
+   them onto a second line. */
 .chip-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.6rem;
-    margin-top: 1.2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-top: 1.25rem;
 }
 .chip {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--r-sm);
-    padding: 0.6rem 0.75rem;
-    font-size: var(--step--1);
+    padding: 0.7rem 0.85rem;
+    font-size: clamp(0.78rem, 0.7rem + 0.25vw, 0.86rem);
     font-weight: 600;
+    line-height: 1.25;
     color: var(--text-2);
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    /* One line, and if a longer label is ever added it truncates cleanly
+       rather than pushing the card taller than its neighbours. */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: border-color 0.22s, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s, background 0.22s;
 }
-.chip:hover { border-color: var(--accent-line); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.chip svg { width: 17px; height: 17px; color: var(--accent); flex: none; }
+.chip:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* The icon sits in its own tile, so all four align on a common left edge
+   whatever the glyph's own width. */
+.chip-ico {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    transition: background 0.22s, color 0.22s;
+}
+.chip:hover .chip-ico { background: var(--accent-strong); color: #fff; }
+.chip-ico svg { width: 16px; height: 16px; }
+
+@media (max-width: 520px) {
+    .chip-grid { grid-template-columns: 1fr; }
+}
 
 /* ══════════════ TECH STACK ══════════════ */
 .tech-grid {
@@ -447,3 +479,34 @@
     margin: 2rem 0 0.7rem;
 }
 .post-body a { color: var(--accent); border-bottom: 1px solid currentColor; }
+
+/* ── Hero typewriter ───────────────────────────────────────
+   The span reserves the width of the longest entry up front. Without that
+   the centred line re-measures on every character, and each one counts as
+   a layout shift — this exact pattern cost 0.14 CLS the first time. */
+.typed-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: calc(var(--typed-ch, 12) * 1ch);
+    color: var(--accent);
+}
+.typed { white-space: nowrap; }
+.typed-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.05em;
+    margin-left: 2px;
+    background: var(--accent);
+    transform: translateY(2px);
+    animation: caretBlink 1s steps(1) infinite;
+}
+@keyframes caretBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+@media (max-width: 640px) {
+    /* Two lines are fine on a phone; the reservation keeps the box stable. */
+    .hero-lead { min-height: 3.1em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .typed-caret { animation: none; opacity: 1; }
+}

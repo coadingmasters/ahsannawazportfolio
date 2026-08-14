@@ -31,7 +31,23 @@
 
                 <h1 class="hero-title">Hi, I'm <span>Ahsan</span> Nawaz</h1>
 
-                <p class="hero-lead">Building secure &amp; scalable web applications with Laravel</p>
+                @php
+                    // Fall back to a sensible list if no skills are set yet.
+                    $typed = $typedSkills->isNotEmpty()
+                        ? $typedSkills
+                        : collect(['Laravel', 'PHP', 'React JS', 'MySQL', 'REST APIs', 'WordPress']);
+                    // The reserved width has to fit the longest entry, or the
+                    // line re-centres on every keystroke and logs a layout shift.
+                    $longest = $typed->max(fn ($t) => mb_strlen($t));
+                @endphp
+                <p class="hero-lead">
+                    Building secure &amp; scalable web applications with
+                    <span class="typed-wrap" style="--typed-ch: {{ $longest }}">
+                        <span id="typed" class="typed"
+                              data-words='@json($typed)'
+                              aria-live="off">{{ $typed->first() }}</span><span class="typed-caret" aria-hidden="true"></span>
+                    </span>
+                </p>
 
                 <p class="hero-desc">
                     I'm a backend-focused developer with 2+ years of experience building modern web
@@ -94,11 +110,11 @@
             <div class="stats">
                 @php
                     $statCards = [
-                        ['n' => $stats['years'].'+',    'l' => 'Years Experience',   'i' => 'M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'],
-                        ['n' => $stats['projects'].'+', 'l' => 'Projects Completed', 'i' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z'],
-                        ['n' => $stats['clients'].'+',  'l' => 'Happy Clients',      'i' => 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87'],
-                        ['n' => '99%',                  'l' => 'Client Satisfaction','i' => 'm12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z'],
-                        ['n' => '24/7',                 'l' => 'Support Availability','i' => 'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'],
+                        ['n' => $siteStats['years'].'+',    'l' => 'Years Experience',   'i' => 'M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'],
+                        ['n' => $siteStats['projects'].'+', 'l' => 'Projects Completed', 'i' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z'],
+                        ['n' => $siteStats['clients'].'+',  'l' => 'Happy Clients',      'i' => 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87'],
+                        ['n' => $siteStats['satisfaction'], 'l' => 'Client Satisfaction','i' => 'm12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z'],
+                        ['n' => $siteStats['support'],      'l' => 'Support Availability','i' => 'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'],
                     ];
                 @endphp
                 @foreach ($statCards as $i => $c)
@@ -139,13 +155,15 @@
 
                     <div class="chip-grid">
                         @foreach ([
-                            ['REST API Development', 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7'],
-                            ['Admin Panel Development', 'M3 5h18M3 12h18M3 19h18'],
-                            ['Database Design', 'M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3z'],
-                            ['Performance Optimisation', 'm13 2-9 12h7l-1 8 9-12h-7l1-8z'],
+                            ['REST API Development',   'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7'],
+                            ['Admin Panel Development','M3 5h18M3 12h18M3 19h11'],
+                            ['Database Design',        'M4 6c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3zM4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3'],
+                            ['Performance Tuning',     'm13 2-9 12h7l-1 8 9-12h-7l1-8z'],
                         ] as $chip)
-                            <div class="chip">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ $chip[1] }}"/></svg>
+                            <div class="chip" title="{{ $chip[0] }}">
+                                <span class="chip-ico" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ $chip[1] }}"/></svg>
+                                </span>
                                 {{ $chip[0] }}
                             </div>
                         @endforeach

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\Admin\SettingController;
 use App\Models\Setting;
+use App\Support\SiteStats;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with('hasCv', $hasCv);
+
+            // Every page quotes the same figures — see App\Support\SiteStats.
+            $view->with('siteStats', SiteStats::all());
         });
 
         // @css('css/theme.css') — a stylesheet link stamped with the file's

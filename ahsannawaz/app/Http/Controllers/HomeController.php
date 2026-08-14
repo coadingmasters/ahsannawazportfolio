@@ -25,6 +25,18 @@ class HomeController extends Controller
             'testimonials' => Testimonial::active()->ordered()->take(6)->get(),
             'posts' => Post::published()->latestFirst()->take(3)->get(),
 
+            // The hero types through real skills rather than a hardcoded list,
+            // so editing one in the admin panel changes what the hero says.
+            // Tools are excluded: the sentence reads "web applications with X",
+            // which works for a framework or a language but not for Git or NPM.
+            'typedSkills' => $skills
+                ->reject(fn ($s) => $s->category === 'tools')
+                ->sortByDesc('percentage')
+                ->pluck('name')
+                ->reject(fn ($n) => mb_strlen($n) > 16)   // keeps the line on one row
+                ->take(8)
+                ->values(),
+
             'stats' => [
                 // Counted from the real content where possible.
                 'projects' => max($projects->count(), 10),

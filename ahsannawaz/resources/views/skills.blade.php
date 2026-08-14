@@ -70,22 +70,22 @@
             {{-- Stats strip --}}
             <div class="sp-stats ab-rv" style="transition-delay:0.18s">
                 <div class="sp-stat">
-                    <span class="sp-stat-num" data-count="{{ $stats['total'] }}">0</span>
+                    <span class="sp-stat-num" data-count="{{ $siteStats['skills'] }}">{{ $siteStats['skills'] }}</span>
                     <span class="sp-stat-label">Technologies</span>
                 </div>
                 <span class="sp-stat-div"></span>
                 <div class="sp-stat">
-                    <span class="sp-stat-num" data-count="{{ $stats['categories'] }}">0</span>
+                    <span class="sp-stat-num" data-count="{{ $siteStats['categories'] }}">{{ $siteStats['categories'] }}</span>
                     <span class="sp-stat-label">Categories</span>
                 </div>
                 <span class="sp-stat-div"></span>
                 <div class="sp-stat">
-                    <span class="sp-stat-num" data-count="{{ $stats['expert'] }}">0</span>
+                    <span class="sp-stat-num" data-count="{{ $siteStats['expert'] }}">{{ $siteStats['expert'] }}</span>
                     <span class="sp-stat-label">Expert Level</span>
                 </div>
                 <span class="sp-stat-div"></span>
                 <div class="sp-stat">
-                    <span class="sp-stat-num" data-count="{{ $stats['average'] }}" data-suffix="%">0</span>
+                    <span class="sp-stat-num" data-count="{{ $siteStats['average'] }}" data-suffix="%">{{ $siteStats['average'] }}%</span>
                     <span class="sp-stat-label">Avg. Proficiency</span>
                 </div>
             </div>

@@ -162,19 +162,19 @@
         <div class="ab-inner">
             <div class="ab-stats-grid">
                 <div class="ab-stat ab-rv">
-                    <span class="ab-stat-num" data-count="5">0</span>
+                    <span class="ab-stat-num" data-count="{{ $siteStats['years'] }}">{{ $siteStats['years'] }}+</span>
                     <span class="ab-stat-label">Years Experience</span>
                 </div>
                 <div class="ab-stat ab-rv" style="transition-delay:0.08s">
-                    <span class="ab-stat-num" data-count="50">0</span>
+                    <span class="ab-stat-num" data-count="{{ $siteStats['projects'] }}">{{ $siteStats['projects'] }}+</span>
                     <span class="ab-stat-label">Projects Delivered</span>
                 </div>
                 <div class="ab-stat ab-rv" style="transition-delay:0.16s">
-                    <span class="ab-stat-num" data-count="30">0</span>
+                    <span class="ab-stat-num" data-count="{{ $siteStats['clients'] }}">{{ $siteStats['clients'] }}+</span>
                     <span class="ab-stat-label">Happy Clients</span>
                 </div>
                 <div class="ab-stat ab-rv" style="transition-delay:0.24s">
-                    <span class="ab-stat-num" data-count="{{ $stats['skills'] }}">0</span>
+                    <span class="ab-stat-num" data-count="{{ $siteStats['skills'] }}">{{ $siteStats['skills'] }}+</span>
                     <span class="ab-stat-label">Technologies</span>
                 </div>
             </div>
