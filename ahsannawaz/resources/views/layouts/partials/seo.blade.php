@@ -44,6 +44,13 @@
 <link rel="canonical" href="{{ $canonical }}">
 <meta name="theme-color" content="#0f766e">
 
+{{-- Icons. The .ico carries 16/32/48 for browsers that still ask for it. --}}
+<link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/brand/favicon-32.png') }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/brand/favicon-96.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/brand/apple-touch-icon.png') }}">
+<link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
 {{-- Open Graph — how the link renders on LinkedIn, Facebook, WhatsApp --}}
 <meta property="og:type" content="{{ $ogType }}">
 <meta property="og:site_name" content="{{ $siteName }}">

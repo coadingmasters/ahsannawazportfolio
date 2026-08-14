@@ -498,3 +498,18 @@
             .newsletter-form-row { flex-direction: column; align-items: stretch; }
             .subscribe-btn { flex: 0 0 auto; width: 100%; }
         }
+
+
+/* ===== FOOTER LOGO =====
+   Replaces the text wordmark with the full lockup. Width and height are on the
+   element so the space is reserved before it loads. */
+.footer-logo {
+    width: clamp(170px, 16vw, 220px);
+    height: auto;
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brand-logo:hover .footer-logo { transform: translateY(-2px); }
+
+/* The wordmark underline belonged to the text version. */
+.brand-logo .logo-text::after { content: none; }

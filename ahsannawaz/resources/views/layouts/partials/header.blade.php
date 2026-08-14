@@ -11,7 +11,18 @@
     <div class="header-inner">
 
         <a href="{{ url('/') }}" class="brand" aria-label="Ahsan Nawaz — home">
-            <span>Ahsan</span><span>&nbsp;Nawaz</span><span class="dot">.dev</span>
+            {{-- The mark is the artwork; the name stays live text so it holds
+                 its edge at any size and keeps the entrance animation. --}}
+            <img class="brand-mark"
+                 src="{{ asset('images/brand/logo-mark-96.webp') }}"
+                 srcset="{{ asset('images/brand/logo-mark-96.webp') }} 96w,
+                         {{ asset('images/brand/logo-mark-144.webp') }} 144w,
+                         {{ asset('images/brand/logo-mark-192.webp') }} 192w"
+                 sizes="64px" width="64" height="39" alt="" aria-hidden="true"
+                 fetchpriority="high" decoding="async">
+            <span class="brand-name">
+                <span>Ahsan</span><span>&nbsp;Nawaz</span><span class="dot">.dev</span>
+            </span>
         </a>
 
         <nav class="nav" id="primaryNav" aria-label="Primary">
