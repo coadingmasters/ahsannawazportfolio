@@ -32,4 +32,8 @@ SERVER=$!
 trap 'kill $SERVER 2>/dev/null || true' EXIT
 sleep 1
 
-( cd "$DIR" && node build-critical.mjs "http://127.0.0.1:$PORT" )
+if [ "${EXTRACT:-1}" = "1" ]; then
+  ( cd "$DIR" && node build-critical.mjs "http://127.0.0.1:$PORT" )
+else
+  echo "Snapshot ready at http://127.0.0.1:$PORT (extraction skipped)"
+fi

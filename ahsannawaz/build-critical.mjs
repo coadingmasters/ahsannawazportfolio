@@ -64,6 +64,14 @@ function collectCritical() {
     try { els = document.querySelectorAll(base); } catch { return true; }
     for (const el of els) {
       if (el === document.documentElement || el === document.body) return true;
+
+      // Taken-out-of-flow elements must keep their rules even when they sit
+      // off-screen. The skip link lives at top:-3rem; drop the rule that puts
+      // it there and it falls back into the flow, pushing the whole page down
+      // 25px until the real stylesheet lands. Same for blobs and orbit rings.
+      const pos = getComputedStyle(el).position;
+      if (pos === 'absolute' || pos === 'fixed') return true;
+
       const r = el.getBoundingClientRect();
       if (r.top < H && r.bottom > 0 && r.width > 0 && r.height > 0) return true;
 
@@ -118,11 +126,23 @@ function collectCritical() {
   };
 
   for (const sheet of document.styleSheets) {
+    // Skip the critical CSS this page already has inlined. Including it merges
+    // a previous run's output with the real stylesheet, and because the inline
+    // block is parsed first, the bundle's base rules end up AFTER the mobile
+    // @media overrides they are supposed to lose to — which is how the header
+    // came back as 88px on phones. Extraction must read the source of truth.
+    if (sheet.ownerNode && sheet.ownerNode.id === 'critical-css') continue;
+
     let rules;
     try { rules = sheet.cssRules; } catch { continue; }   // cross-origin
     walk(rules, true, '', '');
   }
-  return out;
+
+  // Identical rules can be reached from both viewport passes; keep the first
+  // position each one had so the cascade is preserved without duplication.
+  const byText = new Map();
+  for (const r of out) if (!byText.has(r.text)) byText.set(r.text, r.i);
+  return [...byText.entries()].map(([text, i]) => ({ i, text }));
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -134,6 +154,25 @@ const browser = await puppeteer.launch({
 });
 
 const kb = (n) => (n / 1024).toFixed(1) + ' KiB';
+const failures = [];
+
+// What the page looks like with its real stylesheet — the target the critical
+// CSS has to reproduce.
+const reference = {};
+for (const [name, path] of Object.entries(PAGES)) {
+  const page = await browser.newPage();
+  await page.setViewport(VIEWPORTS[0]);
+  await page.goto(BASE + path, { waitUntil: 'networkidle2', timeout: 60000 });
+  reference[name] = await page.evaluate(() => {
+    const m = document.querySelector('#main-content');
+    const h = document.querySelector('.site-header');
+    return {
+      mainTop: m ? Math.round(m.getBoundingClientRect().top) : -1,
+      headerH: h ? Math.round(h.getBoundingClientRect().height) : -1,
+    };
+  });
+  await page.close();
+}
 
 for (const [name, path] of Object.entries(PAGES)) {
   const merged = new Map();   // order index -> rule text
@@ -176,7 +215,51 @@ for (const [name, path] of Object.entries(PAGES)) {
   });
 
   writeFileSync(join(OUT, `critical-${name}.css`), code);
-  console.log(`  critical-${name}.css`.padEnd(28) + kb(code.length).padStart(9));
+
+  // Verify it. Critical CSS that lays the page out differently from the real
+  // stylesheet does not save anything — it just moves the work into a visible
+  // jump. Every regression this file has had (two-column phones, a header at
+  // the wrong height, a skip link back in the flow) would have been caught
+  // here, so the check runs on every build.
+  const page = await browser.newPage();
+  await page.setViewport(VIEWPORTS[0]);
+  await page.setRequestInterception(true);
+  page.on('request', (r) => (/page-\w+\.css/.test(r.url()) ? r.abort() : r.continue()));
+  await page.evaluateOnNewDocument(
+    (css) => document.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('critical-css');
+      if (el) el.textContent = css;
+    }),
+    code.toString()
+  );
+  await page.goto(BASE + path, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  const probe = () => {
+    const m = document.querySelector('#main-content');
+    const h = document.querySelector('.site-header');
+    return {
+      mainTop: m ? Math.round(m.getBoundingClientRect().top) : -1,
+      headerH: h ? Math.round(h.getBoundingClientRect().height) : -1,
+    };
+  };
+  const withCritical = await page.evaluate(probe);
+  await page.close();
+
+  const drift =
+    Math.abs(withCritical.mainTop - reference[name].mainTop) +
+    Math.abs(withCritical.headerH - reference[name].headerH);
+
+  const verdict = drift === 0 ? 'exact' : `DRIFT ${drift}px`;
+  console.log(`  critical-${name}.css`.padEnd(28) + kb(code.length).padStart(9) + '   ' + verdict);
+  if (drift > 0) {
+    console.error(`    critical: main@${withCritical.mainTop} header=${withCritical.headerH}px`);
+    console.error(`    real    : main@${reference[name].mainTop} header=${reference[name].headerH}px`);
+    failures.push(name);
+  }
+}
+
+if (failures.length) {
+  console.error(`\nFAILED: ${failures.join(', ')} would shift on load. Not shipping a jump.`);
+  process.exit(1);
 }
 
 await browser.close();

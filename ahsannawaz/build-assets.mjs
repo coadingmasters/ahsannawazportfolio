@@ -21,12 +21,14 @@ const SRC = 'public/css';
 const OUT = 'public/dist/css';
 
 // Order matters: later files override earlier ones.
+// header/footer come last: they were inline at the end of the document, so
+// that is where they sat in the cascade.
 const BUNDLES = {
-  welcome: ['fonts', 'theme', 'welcome', 'about', 'projects', 'popup'],
-  about: ['fonts', 'theme', 'welcome', 'about'],
-  skills: ['fonts', 'theme', 'welcome', 'about', 'projects', 'skills'],
-  projects: ['fonts', 'theme', 'welcome', 'about', 'projects'],
-  contact: ['fonts', 'theme', 'welcome', 'about', 'contact', 'popup'],
+  welcome: ['fonts', 'theme', 'welcome', 'about', 'projects', 'popup', 'header', 'footer'],
+  about: ['fonts', 'theme', 'welcome', 'about', 'header', 'footer'],
+  skills: ['fonts', 'theme', 'welcome', 'about', 'projects', 'skills', 'header', 'footer'],
+  projects: ['fonts', 'theme', 'welcome', 'about', 'projects', 'header', 'footer'],
+  contact: ['fonts', 'theme', 'welcome', 'about', 'contact', 'popup', 'header', 'footer'],
   admin: ['fonts', 'theme', 'admin'],
 };
 
