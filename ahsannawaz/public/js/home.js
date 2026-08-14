@@ -52,3 +52,26 @@
 
     setTimeout(tick, HOLD);
 })();
+
+/* Table of contents: highlight the section currently in view. Purely a
+   nicety — the links work regardless, so this does nothing if it fails. */
+(function () {
+    const links = document.querySelectorAll('.toc a[data-toc]');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+
+    const byId = new Map();
+    links.forEach((a) => byId.set(a.getAttribute('href').slice(1), a));
+
+    const heads = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+    if (!heads.length) return;
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            links.forEach((a) => a.classList.remove('here'));
+            byId.get(e.target.id)?.classList.add('here');
+        });
+    }, { rootMargin: '-90px 0px -70% 0px', threshold: 0 });
+
+    heads.forEach((h) => io.observe(h));
+})();

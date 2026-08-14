@@ -37,31 +37,93 @@
     @include('layouts.partials.header')
 
     <main id="main-content">
-        <article class="sec">
-            <div style="max-width:760px;margin:0 auto">
+        @php
+            // Pull the h2s out of the stored HTML and give each an id, so the
+            // contents list and the headings agree without asking the author
+            // to write anchors by hand.
+            $bodyHtml = $post->body;
+            $toc = [];
+            $bodyHtml = preg_replace_callback('/<h2>(.*?)<\/h2>/is', function ($m) use (&$toc) {
+                $text = trim(strip_tags($m[1]));
+                $id = \Illuminate\Support\Str::slug($text) ?: 'section-'.(count($toc) + 1);
+                $toc[] = ['id' => $id, 'text' => $text];
+
+                return '<h2 id="'.$id.'">'.$m[1].'</h2>';
+            }, $bodyHtml);
+        @endphp
+
+        <div class="sec article-wrap">
+            <article class="article-main">
                 <div class="post-top">
                     <a href="{{ route('blog') }}" class="read-more">← Back to all articles</a>
                     <span class="cat-tag">{{ $post->category }}</span>
                 </div>
-                <h1 style="font-family:'Sora',sans-serif;font-size:clamp(1.7rem,1.3rem+1.8vw,2.5rem);line-height:1.2;margin:.6rem 0 .5rem">
-                    {{ $post->title }}
-                </h1>
-                <p style="color:var(--text-3);font-size:var(--step--1)">
-                    {{ $post->date_label }} · {{ $post->read_minutes }} min read
-                </p>
+
+                <h1 class="article-title">{{ $post->title }}</h1>
+
+                <div class="article-meta">
+                    <span>{{ $post->date_label }}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{{ $post->read_minutes }} min read</span>
+                    <span aria-hidden="true">·</span>
+                    <span>By Ahsan Nawaz</span>
+                </div>
 
                 @if ($post->image_url)
                     <img src="{{ $post->image_url }}" alt="{{ $post->title }}" width="760" height="428"
-                         style="width:100%;height:auto;border-radius:var(--r-lg);margin:1.5rem 0;box-shadow:var(--shadow)">
+                         class="article-cover" fetchpriority="high">
+                @endif
+
+                @if (count($toc) > 2)
+                    {{-- Inline contents for phones, where the sidebar is below. --}}
+                    <nav class="toc-inline" aria-label="Table of contents">
+                        <h2>In this article</h2>
+                        <ol>
+                            @foreach ($toc as $item)
+                                <li><a href="#{{ $item['id'] }}">{{ $item['text'] }}</a></li>
+                            @endforeach
+                        </ol>
+                    </nav>
                 @endif
 
                 {{-- Sanitised on save by App\Support\PostHtml, so it is safe to
                      print. Nothing unescaped ever reaches the database. --}}
                 <div class="post-body">
-                    {!! $post->body !!}
+                    {!! $bodyHtml !!}
                 </div>
-            </div>
-        </article>
+
+                <div class="article-foot">
+                    <div>
+                        <strong>Found this useful?</strong>
+                        <p>I write these from real client projects. Have one that needs building?</p>
+                    </div>
+                    <a href="{{ route('contact') }}" class="btn-primary">
+                        Start a project
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="article-aside">
+                @if (count($toc) > 2)
+                    <nav class="toc" aria-label="Table of contents">
+                        <h2>On this page</h2>
+                        <ol>
+                            @foreach ($toc as $item)
+                                <li><a href="#{{ $item['id'] }}" data-toc>{{ $item['text'] }}</a></li>
+                            @endforeach
+                        </ol>
+                    </nav>
+                @endif
+
+                <div class="aside-cta">
+                    <h2>Work with me</h2>
+                    <p>Laravel applications, REST APIs and WordPress builds — delivered on time, supported after launch.</p>
+                    <a href="{{ route('contact') }}" class="btn-primary">Get in touch</a>
+                    <a href="{{ route('projects') }}" class="aside-link">See recent projects →</a>
+                </div>
+            </aside>
+        </div>
 
         @if ($related->isNotEmpty())
         <section class="sec sec-tint">
