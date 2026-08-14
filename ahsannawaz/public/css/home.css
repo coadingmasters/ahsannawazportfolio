@@ -218,9 +218,8 @@
     list-style: none;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: clamp(0.7rem, 1.5vw, 1.1rem);
-    margin-top: clamp(2rem, 4vw, 3rem);
-    counter-reset: proc;
+    gap: clamp(0.9rem, 1.8vw, 1.4rem);
+    margin-top: clamp(2.2rem, 4vw, 3rem);
 }
 
 .proc {
@@ -228,70 +227,78 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--r-lg);
-    padding: 1.5rem 1.05rem 1.2rem;
+    /* Roomier than before, and the top inset leaves the number badge its own
+       band so the hover rule underneath it never runs through the digits. */
+    padding: 3.1rem 1.25rem 1.5rem;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.3s, border-color 0.3s;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.32s, border-color 0.32s;
 }
 
-/* A hairline of accent grows across the top on hover — enough to register
-   as a response without the card moving under the cursor. */
+/* The accent rule sits flush in the card's own top edge — clipped by
+   overflow, so it can never overlap the badge sitting below it. */
 .proc::after {
     content: '';
     position: absolute;
-    left: 1.05rem;
-    right: 1.05rem;
-    top: 0;
-    height: 3px;
-    border-radius: 0 0 3px 3px;
+    inset: 0 0 auto 0;
+    height: 4px;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
     background: linear-gradient(90deg, var(--accent), var(--accent-strong));
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .proc:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-7px);
+    box-shadow: 0 18px 40px rgba(20, 83, 45, 0.14), 0 6px 14px rgba(15, 23, 42, 0.07);
     border-color: var(--accent-line);
 }
 .proc:hover::after { transform: scaleX(1); }
 
-/* The step number sits half outside the card, which reads as a marker
-   rather than as body text. */
+/* Number sits fully inside the card, clear of the top rule. */
 .proc-n {
     position: absolute;
-    top: -14px;
-    left: 1.05rem;
-    min-width: 34px;
-    height: 28px;
-    padding: 0 0.5rem;
+    top: 1.15rem;
+    left: 1.25rem;
+    min-width: 40px;
+    height: 30px;
+    padding: 0 0.6rem;
     display: grid;
     place-items: center;
     border-radius: 999px;
-    background: var(--accent-strong);
-    color: #fff;
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    font-size: 0.76rem;
-    letter-spacing: 0.04em;
-    box-shadow: 0 4px 12px rgba(20, 83, 45, 0.28);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.proc:hover .proc-n { transform: translateY(-2px) scale(1.06); }
-
-.proc-ico {
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
     background: var(--accent-soft);
     color: var(--accent);
-    margin: 0.35rem 0 0.85rem;
-    transition: background 0.3s, color 0.3s;
+    border: 1px solid var(--accent-line);
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: background 0.32s, color 0.32s, border-color 0.32s, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.proc-ico svg { width: 21px; height: 21px; }
-.proc:hover .proc-ico { background: var(--accent-strong); color: #fff; }
+.proc:hover .proc-n {
+    background: var(--accent-strong);
+    color: #fff;
+    border-color: var(--accent-strong);
+    transform: scale(1.06);
+    box-shadow: 0 6px 14px rgba(20, 83, 45, 0.3);
+}
+
+/* Icon opposite the number, so the two share the top band without crowding. */
+.proc-ico {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.15rem;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: var(--surface-2);
+    color: var(--text-3);
+    transition: background 0.32s, color 0.32s, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.proc-ico svg { width: 19px; height: 19px; }
+.proc:hover .proc-ico { background: var(--accent-strong); color: #fff; transform: rotate(-6deg) scale(1.06); }
 
 .proc h3 {
     font-family: 'Sora', sans-serif;
@@ -299,35 +306,35 @@
     font-weight: 700;
     color: var(--text);
     line-height: 1.3;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
 }
 .proc p {
     font-size: var(--step--1);
     color: var(--text-3);
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
-/* Connector between cards, so the five read as one sequence. Drawn on the
-   card rather than behind the row, so it never shows past the last one. */
-.proc:not(:last-child)::before {
-    content: '';
+/* Connector, so the five read as one sequence. Drawn on the card rather
+   than behind the row, so nothing trails past the last one. */
+.proc:not(:last-child) .proc-link {
     position: absolute;
     top: 50%;
-    right: calc(-1 * clamp(0.7rem, 1.5vw, 1.1rem) - 1px);
-    width: clamp(0.7rem, 1.5vw, 1.1rem);
+    right: calc(-1 * clamp(0.9rem, 1.8vw, 1.4rem) - 1px);
+    width: clamp(0.9rem, 1.8vw, 1.4rem);
     height: 2px;
     background: var(--accent-line);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1180px) {
     .proc-grid { grid-template-columns: repeat(3, 1fr); }
-    .proc:not(:last-child)::before { display: none; }
+    .proc .proc-link { display: none; }
 }
-@media (max-width: 720px) {
+@media (max-width: 760px) {
     .proc-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 460px) {
-    .proc-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+@media (max-width: 480px) {
+    .proc-grid { grid-template-columns: 1fr; }
+    .proc { padding: 3rem 1.15rem 1.35rem; }
 }
 
 /* ══════════════ TESTIMONIALS ══════════════ */
@@ -346,7 +353,15 @@
 }
 .quote-by b { display: block; font-size: var(--step-0); color: var(--text); }
 .quote-by span { font-size: 0.74rem; color: var(--text-3); }
-.stars { margin-left: auto; color: #f59e0b; font-size: 0.8rem; letter-spacing: 1px; white-space: nowrap; }
+/* Scoped to beat `.quote-by span`, which was winning on specificity and
+   turning the rating grey. */
+.quote-by .stars {
+    margin-left: auto;
+    color: #f59e0b;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
 
 /* ══════════════ BLOG ══════════════ */
 .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }

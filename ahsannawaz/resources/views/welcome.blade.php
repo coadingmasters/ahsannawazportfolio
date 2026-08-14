@@ -283,6 +283,7 @@
                         </span>
                         <h3>{!! $step[0] !!}</h3>
                         <p>{{ $step[1] }}</p>
+                        <span class="proc-link" aria-hidden="true"></span>
                     </li>
                 @endforeach
             </ol>
