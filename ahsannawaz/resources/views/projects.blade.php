@@ -106,16 +106,16 @@
                     @endif
 
                     <div class="pj-feat-links">
-                        @if ($featured->live_url)
+                        @if (filled($featured->live_url) && $featured->live_url !== '#')
                             <a href="{{ $featured->live_url }}" target="_blank" rel="noopener" class="ab-btn-primary">
                                 ↗ View Live
                                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </a>
                         @endif
-                        @if ($featured->github_url)
+                        @if (filled($featured->github_url) && $featured->github_url !== '#')
                             <a href="{{ $featured->github_url }}" target="_blank" rel="noopener" class="ab-btn-ghost">⎇ Source Code</a>
                         @endif
-                        @if (!$featured->live_url && !$featured->github_url)
+                        @if (blank($featured->live_url) || $featured->live_url === '#')
                             <a href="{{ route('contact') }}" class="ab-btn-ghost">Ask about this project →</a>
                         @endif
                     </div>
@@ -167,11 +167,11 @@
                                 <img src="{{ $project->image_url }}" alt="{{ $project->title }} — {{ $catLabels[$project->category] ?? ucfirst($project->category) }} project by Ahsan Nawaz" class="pj-card-img" loading="lazy">
                                 <div class="pj-card-overlay">
                                     <div class="pj-card-actions">
-                                        @if ($project->live_url)
+                                        @if (filled($project->live_url) && $project->live_url !== '#')
                                             <a href="{{ $project->live_url }}" target="_blank" rel="noopener"
                                                class="pj-action" title="View live site" aria-label="View {{ $project->title }} live">↗</a>
                                         @endif
-                                        @if ($project->github_url)
+                                        @if (filled($project->github_url) && $project->github_url !== '#')
                                             <a href="{{ $project->github_url }}" target="_blank" rel="noopener"
                                                class="pj-action" title="View source" aria-label="View {{ $project->title }} source">⎇</a>
                                         @endif

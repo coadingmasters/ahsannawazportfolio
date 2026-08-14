@@ -80,6 +80,8 @@ Route::get('/blog/{post}', function (Post $post) {
     ]);
 })->name('post');
 
+Route::view('/faq', 'faq')->name('faq');
+
 Route::get('/cv', [CvController::class, 'download'])->name('cv.download');
 
 /*
@@ -106,6 +108,7 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('skills'), 'priority' => '0.8', 'freq' => 'monthly', 'lastmod' => $stamp($skillsChanged)],
         ['loc' => route('about'), 'priority' => '0.8', 'freq' => 'monthly', 'lastmod' => $stamp($anyContent)],
         ['loc' => route('contact'), 'priority' => '0.7', 'freq' => 'yearly', 'lastmod' => $stamp($anyContent)],
+        ['loc' => route('faq'), 'priority' => '0.7', 'freq' => 'monthly', 'lastmod' => $stamp($anyContent)],
     ];
 
     if (Post::published()->exists()) {

@@ -27,6 +27,7 @@ save "/skills"    "skills/index.html"
 save "/projects"  "projects/index.html"
 save "/contact"   "contact/index.html"
 save "/blog"      "blog/index.html"
+save "/faq"       "faq/index.html"
 
 python3 -m http.server "$PORT" --directory "$SNAP" >/dev/null 2>&1 &
 SERVER=$!

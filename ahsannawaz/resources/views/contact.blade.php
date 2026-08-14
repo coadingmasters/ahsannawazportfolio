@@ -81,12 +81,15 @@
                     <span class="cp-method-value">Within 24 hours</span>
                 </div>
 
-                <a href="#" class="cp-method ab-rv" data-delay="3" style="--mc:#b45309">
+                @if (config('social.fiverr'))
+                <a href="{{ config('social.fiverr') }}" target="_blank" rel="noopener noreferrer"
+                   class="cp-method ab-rv" data-delay="3" style="--mc:#b45309">
                     <span class="cp-method-ico">⭐</span>
                     <h3 class="cp-method-title">Hire on Fiverr</h3>
                     <p class="cp-method-desc">Prefer an escrow platform? Find me there.</p>
                     <span class="cp-method-value">5-Star Rated →</span>
                 </a>
+                @endif
 
             </div>
         </div>

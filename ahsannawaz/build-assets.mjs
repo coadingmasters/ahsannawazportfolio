@@ -30,6 +30,7 @@ const BUNDLES = {
   projects: ['fonts', 'theme', 'welcome', 'about', 'projects', 'header', 'footer'],
   contact: ['fonts', 'theme', 'welcome', 'about', 'contact', 'popup', 'header', 'footer'],
   blog: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
+  faq: ['fonts', 'theme', 'welcome', 'home', 'header', 'footer'],
   admin: ['fonts', 'theme', 'admin'],
 };
 

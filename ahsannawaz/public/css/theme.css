@@ -188,3 +188,127 @@ img, svg { max-width: 100%; }
         scroll-behavior: auto !important;
     }
 }
+
+/* ============================================================
+   BUTTONS — one system for the whole site.
+   Three separate sets had grown up (btn-primary on the homepage,
+   ab-btn-* on the inner pages, btn-hire in the header), each with its own
+   colours and hover. The aliases at the bottom fold the old names onto
+   these, so every button on the site now behaves the same.
+============================================================ */
+
+.btn-primary,
+.btn-outline,
+.btn-ghost-line,
+.ab-btn-primary,
+.ab-btn-ghost {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.78rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: var(--step--1);
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.28s ease,
+                background 0.28s ease,
+                border-color 0.28s ease,
+                transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.28s ease;
+}
+
+/* The hover fill sweeps in from the left underneath the label, rather than
+   the whole background snapping to a new colour. */
+.btn-primary::before,
+.btn-outline::before,
+.ab-btn-primary::before,
+.ab-btn-ghost::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-primary:hover::before,
+.btn-outline:hover::before,
+.ab-btn-primary:hover::before,
+.ab-btn-ghost:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* ── Solid ─────────────────────────────────────────────── */
+.btn-primary,
+.ab-btn-primary {
+    background: var(--accent-strong);
+    color: #fff;
+}
+.btn-primary::before,
+.ab-btn-primary::before { background: var(--accent); }
+
+.btn-primary:hover,
+.ab-btn-primary:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(20, 83, 45, 0.30);
+}
+
+/* ── Outline ───────────────────────────────────────────── */
+.btn-outline,
+.ab-btn-ghost {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border-strong);
+}
+.btn-outline::before,
+.ab-btn-ghost::before { background: var(--accent-strong); }
+
+.btn-outline:hover,
+.ab-btn-ghost:hover {
+    color: #fff;
+    border-color: var(--accent-strong);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(20, 83, 45, 0.22);
+}
+
+/* Trailing icons lead the eye in the direction the button goes. */
+.btn-primary svg,
+.btn-outline svg,
+.ab-btn-primary svg,
+.ab-btn-ghost svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-primary:hover svg,
+.btn-outline:hover svg,
+.ab-btn-primary:hover svg,
+.ab-btn-ghost:hover svg { transform: translateX(4px); }
+
+.btn-primary:active,
+.btn-outline:active,
+.ab-btn-primary:active,
+.ab-btn-ghost:active { transform: translateY(0); }
+
+/* Full width on the narrowest phones, so a CTA is never a small target. */
+@media (max-width: 420px) {
+    .cta-row .btn-primary,
+    .cta-row .btn-outline { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-primary::before, .btn-outline::before,
+    .ab-btn-primary::before, .ab-btn-ghost::before { transition: none; }
+    .btn-primary, .btn-outline, .ab-btn-primary, .ab-btn-ghost { transition: background 0.2s, color 0.2s; }
+}

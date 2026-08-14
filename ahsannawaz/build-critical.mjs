@@ -30,6 +30,7 @@ const CHROME = '/usr/bin/google-chrome';
 const PAGES = {
   welcome: '/',
   blog: '/blog',
+  faq: '/faq',
   about: '/about',
   skills: '/skills',
   projects: '/projects',

@@ -35,6 +35,7 @@
             @if (\App\Models\Post::published()->exists())
                 <a href="{{ route('blog') }}" class="{{ request()->is('blog*') ? 'active' : '' }}">Blog</a>
             @endif
+            <a href="{{ route('faq') }}" class="{{ request()->is('faq') ? 'active' : '' }}">FAQ</a>
             <a href="{{ route('contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
         </nav>
 
@@ -59,6 +60,7 @@
         @if (\App\Models\Post::published()->exists())
             <a href="{{ route('blog') }}" class="{{ request()->is('blog*') ? 'active' : '' }}">Blog</a>
         @endif
+        <a href="{{ route('faq') }}" class="{{ request()->is('faq') ? 'active' : '' }}">FAQ</a>
         <a href="{{ route('contact') }}"  class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
         <a href="{{ route('contact') }}"  class="btn-hire">Hire Me</a>
     </div>
