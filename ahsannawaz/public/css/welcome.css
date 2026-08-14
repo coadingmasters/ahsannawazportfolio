@@ -2148,3 +2148,28 @@ a.ct-info-item:hover .ct-info-arr { opacity: 1; transform: translateX(3px); }
 @media (prefers-reduced-motion: reduce) {
     .code-scatter span { animation: none; opacity: 0.15; }
 }
+
+
+/* ===== TYPEWRITER — reserve the space it will need =====
+   The line is centred, so a growing string re-centres it on every keystroke
+   and each one counts as a layout shift. Sizing the span to the longest role
+   up front (and aligning the text left inside it) keeps the line fixed.
+   'Full-Stack Developer' is the longest entry in welcome.js — keep in sync. */
+.role-line {
+    min-height: 1.6em;                 /* holds height while the span is empty */
+}
+
+#typewriter {
+    display: inline-block;
+    min-width: 20ch;                   /* ~ 'Full-Stack Developer' */
+    text-align: left;
+    vertical-align: bottom;
+}
+
+@media (max-width: 640px) {
+    /* Keep the reservation here too. Dropping it to 0 let the centred line
+       re-measure on every keystroke, which is a layout shift per character.
+       20ch plus "I'm a " still fits comfortably at 360px. */
+    #typewriter { min-width: 19ch; }
+    .role-line { min-height: 3.2em; }
+}

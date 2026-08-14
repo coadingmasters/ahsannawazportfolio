@@ -413,13 +413,18 @@ body {
             var max = (doc.scrollHeight - window.innerHeight) || 1;
             progress.style.transform = 'scaleX(' + Math.min(1, y / max) + ')';
         }
-        // Link widths do not move, but the pill's offset does if the bar reflows.
-        if (!reduced) resetPill();
         ticking = false;
     }
     window.addEventListener('scroll', function () {
         if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
     }, { passive: true });
+
+    // The bar changes height when it sticks, which is the only scroll-driven
+    // event that can move the pill. Reading geometry here costs one layout
+    // instead of one per frame.
+    header.addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'height') resetPill();
+    });
     onScroll();
 
     /* ---- mobile menu ----------------------------------------------- */

@@ -44,16 +44,16 @@ const VIEWPORTS = [
 function collectCritical() {
   const H = window.innerHeight;
   const out = [];
-  const seen = new Set();
 
-  const push = (text) => {
-    if (text && !seen.has(text)) { seen.add(text); out.push(text); }
-  };
+  // Each rule is tagged with its position in the original cascade so the two
+  // viewport passes can be merged without reordering. The counter must advance
+  // identically in both passes, so it counts EVERY rule — kept or not, matching
+  // media or not. Counting only kept rules let the passes drift, which put
+  // desktop's `.hero-inner{1fr 1fr}` after mobile's `@media` override and left
+  // phones laying out in two columns until the real stylesheet arrived.
+  let order = 0;
 
-  // A selector only tells us what it *could* match; geometry tells us whether
-  // any of those elements is on the first screen.
   const visible = (selectorText) => {
-    // State and pseudo-element suffixes never match at rest, so test the base.
     const base = selectorText
       .split(',')
       .map((s) => s.replace(/::?(before|after|hover|focus|focus-visible|focus-within|active|visited|target|placeholder|selection|marker|first-line|first-letter|backdrop)\b(\([^)]*\))?/g, '').trim())
@@ -61,39 +61,58 @@ function collectCritical() {
       .join(',');
     if (!base) return false;
     let els;
-    try { els = document.querySelectorAll(base); } catch { return true; } // unparseable → keep
+    try { els = document.querySelectorAll(base); } catch { return true; }
     for (const el of els) {
+      if (el === document.documentElement || el === document.body) return true;
       const r = el.getBoundingClientRect();
       if (r.top < H && r.bottom > 0 && r.width > 0 && r.height > 0) return true;
-      // html/body have odd boxes but always matter.
-      if (el === document.documentElement || el === document.body) return true;
+
+      // An element can legitimately measure zero right now and still matter:
+      // the typewriter span is empty between words, and its rule reserves the
+      // width that stops the line shifting. Judge those by their parent's box.
+      if (r.width === 0 || r.height === 0) {
+        const p = el.parentElement;
+        if (p) {
+          const pr = p.getBoundingClientRect();
+          if (pr.top < H && pr.bottom > 0 && pr.width > 0 && pr.height > 0) return true;
+        }
+      }
     }
     return false;
   };
 
-  const walk = (rules, wrapOpen, wrapClose) => {
-    for (const rule of rules) {
-      const wrap = (t) => (wrapOpen ? wrapOpen + t + wrapClose : t);
+  const declaresVars = (rule) => {
+    for (let i = 0; rule.style && i < rule.style.length; i++) {
+      if (rule.style[i].startsWith('--')) return true;
+    }
+    return false;
+  };
 
-      if (rule.type === CSSRule.STYLE_RULE) {
-        // Custom-property blocks (:root, [data-theme]) style nothing directly
-        // but everything depends on them. Test the declarations, not the text:
-        // cssText also contains every var() *usage*, which is nearly every rule.
-        let declaresVars = false;
-        for (let i = 0; rule.style && i < rule.style.length; i++) {
-            if (rule.style[i].startsWith('--')) { declaresVars = true; break; }
-        }
-        if (declaresVars || visible(rule.selectorText)) push(wrap(rule.cssText));
-      } else if (rule.type === CSSRule.MEDIA_RULE) {
-        if (window.matchMedia(rule.conditionText).matches) {
-          walk(rule.cssRules, `@media ${rule.conditionText}{`, '}');
-        }
-      } else if (rule.type === CSSRule.SUPPORTS_RULE) {
-        if (CSS.supports(rule.conditionText)) walk(rule.cssRules, `@supports ${rule.conditionText}{`, '}');
-      } else if (rule.type === CSSRule.FONT_FACE_RULE) {
-        push(rule.cssText);                       // needed before first paint
-      } else if (rule.type === CSSRule.KEYFRAMES_RULE) {
-        push(rule.cssText);                       // entrance animations run immediately
+  // `keep` goes false inside a non-matching @media: we still walk it so the
+  // counter stays in step, we just do not collect anything from it.
+  const walk = (rules, keep, open, close) => {
+    for (const rule of rules) {
+      const i = ++order;
+      const wrap = (t) => (open ? open + t + close : t);
+
+      switch (rule.type) {
+        case CSSRule.STYLE_RULE:
+          if (keep && (declaresVars(rule) || visible(rule.selectorText))) {
+            out.push({ i, text: wrap(rule.cssText) });
+          }
+          break;
+        case CSSRule.MEDIA_RULE:
+          walk(rule.cssRules, keep && window.matchMedia(rule.conditionText).matches,
+               `@media ${rule.conditionText}{`, '}');
+          break;
+        case CSSRule.SUPPORTS_RULE:
+          walk(rule.cssRules, keep && CSS.supports(rule.conditionText),
+               `@supports ${rule.conditionText}{`, '}');
+          break;
+        case CSSRule.FONT_FACE_RULE:
+        case CSSRule.KEYFRAMES_RULE:
+          if (keep) out.push({ i, text: rule.cssText });
+          break;
       }
     }
   };
@@ -101,9 +120,9 @@ function collectCritical() {
   for (const sheet of document.styleSheets) {
     let rules;
     try { rules = sheet.cssRules; } catch { continue; }   // cross-origin
-    walk(rules, '', '');
+    walk(rules, true, '', '');
   }
-  return out.join('\n');
+  return out;
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -117,7 +136,7 @@ const browser = await puppeteer.launch({
 const kb = (n) => (n / 1024).toFixed(1) + ' KiB';
 
 for (const [name, path] of Object.entries(PAGES)) {
-  let combined = '';
+  const merged = new Map();   // order index -> rule text
   for (const vp of VIEWPORTS) {
     const page = await browser.newPage();
     await page.setViewport(vp);
@@ -139,9 +158,14 @@ for (const [name, path] of Object.entries(PAGES)) {
       { timeout: 15000 }
     ).catch(() => {});
 
-    combined += '\n' + (await page.evaluate(collectCritical));
+    for (const { i, text } of await page.evaluate(collectCritical)) {
+      if (!merged.has(i)) merged.set(i, text);
+    }
     await page.close();
   }
+
+  // Back into cascade order before minifying.
+  const combined = [...merged.entries()].sort((a, b) => a[0] - b[0]).map(([, t]) => t).join('\n');
 
   const { code } = transform({
     filename: `critical-${name}.css`,
