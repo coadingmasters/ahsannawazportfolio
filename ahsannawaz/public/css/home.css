@@ -436,6 +436,12 @@
 /* Buttons live in theme.css so every page shares one system. */
 
 /* ══════════════ RESPONSIVE ══════════════ */
+@media (max-width: 1024px) {
+    /* Tablet sits between the desktop and phone rules, so it was inheriting
+       desktop section padding — the other half of the gap on an iPad. */
+    .sec { padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2rem); }
+}
+
 @media (max-width: 980px) {
     .stats { grid-template-columns: repeat(3, 1fr); }
     .about-strip, .svc-split { grid-template-columns: 1fr; }
