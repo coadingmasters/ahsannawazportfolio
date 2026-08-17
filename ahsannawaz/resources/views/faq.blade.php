@@ -47,19 +47,23 @@
 
         <section class="sec" style="padding-top:clamp(2rem,4vw,3rem)">
             <div class="sec-inner faq-wrap">
-                <div class="faq-list">
+                <div class="faq-list" id="faq-list">
                     @foreach ($faqs as $i => $faq)
-                        {{-- <details> gives working accordions with no JavaScript,
-                             and keeps the answer in the DOM for crawlers. --}}
+                        {{-- <details> keeps this working with no JavaScript and
+                             keeps the answer in the DOM for crawlers. The script
+                             below only adds the height animation on top. --}}
                         <details class="faq rv rv-d{{ min($i % 4, 3) }}" @if ($i === 0) open @endif>
                             <summary>
-                                <span>{{ $faq['q'] }}</span>
-                                <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="m6 9 6 6 6-6"/>
-                                </svg>
+                                <span class="faq-n">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="faq-q">{{ $faq['q'] }}</span>
+                                <span class="faq-chev" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </span>
                             </summary>
-                            <div class="faq-a"><p>{{ $faq['a'] }}</p></div>
+                            <div class="faq-a"><div class="faq-a-in"><p>{{ $faq['a'] }}</p></div></div>
                         </details>
                     @endforeach
                 </div>

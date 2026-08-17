@@ -75,3 +75,53 @@
 
     heads.forEach((h) => io.observe(h));
 })();
+
+/* FAQ accordion.
+   <details> alone snaps open with no transition, and removing the attribute
+   immediately would hide the panel before it could animate shut. So opening
+   sets [open] straight away and lets CSS grow the row; closing plays the
+   animation first and drops [open] when it finishes. Without JS the element
+   still opens and closes on its own — it just does it instantly. */
+(function () {
+    const items = document.querySelectorAll('.faq-list .faq');
+    if (!items.length) return;
+
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    items.forEach((item) => {
+        const summary = item.querySelector('summary');
+        if (!summary) return;
+
+        summary.addEventListener('click', (e) => {
+            if (still) return;               // let the browser do it plainly
+            e.preventDefault();
+
+            if (item.open) {
+                item.classList.add('is-closing');
+                const done = () => {
+                    item.open = false;
+                    item.classList.remove('is-closing');
+                    item.removeEventListener('transitionend', done);
+                };
+                // transitionend can be missed if the panel is display:none'd
+                // mid-flight, so back it with a timeout of the same length.
+                item.addEventListener('transitionend', done);
+                setTimeout(done, 450);
+                return;
+            }
+
+            // One panel at a time reads better than a page of open answers.
+            items.forEach((other) => {
+                if (other !== item && other.open) {
+                    other.classList.add('is-closing');
+                    setTimeout(() => {
+                        other.open = false;
+                        other.classList.remove('is-closing');
+                    }, 400);
+                }
+            });
+
+            item.open = true;
+        });
+    });
+})();

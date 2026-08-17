@@ -533,43 +533,110 @@
     align-items: start;
 }
 
-.faq-list { display: grid; gap: 0.75rem; }
+.faq-list { display: grid; gap: 0.7rem; }
 
 .faq {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--r);
     box-shadow: var(--shadow-sm);
-    transition: border-color 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.faq[open] { border-color: var(--accent-line); box-shadow: var(--shadow-md); }
-.faq:hover { border-color: var(--accent-line); }
+.faq:hover { border-color: var(--accent-line); transform: translateX(3px); }
+.faq[open] {
+    border-color: var(--accent-line);
+    box-shadow: 0 14px 32px rgba(20, 83, 45, 0.10), 0 4px 10px rgba(15, 23, 42, 0.05);
+}
+
+/* Accent bar down the left edge, drawn only while open. */
+.faq::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq[open]::before { transform: scaleY(1); }
 
 .faq summary {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.15rem;
+    gap: 0.9rem;
+    padding: 1.05rem 1.2rem;
     cursor: pointer;
-    font-family: 'Sora', sans-serif;
-    font-weight: 600;
-    font-size: var(--step-0);
-    color: var(--text);
     list-style: none;
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary:hover { color: var(--accent); }
 
-.faq-chev {
-    width: 18px; height: 18px; flex: none;
+.faq-n {
+    flex: none;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    border-radius: 10px;
+    background: var(--accent-soft);
     color: var(--accent);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 0.74rem;
+    transition: background 0.3s, color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.faq[open] .faq-chev { transform: rotate(180deg); }
+.faq[open] .faq-n, .faq:hover .faq-n {
+    background: var(--accent-strong);
+    color: #fff;
+    transform: scale(1.06);
+}
 
-.faq-a { padding: 0 1.15rem 1.15rem; }
-.faq-a p { color: var(--text-3); font-size: var(--step--1); line-height: 1.8; }
+.faq-q {
+    flex: 1;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: var(--step-0);
+    line-height: 1.4;
+    color: var(--text);
+    transition: color 0.25s;
+}
+.faq[open] .faq-q { color: var(--accent); }
+
+/* A plus that rotates into a minus reads more clearly than a chevron. */
+.faq-chev {
+    flex: none;
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.3s, border-color 0.3s, color 0.3s;
+}
+.faq-chev svg { width: 15px; height: 15px; }
+.faq[open] .faq-chev {
+    transform: rotate(135deg);
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+    color: #fff;
+}
+
+/* Animating height needs a measurable value; a grid row from 0fr to 1fr
+   gives one without hard-coding a max-height that clips longer answers. */
+.faq-a {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-a-in { overflow: hidden; }
+.faq-a p {
+    padding: 0 1.2rem 1.2rem 4.1rem;
+    color: var(--text-3);
+    font-size: var(--step--1);
+    line-height: 1.8;
+}
+/* Set by the script while a panel closes, and on every closed panel at load. */
+.faq.is-closing .faq-a, .faq:not([open]) .faq-a { grid-template-rows: 0fr; }
 
 /* Sidebar */
 .faq-aside {
@@ -583,41 +650,29 @@
 }
 .faq-aside h2 { color: #fff; font-size: var(--step-1); margin-bottom: 0.5rem; }
 .faq-aside p { font-size: var(--step--1); line-height: 1.7; opacity: 0.9; margin-bottom: 1.1rem; }
-.faq-aside .btn-primary { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.32); width: 100%; }
-.faq-aside .btn-primary::before { background: #fff; }
-.faq-aside .btn-primary:hover { color: var(--accent-strong); }
+.faq-aside .btn-primary { background: #fff; color: var(--accent-strong); border-color: #fff; width: 100%; }
+.faq-aside .btn-primary::before { background: rgba(255,255,255,0.82); }
+.faq-aside .btn-primary:hover { color: var(--accent-deep); }
 
 .faq-links { list-style: none; margin-top: 1.3rem; display: grid; gap: 0.6rem; }
 .faq-links a {
+    display: inline-block;
     font-size: var(--step--1);
     color: rgba(255,255,255,0.86);
     border-bottom: 1px solid rgba(255,255,255,0.25);
     padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s, border-color 0.2s, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.faq-links a:hover { color: #fff; border-color: #fff; }
+.faq-links a:hover { color: #fff; border-color: #fff; transform: translateX(4px); }
 
 @media (max-width: 900px) {
     .faq-wrap { grid-template-columns: 1fr; }
     .faq-aside { position: static; }
+    .faq-a p { padding-left: 1.2rem; }
 }
 
-/* Article header: the back link and the category chip share a row with
-   real space between them rather than running together. */
-.post-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.4rem;
-}
-.post-top .cat-tag {
-    text-transform: capitalize;
-    background: var(--accent-soft);
-    color: var(--accent);
-    border-color: var(--accent-line);
-    font-weight: 600;
+@media (prefers-reduced-motion: reduce) {
+    .faq, .faq::before, .faq-a, .faq-n, .faq-chev { transition: none; }
 }
 
 /* ══════════════ SITEMAP PAGE ══════════════ */
