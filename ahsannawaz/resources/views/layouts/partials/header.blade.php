@@ -103,9 +103,22 @@
 
     /* ---- shrink-on-scroll + progress ------------------------------- */
     var ticking = false;
+    var stuck = false;
     function onScroll() {
         var y = window.scrollY || document.documentElement.scrollTop;
-        header.classList.toggle('is-stuck', y > 12);
+        // Two thresholds, not one. The bar shrinks 88px to 66px when it
+        // sticks, and that 22px shift moves the page under the pointer — with
+        // a single threshold at 12px the new scroll position lands back below
+        // it, the class comes off, the bar grows, and it crosses again. That
+        // loop is the flicker. A dead band wider than the height change means
+        // neither edge can trigger the other.
+        if (!stuck && y > 90) {
+            stuck = true;
+            header.classList.add('is-stuck');
+        } else if (stuck && y < 40) {
+            stuck = false;
+            header.classList.remove('is-stuck');
+        }
 
         if (progress) {
             var doc = document.documentElement;
